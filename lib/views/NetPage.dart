@@ -3,12 +3,12 @@ import 'package:boohee_flutter/model/gank_entriy.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class NetRoute extends StatefulWidget {
+class NetPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _NetRouteState();
+  State<StatefulWidget> createState() => _NetPageState();
 }
 
-class _NetRouteState extends State<NetRoute> {
+class _NetPageState extends State<NetPage> {
   String content = "";
   Response response;
 
@@ -21,9 +21,6 @@ class _NetRouteState extends State<NetRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("薄荷"),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[Text("网络返回数据：$content")],

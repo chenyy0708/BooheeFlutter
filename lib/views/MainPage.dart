@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'NetPage.dart';
+
 class MainPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _MainPageState();
@@ -7,25 +9,36 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<StatefulWidget>
     with SingleTickerProviderStateMixin {
-  // 标记导航栏目前点击index
-  int _selectedIndex = 1;
-
-  // TabBar
-  TabController _tabController;
-  List tabs = [
-    "新闻",
-    "历史",
-    "图片",
+  int _selectedIndex = 2;
+  List<Widget> _list = List();
+  static List tabData = [
+    {'text': '首页', 'icon': Icon(Icons.extension)},
+    {'text': '伙伴', 'icon': Icon(Icons.favorite)},
+    {'text': '商店', 'icon': Icon(Icons.import_contacts)},
+    {'text': '我', 'icon': Icon(Icons.inbox)},
   ];
+  String title = "首页";
+  List<BottomNavigationBarItem> _myTabs = [];
 
   @override
   void initState() {
     super.initState();
-    // 创建Controller
-    _tabController = TabController(length: tabs.length, vsync: this);
-    _tabController.addListener(() {
-      print(_tabController.index);
-    });
+    for (int i = 0; i < tabData.length; i++) {
+      // 初始化底部Tab
+      _myTabs.add(BottomNavigationBarItem(
+        icon: tabData[i]['icon'],
+        title: Text(
+          tabData[i]['text'],
+        ),
+      ));
+    }
+    title = tabData[_selectedIndex]['text'];
+    _list..add(NetPage())..add(NetPage())..add(NetPage())..add(NetPage());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -33,7 +46,7 @@ class _MainPageState extends State<StatefulWidget>
     return Scaffold(
       appBar: AppBar(
         // 导航栏
-        title: Text("Material Widget Demo"),
+        title: Text(title),
         actions: <Widget>[
           //  导航栏右侧菜单按钮图标等
           IconButton(
@@ -41,49 +54,19 @@ class _MainPageState extends State<StatefulWidget>
             onPressed: () {},
           )
         ],
-        // 自定义appbar左侧按钮图标功能
-        leading: Builder(builder: (context) {
-          return IconButton(
-              icon: Icon(
-                Icons.ac_unit,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // 打开抽屉菜单
-                Scaffold.of(context).openDrawer();
-              });
-        }),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: tabs
-              .map((e) => Tab(
-                    text: e,
-                  ))
-              .toList(),
-        ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: tabs.map((e) {
-          return Container(
-            alignment: Alignment.center,
-            child: Text(
-              e,
-              textScaleFactor: 5,
-            ),
-          );
-        }).toList(),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _list,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.business), title: Text("社区")),
-          BottomNavigationBarItem(icon: Icon(Icons.school), title: Text("学习")),
-        ],
+        items: _myTabs,
+        //高亮  被点击高亮
         currentIndex: _selectedIndex,
-        fixedColor: Colors.blue,
+        //修改 页面
         onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
+        fixedColor: Colors.blue,
       ),
     );
   }
@@ -93,6 +76,7 @@ class _MainPageState extends State<StatefulWidget>
     // 刷新widget
     setState(() {
       _selectedIndex = index;
+      title = tabData[index]['text'];
     });
   }
 }
