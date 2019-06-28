@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'NetPage.dart';
+import 'NetPage_1.dart';
+import 'NetPage_2.dart';
+import 'NetPage_3.dart';
+import 'NetPage_4.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -33,7 +36,11 @@ class _MainPageState extends State<StatefulWidget>
       ));
     }
     title = tabData[_selectedIndex]['text'];
-    _list..add(NetPage())..add(NetPage())..add(NetPage())..add(NetPage());
+    _list
+      ..add(NetPage_1())
+      ..add(NetPage_2())
+      ..add(NetPage_3())
+      ..add(NetPage_4());
   }
 
   @override

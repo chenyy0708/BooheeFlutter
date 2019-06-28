@@ -3,12 +3,12 @@ import 'package:boohee_flutter/model/gank_entriy.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class NetPage extends StatefulWidget {
+class NetPage_2 extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _NetPageState();
+  State<StatefulWidget> createState() => _NetPage_2State();
 }
 
-class _NetPageState extends State<NetPage> {
+class _NetPage_2State extends State<NetPage_2> {
   String content = "";
   Response response;
 
@@ -23,7 +23,7 @@ class _NetPageState extends State<NetPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[Text("网络返回数据：$content")],
+          children: <Widget>[Text("Page2：$content")],
         ),
       ),
       floatingActionButton: FloatingActionButton(
