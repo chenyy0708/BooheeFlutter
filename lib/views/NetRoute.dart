@@ -22,7 +22,7 @@ class _NetRouteState extends State<NetRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("NetRoute Demo"),
+        title: Text("薄荷"),
       ),
       body: SingleChildScrollView(
         child: Column(
