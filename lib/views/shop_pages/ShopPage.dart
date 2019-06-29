@@ -25,6 +25,8 @@ class _ShopPageState extends State<ShopPage> {
       new GlobalKey<RefreshHeaderState>();
   GlobalKey<RefreshFooterState> _footerKey =
       new GlobalKey<RefreshFooterState>();
+  GlobalKey<EasyRefreshState> _easyRefreshKey =
+      new GlobalKey<EasyRefreshState>();
 
   @override
   void initState() {
@@ -49,6 +51,7 @@ class _ShopPageState extends State<ShopPage> {
           _categoriseList.add(it);
         }
       });
+      _easyRefreshKey.currentState.callRefreshFinish();
       setState(() {});
     });
   }
@@ -60,18 +63,23 @@ class _ShopPageState extends State<ShopPage> {
       ShopRecommendList data = ShopRecommendList.fromJson(response.data);
       if (page == 1) _goodsList.clear();
       _goodsList.addAll(data.goods);
+      _easyRefreshKey.currentState.callLoadMoreFinish();
+      setState(() {});
     });
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return EasyRefresh(
+      autoControl: false,
+      key: _easyRefreshKey,
       refreshHeader: MaterialHeader(
         key: _headerKey,
+        valueColor: AlwaysStoppedAnimation(mainColor),
       ),
       refreshFooter: MaterialFooter(
         key: _footerKey,
+        valueColor: AlwaysStoppedAnimation(mainColor),
       ),
       child: CustomScrollView(
         slivers: <Widget>[
@@ -81,12 +89,10 @@ class _ShopPageState extends State<ShopPage> {
         ],
       ),
       onRefresh: () {
-        print("下拉刷新");
         page = 1;
         loadData();
       },
       loadMore: () {
-        print("上拉加载");
         page++;
         getRecommendList(page);
       },
@@ -161,7 +167,11 @@ class _ShopPageState extends State<ShopPage> {
       padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
       sliver: SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, mainAxisSpacing: 7.5, crossAxisSpacing: 5.5),
+            crossAxisCount: 2,
+            mainAxisSpacing: 7.5,
+            crossAxisSpacing: 5.5,
+//              childAspectRatio: 0.65
+          ),
           delegate: new SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return getGoodsItemContainer(_goodsList[index]);
@@ -178,25 +188,26 @@ class _ShopPageState extends State<ShopPage> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              // 阴影
               color: Color(0xFF8C95B7),
             )
           ],
           borderRadius: BorderRadius.circular(10.0)),
       child: Column(
         children: <Widget>[
-          Container(
+          Expanded(
+              child: Container(
             height: 165,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(item.bigPhotoUrl),
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
-              ),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0)),
             ),
-          ),
+          )),
+          Container(child: Text(item.title))
         ],
       ),
     );
