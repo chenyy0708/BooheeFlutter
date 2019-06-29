@@ -42,14 +42,12 @@ class _ShopPageState extends State<ShopPage> {
       refreshFooter: MaterialFooter(
         key: _footerKey,
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            initBannerView(),
-            initCategoryView(),
-            initGoodsView(),
-          ],
-        ),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          initBannerView(),
+          initCategoryGridView(),
+          createGoodsGridView(),
+        ],
       ),
       onRefresh: () async {},
       loadMore: () async {},
@@ -57,13 +55,15 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   Widget initBannerView() {
-    return BannerView(
-      // 轮播图
-      data: _bannerList,
-      buildShowView: (index, data) {
-        return initBannerChildView(data as Banner_showcases);
-      },
-      onBannerClickListener: (index, data) {},
+    return SliverToBoxAdapter(
+      child: BannerView(
+        // 轮播图
+        data: _bannerList,
+        buildShowView: (index, data) {
+          return initBannerChildView(data as Banner_showcases);
+        },
+        onBannerClickListener: (index, data) {},
+      ),
     );
   }
 
@@ -84,39 +84,25 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 
-  // 分类卡片
-  Widget initCategoryView() {
-    return Container(
-      margin: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
-      constraints: BoxConstraints.tightFor(height: 162.0),
-      decoration: BoxDecoration(
-          //背景装饰
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              // 阴影
-              color: Color(0xFF8C95B7),
-            )
-          ],
-          borderRadius: BorderRadius.circular(12.0)),
-      child: initCategoryGridView(),
-    );
-  }
-
   // 分类
   Widget initCategoryGridView() {
-    return GridView.builder(
-        itemCount: _categoriseList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5, childAspectRatio: 1.0),
-        itemBuilder: (BuildContext context, int index) {
-          return getCategoryItemContainer(_categoriseList[index]);
-        });
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
+      sliver: SliverGrid(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5, childAspectRatio: 1.0),
+          delegate: new SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return getCategoryItemContainer(_categoriseList[index]);
+            },
+            childCount: _categoriseList.length,
+          )),
+    );
   }
 
   Widget getCategoryItemContainer(Categories item) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Image.network(
           item.iconUrl,
@@ -130,22 +116,19 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 
-  Widget initGoodsView() {
-    return Container(
-      margin: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
-      constraints: BoxConstraints.tightFor(height: 162.0),
-      child: createGoodsGridView(),
-    );
-  }
-
   Widget createGoodsGridView() {
-    return GridView.builder(
-        itemCount: _goodsList.length,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext context, int index) {
-          return getGoodsItemContainer(_goodsList[index]);
-        });
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
+      sliver: SliverGrid(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          delegate: new SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return getGoodsItemContainer(_goodsList[index]);
+            },
+            childCount: _goodsList.length,
+          )),
+    );
   }
 
   Widget getGoodsItemContainer(Goods item) {
