@@ -3,7 +3,6 @@ import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_footer.dart';
@@ -15,9 +14,6 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-  String content = "";
-  Response response;
-
   @override
   void initState() {
     super.initState();
@@ -27,6 +23,8 @@ class _ShopPageState extends State<ShopPage> {
   List<Banner_showcases> _bannerList = [];
   List<Categories> _categoriseList = [];
   List<Goods> _goodsList = [];
+
+  int page = 1;
 
   GlobalKey<RefreshHeaderState> _headerKey =
       new GlobalKey<RefreshHeaderState>();
@@ -49,8 +47,16 @@ class _ShopPageState extends State<ShopPage> {
           createGoodsGridView(),
         ],
       ),
-      onRefresh: () async {},
-      loadMore: () async {},
+      onRefresh: () {
+        print("下拉刷新");
+        page = 1;
+        loadData();
+      },
+      loadMore: () {
+        print("上拉加载");
+        page++;
+        getRecommendList(page);
+      },
     );
   }
 
@@ -87,7 +93,7 @@ class _ShopPageState extends State<ShopPage> {
   // 分类
   Widget initCategoryGridView() {
     return SliverPadding(
-      padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
+      padding: EdgeInsets.only(top: 13.0, left: 17.0, right: 17),
       sliver: SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 5, childAspectRatio: 1.0),
@@ -111,7 +117,7 @@ class _ShopPageState extends State<ShopPage> {
         ),
         Text(
           item.name,
-        )
+        ),
       ],
     );
   }
@@ -120,8 +126,8 @@ class _ShopPageState extends State<ShopPage> {
     return SliverPadding(
       padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
       sliver: SliverGrid(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
           delegate: new SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return getGoodsItemContainer(_goodsList[index]);
@@ -164,12 +170,13 @@ class _ShopPageState extends State<ShopPage> {
 
   void loadData() {
     getBanner();
-    getRecommendList();
+    getRecommendList(page);
   }
 
   // 获取banner数据
   void getBanner() {
     dio.get(shop_banner).then((response) {
+      if (page == 1) _categoriseList.clear();
       ShopBanner data = ShopBanner.fromJson(response.data);
       _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
       // 保证数据最多为10条
@@ -183,11 +190,12 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   // 商店推荐列表
-  void getRecommendList() {
-    dio.get(shop_recommend_list + "9", queryParameters: {"page": 1}).then(
+  void getRecommendList(int page) {
+    dio.get(shop_recommend_list + "9", queryParameters: {"page": page}).then(
         (response) {
       ShopRecommendList data = ShopRecommendList.fromJson(response.data);
-      _goodsList = data.goods;
+      if (page == 1) _goodsList.clear();
+      _goodsList.addAll(data.goods);
     });
     setState(() {});
   }
