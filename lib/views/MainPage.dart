@@ -100,7 +100,7 @@ class _MainPageState extends State<StatefulWidget>
       appBar: AppBar(
         // 导航栏
         title: Text(title),
-        backgroundColor: main_color,
+        backgroundColor: mainColor,
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -111,7 +111,7 @@ class _MainPageState extends State<StatefulWidget>
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        fixedColor: main_color,
+        fixedColor: mainColor,
       ),
     );
   }

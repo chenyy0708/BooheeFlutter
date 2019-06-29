@@ -1,4 +1,5 @@
 import 'package:banner/banner.dart';
+import 'package:boohee_flutter/common/Colors.dart';
 import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
@@ -14,12 +15,6 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-  @override
-  void initState() {
-    super.initState();
-    loadData();
-  }
-
   List<Banner_showcases> _bannerList = [];
   List<Categories> _categoriseList = [];
   List<Goods> _goodsList = [];
@@ -32,6 +27,44 @@ class _ShopPageState extends State<ShopPage> {
       new GlobalKey<RefreshFooterState>();
 
   @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() {
+    getBanner();
+    getRecommendList(page);
+  }
+
+  // 获取banner数据
+  void getBanner() {
+    dio.get(shop_banner).then((response) {
+      if (page == 1) _categoriseList.clear();
+      ShopBanner data = ShopBanner.fromJson(response.data);
+      _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
+      // 保证数据最多为10条
+      data.categories.forEach((it) {
+        if (data.categories.indexOf(it) < 10) {
+          _categoriseList.add(it);
+        }
+      });
+      setState(() {});
+    });
+  }
+
+  // 商店推荐列表
+  void getRecommendList(int page) {
+    dio.get(shop_recommend_list + "9", queryParameters: {"page": page}).then(
+        (response) {
+      ShopRecommendList data = ShopRecommendList.fromJson(response.data);
+      if (page == 1) _goodsList.clear();
+      _goodsList.addAll(data.goods);
+    });
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return EasyRefresh(
       refreshHeader: MaterialHeader(
@@ -42,8 +75,8 @@ class _ShopPageState extends State<ShopPage> {
       ),
       child: CustomScrollView(
         slivers: <Widget>[
-          initBannerView(),
-          initCategoryGridView(),
+          createBannerView(),
+          createCategoryGridView(),
           createGoodsGridView(),
         ],
       ),
@@ -60,21 +93,21 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 
-  Widget initBannerView() {
+  // 轮播图
+  Widget createBannerView() {
     return SliverToBoxAdapter(
       child: BannerView(
         // 轮播图
         data: _bannerList,
         buildShowView: (index, data) {
-          return initBannerChildView(data as Banner_showcases);
+          return createBannerChildView(data as Banner_showcases);
         },
         onBannerClickListener: (index, data) {},
       ),
     );
   }
 
-  // 轮播View
-  Widget initBannerChildView(Banner_showcases data) {
+  Widget createBannerChildView(Banner_showcases data) {
     return Container(
       margin: EdgeInsets.only(top: 13.0, left: 17, right: 17),
       height: 200,
@@ -91,12 +124,12 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   // 分类
-  Widget initCategoryGridView() {
+  Widget createCategoryGridView() {
     return SliverPadding(
       padding: EdgeInsets.only(top: 13.0, left: 17.0, right: 17),
       sliver: SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5, childAspectRatio: 1.0),
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
           delegate: new SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return getCategoryItemContainer(_categoriseList[index]);
@@ -117,6 +150,7 @@ class _ShopPageState extends State<ShopPage> {
         ),
         Text(
           item.name,
+          style: TextStyle(fontSize: 12, color: color_373D52),
         ),
       ],
     );
@@ -127,7 +161,7 @@ class _ShopPageState extends State<ShopPage> {
       padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
       sliver: SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15),
+              crossAxisCount: 2, mainAxisSpacing: 7.5, crossAxisSpacing: 5.5),
           delegate: new SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return getGoodsItemContainer(_goodsList[index]);
@@ -166,37 +200,5 @@ class _ShopPageState extends State<ShopPage> {
         ],
       ),
     );
-  }
-
-  void loadData() {
-    getBanner();
-    getRecommendList(page);
-  }
-
-  // 获取banner数据
-  void getBanner() {
-    dio.get(shop_banner).then((response) {
-      if (page == 1) _categoriseList.clear();
-      ShopBanner data = ShopBanner.fromJson(response.data);
-      _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
-      // 保证数据最多为10条
-      data.categories.forEach((it) {
-        if (data.categories.indexOf(it) < 10) {
-          _categoriseList.add(it);
-        }
-      });
-      setState(() {});
-    });
-  }
-
-  // 商店推荐列表
-  void getRecommendList(int page) {
-    dio.get(shop_recommend_list + "9", queryParameters: {"page": page}).then(
-        (response) {
-      ShopRecommendList data = ShopRecommendList.fromJson(response.data);
-      if (page == 1) _goodsList.clear();
-      _goodsList.addAll(data.goods);
-    });
-    setState(() {});
   }
 }
