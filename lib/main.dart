@@ -1,7 +1,12 @@
 import 'package:boohee_flutter/views/MainPage.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'http/http.dart';
+
+void main() {
+  dio.options = mBooheeOptions;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

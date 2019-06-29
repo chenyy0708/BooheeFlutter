@@ -1,8 +1,9 @@
+import 'package:boohee_flutter/common/Colors.dart';
+import 'package:boohee_flutter/views/shop_pages/ShopPage.dart';
 import 'package:flutter/material.dart';
 
 import 'NetPage_1.dart';
 import 'NetPage_2.dart';
-import 'NetPage_3.dart';
 import 'NetPage_4.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,11 +15,55 @@ class _MainPageState extends State<StatefulWidget>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 2;
   List<Widget> _list = List();
-  static List tabData = [
-    {'text': '首页', 'icon': Icon(Icons.extension)},
-    {'text': '伙伴', 'icon': Icon(Icons.favorite)},
-    {'text': '商店', 'icon': Icon(Icons.import_contacts)},
-    {'text': '我', 'icon': Icon(Icons.inbox)},
+  List<Widget> _selectIcon = [
+    Image.asset(
+      "images/ic_tab_bar_home_green.png",
+      width: 22,
+      height: 22,
+    ),
+    Image.asset(
+      "images/ic_tab_bar_partner_green.png",
+      width: 22,
+      height: 22,
+    ),
+    Image.asset(
+      "images/ic_tab_bar_shop_green.png",
+      width: 22,
+      height: 22,
+    ),
+    Image.asset(
+      "images/ic_tab_bar_me_green.png",
+      width: 22,
+      height: 22,
+    ),
+  ];
+  List<Widget> _unselectIcon = [
+    Image.asset(
+      "images/ic_tab_bar_home_grey.png",
+      width: 22,
+      height: 22,
+    ),
+    Image.asset(
+      "images/ic_tab_bar_partner_grey.png",
+      width: 22,
+      height: 22,
+    ),
+    Image.asset(
+      "images/ic_tab_bar_shop_grey.png",
+      width: 22,
+      height: 22,
+    ),
+    Image.asset(
+      "images/ic_tab_bar_me_grey.png",
+      width: 22,
+      height: 22,
+    ),
+  ];
+  static List<String> tabData = [
+    "首页",
+    "伙伴",
+    "商店",
+    "我",
   ];
   String title = "首页";
   List<BottomNavigationBarItem> _myTabs = [];
@@ -29,17 +74,18 @@ class _MainPageState extends State<StatefulWidget>
     for (int i = 0; i < tabData.length; i++) {
       // 初始化底部Tab
       _myTabs.add(BottomNavigationBarItem(
-        icon: tabData[i]['icon'],
+        icon: _unselectIcon[i],
+        activeIcon: _selectIcon[i],
         title: Text(
-          tabData[i]['text'],
+          tabData[i],
         ),
       ));
     }
-    title = tabData[_selectedIndex]['text'];
+    title = tabData[_selectedIndex];
     _list
       ..add(NetPage_1())
       ..add(NetPage_2())
-      ..add(NetPage_3())
+      ..add(ShopPage())
       ..add(NetPage_4());
   }
 
@@ -54,13 +100,7 @@ class _MainPageState extends State<StatefulWidget>
       appBar: AppBar(
         // 导航栏
         title: Text(title),
-        actions: <Widget>[
-          //  导航栏右侧菜单按钮图标等
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () {},
-          )
-        ],
+        backgroundColor: main_color,
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -68,12 +108,10 @@ class _MainPageState extends State<StatefulWidget>
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: _myTabs,
-        //高亮  被点击高亮
         currentIndex: _selectedIndex,
-        //修改 页面
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.blue,
+        fixedColor: main_color,
       ),
     );
   }
@@ -83,7 +121,7 @@ class _MainPageState extends State<StatefulWidget>
     // 刷新widget
     setState(() {
       _selectedIndex = index;
-      title = tabData[index]['text'];
+      title = tabData[index];
     });
   }
 }
