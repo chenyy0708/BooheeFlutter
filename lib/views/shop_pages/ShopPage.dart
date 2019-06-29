@@ -5,6 +5,9 @@ import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_easyrefresh/material_footer.dart';
+import 'package:flutter_easyrefresh/material_header.dart';
 
 class ShopPage extends StatefulWidget {
   @override
@@ -25,10 +28,21 @@ class _ShopPageState extends State<ShopPage> {
   List<Categories> _categoriseList = [];
   List<Goods> _goodsList = [];
 
+  GlobalKey<RefreshHeaderState> _headerKey =
+      new GlobalKey<RefreshHeaderState>();
+  GlobalKey<RefreshFooterState> _footerKey =
+      new GlobalKey<RefreshFooterState>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return EasyRefresh(
+      refreshHeader: MaterialHeader(
+        key: _headerKey,
+      ),
+      refreshFooter: MaterialFooter(
+        key: _footerKey,
+      ),
+      child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             initBannerView(),
@@ -37,6 +51,8 @@ class _ShopPageState extends State<ShopPage> {
           ],
         ),
       ),
+      onRefresh: () async {},
+      loadMore: () async {},
     );
   }
 
