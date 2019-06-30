@@ -143,17 +143,27 @@ class _ShopPageState extends State<ShopPage> {
 
   // 分类
   Widget createCategoryGridView() {
-    return SliverPadding(
-      padding: EdgeInsets.only(top: 13.0, left: 17.0, right: 17),
-      sliver: SliverGrid(
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
-          delegate: new SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return getCategoryItemContainer(_categoriseList[index]);
-            },
-            childCount: _categoriseList.length,
-          )),
+    return SliverToBoxAdapter(
+      child: Container(
+        height: 162, // 指定卡片大小
+        child: Card(
+          shape: // 圆角
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          margin: EdgeInsets.only(left: 17, right: 17, top: 13),
+          elevation: 1,
+          child: Padding(
+            padding: EdgeInsets.only(top: 13, left: 10, right: 10),
+            child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(), // 禁用GradView滚动事件
+                itemCount: _categoriseList.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5, childAspectRatio: 1.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return getCategoryItemContainer(_categoriseList[index]);
+                }),
+          ),
+        ),
+      ),
     );
   }
 
@@ -193,17 +203,12 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   Widget getGoodsItemContainer(Goods item) {
-    return Container(
-      decoration: BoxDecoration(
-          //背景装饰
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xFF8C95B7),
-            )
-          ],
-          borderRadius: BorderRadius.circular(10.0)),
+    return Card(
+      margin: EdgeInsets.all(0.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      elevation: 1,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
               child: Container(
@@ -221,18 +226,18 @@ class _ShopPageState extends State<ShopPage> {
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10, top: 8),
             child: Text(
-              item.title,
+              item.title.split("｜")[0] ?? "",
               style: TextStyle(fontSize: 13, color: color_373D52),
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10, top: 1),
             child: Text(
-              item.title,
+              item.title.split("｜")[1] ?? "",
               style: TextStyle(fontSize: 11, color: color_A8ACBC),
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -248,7 +253,10 @@ class _ShopPageState extends State<ShopPage> {
                   padding: EdgeInsets.only(left: 8),
                   child: Text(
                     "¥" + item.marketPrice.toString(),
-                    style: TextStyle(fontSize: 11, color: color_A8ACBC),
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: color_A8ACBC,
+                        decoration: TextDecoration.lineThrough),
                   ),
                 )
               ],
