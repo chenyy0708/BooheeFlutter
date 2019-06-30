@@ -20,6 +20,8 @@ class _ShopPageState extends State<ShopPage> {
   List<Goods> _goodsList = [];
 
   int page = 1;
+  double bannerHeight = 200;
+  int mId = 9;
 
   GlobalKey<RefreshHeaderState> _headerKey =
       new GlobalKey<RefreshHeaderState>();
@@ -36,7 +38,6 @@ class _ShopPageState extends State<ShopPage> {
 
   void loadData() {
     getBanner();
-    getRecommendList(page);
   }
 
   // 获取banner数据
@@ -47,19 +48,29 @@ class _ShopPageState extends State<ShopPage> {
       _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
       // 保证数据最多为10条
       data.categories.forEach((it) {
+        // 默认第一个分类
+        if (data.categories.indexOf(it) == 0) mId = it.id;
         if (data.categories.indexOf(it) < 10) {
           _categoriseList.add(it);
         }
       });
       _easyRefreshKey.currentState.callRefreshFinish();
+      // 计算Banner的高度
+      double screenWidth = MediaQuery.of(context).size.width;
+      if (_bannerList.length > 0) {
+        bannerHeight = (screenWidth - 2 * 17) *
+            (_bannerList[0].defaultPhotoHeight /
+                _bannerList[0].defaultPhotoWidth);
+      }
       setState(() {});
+      getRecommendList(page);
     });
   }
 
   // 商店推荐列表
   void getRecommendList(int page) {
-    dio.get(shop_recommend_list + "9", queryParameters: {"page": page}).then(
-        (response) {
+    dio.get(shop_recommend_list + mId.toString(),
+        queryParameters: {"page": page}).then((response) {
       ShopRecommendList data = ShopRecommendList.fromJson(response.data);
       if (page == 1) _goodsList.clear();
       _goodsList.addAll(data.goods);
@@ -72,6 +83,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return EasyRefresh(
       autoControl: false,
+      autoLoad: true,
       key: _easyRefreshKey,
       refreshHeader: MaterialHeader(
         key: _headerKey,
@@ -103,6 +115,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget createBannerView() {
     return SliverToBoxAdapter(
       child: BannerView(
+        height: bannerHeight,
         // 轮播图
         data: _bannerList,
         buildShowView: (index, data) {
@@ -116,7 +129,6 @@ class _ShopPageState extends State<ShopPage> {
   Widget createBannerChildView(Banner_showcases data) {
     return Container(
       margin: EdgeInsets.only(top: 13.0, left: 17, right: 17),
-      height: 200,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(data.defaultPhotoUrl),
@@ -167,11 +179,10 @@ class _ShopPageState extends State<ShopPage> {
       padding: EdgeInsets.only(top: 13.0, bottom: 13, left: 17.0, right: 17),
       sliver: SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 7.5,
-            crossAxisSpacing: 5.5,
-//              childAspectRatio: 0.65
-          ),
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 8,
+              childAspectRatio: 0.65),
           delegate: new SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return getGoodsItemContainer(_goodsList[index]);
@@ -207,7 +218,42 @@ class _ShopPageState extends State<ShopPage> {
                   topRight: Radius.circular(10.0)),
             ),
           )),
-          Container(child: Text(item.title))
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, top: 8),
+            child: Text(
+              item.title,
+              style: TextStyle(fontSize: 13, color: color_373D52),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, top: 1),
+            child: Text(
+              item.title,
+              style: TextStyle(fontSize: 11, color: color_A8ACBC),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 12),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  "¥" + item.basePrice.toString(),
+                  style: TextStyle(fontSize: 11, color: color_FF6C65),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Text(
+                    "¥" + item.marketPrice.toString(),
+                    style: TextStyle(fontSize: 11, color: color_A8ACBC),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
