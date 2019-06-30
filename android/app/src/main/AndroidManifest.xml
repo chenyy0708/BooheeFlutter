@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="boohee_flutter"
+        android:label="薄荷Flutter"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
