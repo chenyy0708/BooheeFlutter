@@ -23,10 +23,6 @@ class _NetPage_4State extends State<NetPage_4> {
           children: <Widget>[Text("Page4：$content")],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Text("获取"),
-          onPressed: () {
-          }),
     );
   }
 

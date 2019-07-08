@@ -1,5 +1,9 @@
+import 'package:boohee_flutter/app/route/fluro_navigator.dart';
+import 'package:boohee_flutter/app/route/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+import 'NewRoute.dart';
 
 class NetPage_1 extends StatefulWidget {
   @override
@@ -18,13 +22,18 @@ class _NetPage_1State extends State<NetPage_1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[Text("宝贝我爱你~")],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: "home",
+            child: Text("open new route"),
+            onPressed: () {
+              NavigatorUtils.push(context, Routes.login);
+            },
+          ),
+        ],
       ),
-      floatingActionButton:
-          FloatingActionButton(child: Text("获取"), onPressed: () {}),
     );
   }
 }
