@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'http/http.dart';
 
 void main() {
-  dio.options = mBooheeOptions;
+  _init();
   runApp(RouteComponent());
+}
+
+void _init() {
+  dio.options = mBooheeOptions;
 }
 

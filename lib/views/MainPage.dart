@@ -1,5 +1,5 @@
-import 'package:boohee_flutter/common/Colors.dart';
-import 'package:boohee_flutter/views/shop_pages/ShopPage.dart';
+import 'package:boohee_flutter/common/colors.dart';
+import 'package:boohee_flutter/views/shop_pages/shop_page.dart';
 import 'package:flutter/material.dart';
 
 import 'NetPage_1.dart';

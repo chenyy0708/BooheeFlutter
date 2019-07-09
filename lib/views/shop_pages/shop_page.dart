@@ -1,5 +1,5 @@
 import 'package:banner/banner.dart';
-import 'package:boohee_flutter/common/Colors.dart';
+import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';

@@ -11,7 +11,7 @@ import 'package:fluro/fluro.dart';
 import './route_handlers.dart';
 
 class Routes {
-  static String root = "/";
+  static String root = "/home";
   static String login = "/login";
 
   static void configureRoutes(Router router) {
