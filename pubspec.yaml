@@ -64,6 +64,7 @@ flutter:
   - images/ic_tab_bar_partner_green.png
   - images/ic_tab_bar_shop_green.png
   - images/launch_image.png
+  - images/ic_boohee_logo.png
       # To add assets to your application, add an assets section, like this:
       # assets:
       #  - images/a_dot_burr.jpeg

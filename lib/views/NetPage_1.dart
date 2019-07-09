@@ -3,7 +3,6 @@ import 'package:boohee_flutter/app/route/routes.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import 'NewRoute.dart';
 
 class NetPage_1 extends StatefulWidget {
   @override

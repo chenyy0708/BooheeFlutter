@@ -7,7 +7,7 @@
  * See LICENSE for distribution and usage details.
  */
 import 'package:boohee_flutter/views/MainPage.dart';
-import 'package:boohee_flutter/views/NewRoute.dart';
+import 'package:boohee_flutter/views/login/login_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
@@ -18,5 +18,5 @@ var rootHandler = new Handler(
 
 var loginHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return new NewRoute();
+  return new LoginPage();
 });

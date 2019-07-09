@@ -98,6 +98,7 @@ class _MainPageState extends State<StatefulWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         // 导航栏
         title: Text(title),
         backgroundColor: mainColor,

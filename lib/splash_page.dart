@@ -9,7 +9,6 @@ import 'app/route/application.dart';
 import 'app/route/fluro_navigator.dart';
 import 'app/route/routes.dart';
 import 'common/constant.dart';
-import 'http/http.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -33,26 +32,23 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(
-      body: new Image.asset(
-        Utils.getImgPath('launch_image'),
-        width: double.infinity,
-        fit: BoxFit.fill,
-        height: double.infinity,
+    return MaterialApp(
+      home: Scaffold(
+        body: new Image.asset(
+          Utils.getImgPath('launch_image'),
+          width: double.infinity,
+          fit: BoxFit.fill,
+          height: double.infinity,
+        ),
       ),
-    ),);
+    );
   }
 
   void _loadLoginStatus() async {
     await SpUtil.getInstance();
     if (!mounted) return;
-    _init();
     _loadLocale();
     _initAsync();
-  }
-
-  void _init() {
-    dio.options = mBooheeOptions;
   }
 
   void _loadLocale() {
@@ -69,8 +65,7 @@ class _SplashPageState extends State<SplashPage> {
       if (isLogin) {
         NavigatorUtils.push(context, Routes.root);
       } else {
-        NavigatorUtils.push(context, Routes.login,
-            replace: true, clearStack: true);
+        NavigatorUtils.push(context, Routes.login, replace: true);
       }
     });
   }
