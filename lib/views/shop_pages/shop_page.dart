@@ -81,33 +81,39 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return EasyRefresh(
-      autoControl: false,
-      autoLoad: true,
-      key: _easyRefreshKey,
-      refreshHeader: MaterialHeader(
-        key: _headerKey,
-        valueColor: AlwaysStoppedAnimation(mainColor),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("商店"),
+        backgroundColor: mainColor,
       ),
-      refreshFooter: MaterialFooter(
-        key: _footerKey,
-        valueColor: AlwaysStoppedAnimation(mainColor),
+      body: EasyRefresh(
+        autoControl: false,
+        autoLoad: true,
+        key: _easyRefreshKey,
+        refreshHeader: MaterialHeader(
+          key: _headerKey,
+          valueColor: AlwaysStoppedAnimation(mainColor),
+        ),
+        refreshFooter: MaterialFooter(
+          key: _footerKey,
+          valueColor: AlwaysStoppedAnimation(mainColor),
+        ),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            createBannerView(),
+            createCategoryGridView(),
+            createGoodsGridView(),
+          ],
+        ),
+        onRefresh: () {
+          page = 1;
+          loadData();
+        },
+        loadMore: () {
+          page++;
+          getRecommendList(page);
+        },
       ),
-      child: CustomScrollView(
-        slivers: <Widget>[
-          createBannerView(),
-          createCategoryGridView(),
-          createGoodsGridView(),
-        ],
-      ),
-      onRefresh: () {
-        page = 1;
-        loadData();
-      },
-      loadMore: () {
-        page++;
-        getRecommendList(page);
-      },
     );
   }
 
