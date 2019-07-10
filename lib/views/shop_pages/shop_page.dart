@@ -1,5 +1,5 @@
 import 'package:banner/banner.dart';
-import 'package:boohee_flutter/common/Colors.dart';
+import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
@@ -42,7 +42,7 @@ class _ShopPageState extends State<ShopPage> {
 
   // 获取banner数据
   void getBanner() {
-    dio.get(shop_banner).then((response) {
+    dio.get(RequestUrl.shop_banner).then((response) {
       if (page == 1) _categoriseList.clear();
       ShopBanner data = ShopBanner.fromJson(response.data);
       _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
@@ -69,7 +69,7 @@ class _ShopPageState extends State<ShopPage> {
 
   // 商店推荐列表
   void getRecommendList(int page) {
-    dio.get(shop_recommend_list + mId.toString(),
+    dio.get(RequestUrl.shop_recommend_list + mId.toString(),
         queryParameters: {"page": page}).then((response) {
       ShopRecommendList data = ShopRecommendList.fromJson(response.data);
       if (page == 1) _goodsList.clear();
@@ -81,33 +81,39 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return EasyRefresh(
-      autoControl: false,
-      autoLoad: true,
-      key: _easyRefreshKey,
-      refreshHeader: MaterialHeader(
-        key: _headerKey,
-        valueColor: AlwaysStoppedAnimation(mainColor),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("商店"),
+        backgroundColor: mainColor,
       ),
-      refreshFooter: MaterialFooter(
-        key: _footerKey,
-        valueColor: AlwaysStoppedAnimation(mainColor),
+      body: EasyRefresh(
+        autoControl: false,
+        autoLoad: true,
+        key: _easyRefreshKey,
+        refreshHeader: MaterialHeader(
+          key: _headerKey,
+          valueColor: AlwaysStoppedAnimation(mainColor),
+        ),
+        refreshFooter: MaterialFooter(
+          key: _footerKey,
+          valueColor: AlwaysStoppedAnimation(mainColor),
+        ),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            createBannerView(),
+            createCategoryGridView(),
+            createGoodsGridView(),
+          ],
+        ),
+        onRefresh: () {
+          page = 1;
+          loadData();
+        },
+        loadMore: () {
+          page++;
+          getRecommendList(page);
+        },
       ),
-      child: CustomScrollView(
-        slivers: <Widget>[
-          createBannerView(),
-          createCategoryGridView(),
-          createGoodsGridView(),
-        ],
-      ),
-      onRefresh: () {
-        page = 1;
-        loadData();
-      },
-      loadMore: () {
-        page++;
-        getRecommendList(page);
-      },
     );
   }
 
@@ -178,7 +184,7 @@ class _ShopPageState extends State<ShopPage> {
         ),
         Text(
           item.name,
-          style: TextStyle(fontSize: 12, color: color_373D52),
+          style: TextStyle(fontSize: 12, color: color373D52),
         ),
       ],
     );
@@ -227,7 +233,7 @@ class _ShopPageState extends State<ShopPage> {
             padding: EdgeInsets.only(left: 10, right: 10, top: 8),
             child: Text(
               item.title.split("｜")[0] ?? "",
-              style: TextStyle(fontSize: 13, color: color_373D52),
+              style: TextStyle(fontSize: 13, color: color373D52),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -236,7 +242,7 @@ class _ShopPageState extends State<ShopPage> {
             padding: EdgeInsets.only(left: 10, right: 10, top: 1),
             child: Text(
               item.title.split("｜")[1] ?? "",
-              style: TextStyle(fontSize: 11, color: color_A8ACBC),
+              style: TextStyle(fontSize: 11, color: colorA8ACBC),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -247,7 +253,7 @@ class _ShopPageState extends State<ShopPage> {
               children: <Widget>[
                 Text(
                   "¥" + item.basePrice.toString(),
-                  style: TextStyle(fontSize: 11, color: color_FF6C65),
+                  style: TextStyle(fontSize: 11, color: colorFF6C65),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 8),
@@ -255,7 +261,7 @@ class _ShopPageState extends State<ShopPage> {
                     "¥" + item.marketPrice.toString(),
                     style: TextStyle(
                         fontSize: 11,
-                        color: color_A8ACBC,
+                        color: colorA8ACBC,
                         decoration: TextDecoration.lineThrough),
                   ),
                 )

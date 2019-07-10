@@ -1,11 +1,10 @@
 import 'package:boohee_flutter/app/route/application.dart';
 import 'package:boohee_flutter/app/route/routes.dart';
-import 'package:boohee_flutter/common/Colors.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'MainPage.dart';
+import '../splash_page.dart';
 
 class RouteComponent extends StatefulWidget {
   @override
@@ -13,7 +12,6 @@ class RouteComponent extends StatefulWidget {
 }
 
 class _RouteComponentState extends State<RouteComponent> {
-
   _RouteComponentState() {
     final router = new Router();
     Routes.configureRoutes(router);
@@ -26,7 +24,7 @@ class _RouteComponentState extends State<RouteComponent> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: SplashPage(),
     );
   }
 }

@@ -1,10 +1,10 @@
-import 'package:boohee_flutter/common/Colors.dart';
-import 'package:boohee_flutter/views/shop_pages/ShopPage.dart';
+import 'package:boohee_flutter/common/colors.dart';
+import 'package:boohee_flutter/views/shop_pages/shop_page.dart';
 import 'package:flutter/material.dart';
 
 import 'NetPage_1.dart';
 import 'NetPage_2.dart';
-import 'NetPage_4.dart';
+import 'mine_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -65,7 +65,6 @@ class _MainPageState extends State<StatefulWidget>
     "商店",
     "我",
   ];
-  String title = "首页";
   List<BottomNavigationBarItem> _myTabs = [];
 
   @override
@@ -81,12 +80,7 @@ class _MainPageState extends State<StatefulWidget>
         ),
       ));
     }
-    title = tabData[_selectedIndex];
-    _list
-      ..add(NetPage_1())
-      ..add(NetPage_2())
-      ..add(ShopPage())
-      ..add(NetPage_4());
+    _list..add(NetPage_1())..add(NetPage_2())..add(ShopPage())..add(MinePage());
   }
 
   @override
@@ -97,11 +91,6 @@ class _MainPageState extends State<StatefulWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // 导航栏
-        title: Text(title),
-        backgroundColor: mainColor,
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _list,
@@ -121,7 +110,6 @@ class _MainPageState extends State<StatefulWidget>
     // 刷新widget
     setState(() {
       _selectedIndex = index;
-      title = tabData[index];
     });
   }
 }
