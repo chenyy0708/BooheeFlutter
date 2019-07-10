@@ -63,7 +63,7 @@ class _SplashPageState extends State<SplashPage> {
   void _initAsync() {
     Observable.just(3).delay(new Duration(milliseconds: 1000)).listen((_) {
       if (isLogin) {
-        NavigatorUtils.push(context, Routes.root);
+        NavigatorUtils.push(context, Routes.root,replace: true);
       } else {
         NavigatorUtils.push(context, Routes.login, replace: true);
       }

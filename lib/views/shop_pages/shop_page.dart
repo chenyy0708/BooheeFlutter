@@ -42,7 +42,7 @@ class _ShopPageState extends State<ShopPage> {
 
   // 获取banner数据
   void getBanner() {
-    dio.get(shop_banner).then((response) {
+    dio.get(RequestUrl.shop_banner).then((response) {
       if (page == 1) _categoriseList.clear();
       ShopBanner data = ShopBanner.fromJson(response.data);
       _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
@@ -69,7 +69,7 @@ class _ShopPageState extends State<ShopPage> {
 
   // 商店推荐列表
   void getRecommendList(int page) {
-    dio.get(shop_recommend_list + mId.toString(),
+    dio.get(RequestUrl.shop_recommend_list + mId.toString(),
         queryParameters: {"page": page}).then((response) {
       ShopRecommendList data = ShopRecommendList.fromJson(response.data);
       if (page == 1) _goodsList.clear();
