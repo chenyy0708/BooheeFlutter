@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'NetPage_1.dart';
 import 'NetPage_2.dart';
-import 'NetPage_4.dart';
+import 'mine_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -86,7 +86,7 @@ class _MainPageState extends State<StatefulWidget>
       ..add(NetPage_1())
       ..add(NetPage_2())
       ..add(ShopPage())
-      ..add(NetPage_4());
+      ..add(MinePage());
   }
 
   @override

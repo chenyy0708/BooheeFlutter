@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
@@ -57,9 +56,9 @@ class RequestUrl {
 
   // 参数签名
   static String signature(String json) {
-    String key = KEY;
-    String secret = SECRET;
-    String context = contextParams(json);
+//    String key = KEY;
+//    String secret = SECRET;
+//    String context = contextParams(json);
     return Base64.encodeBase64(json);
   }
 }
