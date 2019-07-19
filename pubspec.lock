@@ -22,6 +22,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  auto_size:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "8fad57098f2852e7f220a6764e2eb1ff1f7dc5ad"
+      url: "git://github.com/flutterchina/auto_size.git"
+    source: git
+    version: "0.0.1"
   banner:
     dependency: "direct main"
     description:

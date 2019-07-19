@@ -1,13 +1,13 @@
+import 'package:auto_size/auto_size.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/views/route_component.dart';
-import 'package:flutter/material.dart';
 
 import 'common/constant.dart';
 import 'http/http.dart';
 
 void main() {
   _init();
-  runApp(RouteComponent());
+  runAutoSizeApp(RouteComponent(), width: 375, height: 667);
 }
 
 void _init() async {
