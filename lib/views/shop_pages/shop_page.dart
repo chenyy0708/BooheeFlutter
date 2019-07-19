@@ -241,7 +241,7 @@ class _ShopPageState extends State<ShopPage> {
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10, top: 1),
             child: Text(
-              item.title.split("｜")[1] ?? "",
+              item.title.split("｜").length > 1 ? item.title.split("｜")[1] : "",
               style: TextStyle(fontSize: 11, color: colorA8ACBC),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
