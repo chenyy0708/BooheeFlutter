@@ -2,7 +2,7 @@ import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/views/shop_pages/shop_page.dart';
 import 'package:flutter/material.dart';
 
-import 'NetPage_1.dart';
+import 'home_page.dart';
 import 'NetPage_2.dart';
 import 'mine_page.dart';
 
@@ -80,7 +80,7 @@ class _MainPageState extends State<StatefulWidget>
         ),
       ));
     }
-    _list..add(NetPage_1())..add(NetPage_2())..add(ShopPage())..add(MinePage());
+    _list..add(HomePage())..add(NetPage_2())..add(ShopPage())..add(MinePage());
   }
 
   @override

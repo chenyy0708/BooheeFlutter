@@ -1,8 +1,12 @@
-
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
+
+class HomeRequestUrl {
+  // 首页卡片
+  static const String home_tools = "/api/v2/tools";
+}
 
 class RequestUrl {
 //  static const String domain = ".iboohee.cn";
@@ -17,6 +21,7 @@ class RequestUrl {
   static const String SECRET = "0d1efea355c74c17deaf5fb10c6ca68f57af7ecc";
   static const String QA_KEY = "ifood";
   static const String QA_SECRET = "boohee-test-test-test";
+
   // 商店banner
   static const String shop_banner = "/api/v1/shop_home_v63";
 
@@ -44,7 +49,9 @@ class RequestUrl {
     }
     params.putIfAbsent("app_key", () => key);
     params.putIfAbsent(
-        "context_params", () => "eyJsb2dpbiI6IjE4MzcwNjIyMDMwIiwicGFzc3dvcmQiOiJxcTEyMzQ1NiIsImRldmljZV90b2tlbiI6Ijg2ODAyODAzNzc0NDE0MyJ9");
+        "context_params",
+        () =>
+            "eyJsb2dpbiI6IjE4MzcwNjIyMDMwIiwicGFzc3dvcmQiOiJxcTEyMzQ1NiIsImRldmljZV90b2tlbiI6Ijg2ODAyODAzNzc0NDE0MyJ9");
     params.putIfAbsent("sign", () => "VOe6bXKlPuqBMxZgMt+L7hP6yco=");
     return params;
   }
