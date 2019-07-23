@@ -67,7 +67,16 @@ class _HomePageState extends State<HomePage> {
               } else if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
                 widget = createWeightRecord(topCards[index]);
               } else if (topCards[index].code == HomeCard.HEALTH_HABITS) {
-                widget = createCommonCard("ic_home_habit", "健康习惯");
+                widget = createCommonCard("ic_home_habit", "健康习惯",
+                    subWidget: RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "今日完成: ",
+                            style: TextStyles.get11TextA8ACBC()),
+                        TextSpan(
+                            text: "57%", style: TextStyles.get11Text_00CDA2()),
+                      ]),
+                    ));
               }
               return widget;
             }, childCount: topCards.length)),
@@ -250,7 +259,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 通用的卡片布局
-  Widget createCommonCard(String iconUrl, String title, {String subTitle: ""}) {
+  Widget createCommonCard(String iconUrl, String title,
+      // ignore: avoid_init_to_null
+      {Widget subWidget: null}) {
     return Card(
       shape: // 圆角
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -275,10 +286,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                  Text(
-                  subTitle,
-                  style: TextStyles.get14TextBold_373D52(),
-                ),
+                subWidget == null ? Text("") : subWidget,
                 Image.asset(
                   Utils.getImgPath("ic_arrow_grey"),
                 )

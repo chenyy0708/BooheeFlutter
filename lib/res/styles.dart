@@ -4,6 +4,14 @@ import 'package:boohee_flutter/common/colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class TextStyles {
+  static TextStyle get11Text_00CDA2() {
+    return TextStyle(fontSize: 11, color: color00CDA2);
+  }
+
+  static TextStyle get11TextA8ACBC() {
+    return TextStyle(fontSize: 11, color: colorA8ACBC);
+  }
+
   static TextStyle get14TextBold_373D52() {
     return TextStyle(
         fontSize: 14, color: color373D52, fontWeight: FontWeight.w700);
