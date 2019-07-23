@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // 顶部卡片
   List<Data> topCards = List();
+  List<Data> bottomCards = List();
   List<String> topCardItems = [
     HomeCard.DIET_SPORT_RECORD,
     HomeCard.WISDOM,
@@ -38,6 +39,9 @@ class _HomePageState extends State<HomePage> {
       HomeTools homeTools = HomeTools.fromJson(response.data);
       topCards = homeTools.data
           .where((item) => item.visible && topCardItems.contains(item.code))
+          .toList();
+      bottomCards = homeTools.data
+          .where((item) => item.visible && !topCardItems.contains(item.code))
           .toList();
       setState(() {});
     });
@@ -67,29 +71,21 @@ class _HomePageState extends State<HomePage> {
               } else if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
                 widget = createWeightRecord(topCards[index]);
               } else if (topCards[index].code == HomeCard.HEALTH_HABITS) {
-                widget = createCommonCard("ic_home_habit", "健康习惯",
-                    subWidget: RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: "今日完成: ",
-                            style: TextStyles.get11TextA8ACBC()),
-                        TextSpan(
-                            text: "57%", style: TextStyles.get11Text_00CDA2()),
-                      ]),
-                    ));
+                widget = createHealthHabits("ic_home_habit", "健康习惯");
               }
               return widget;
             }, childCount: topCards.length)),
+            createToolsCards()
           ],
         ),
-        Container(
-          margin: EdgeInsets.only(top: 50, left: 17, right: 17),
-          height: 34,
-          child: AppBar(
-            backgroundColor: mainColor,
-            title: Text("首页"),
-          ),
-        )
+//        Container(
+//          margin: EdgeInsets.only(top: 50, left: 17, right: 17),
+//          height: 34,
+//          child: AppBar(
+//            backgroundColor: mainColor,
+//            title: Text("首页"),
+//          ),
+//        )
       ],
     );
   }
@@ -258,10 +254,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // 通用的卡片布局
-  Widget createCommonCard(String iconUrl, String title,
-      // ignore: avoid_init_to_null
-      {Widget subWidget: null}) {
+  // 健康习惯
+  Widget createHealthHabits(String iconUrl, String title) {
     return Card(
       shape: // 圆角
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -286,13 +280,132 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                subWidget == null ? Text("") : subWidget,
+                RichText(
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "今日完成: ", style: TextStyles.get11TextA8ACBC()),
+                    TextSpan(text: "57%", style: TextStyles.get11Text_00CDA2()),
+                  ]),
+                ),
                 Image.asset(
                   Utils.getImgPath("ic_arrow_grey"),
                 )
               ],
             ))
           ],
+        ),
+      ),
+    );
+  }
+
+  // 通用的卡片布局
+  Widget createCommonCard(String iconUrl, String title,
+      // ignore: avoid_init_to_null
+      {Widget subWidget: null}) {
+    return Container(
+      padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
+      height: 58,
+      child: Row(
+        children: <Widget>[
+          Image.asset(
+            Utils.getImgPath(iconUrl),
+            height: 18,
+            width: 18,
+          ),
+          PaddingStyles.getPadding(6),
+          Text(
+            title,
+            style: TextStyles.get14TextBold_373D52(),
+          ),
+          Expanded(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              subWidget == null ? Text("") : subWidget,
+              Image.asset(
+                Utils.getImgPath("ic_arrow_grey"),
+              )
+            ],
+          ))
+        ],
+      ),
+    );
+  }
+
+  // 底部健康工具列表
+  Widget createToolsCards() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: EdgeInsets.only(top: 13, bottom: 30),
+        height: (58 * bottomCards.length).toDouble(), // 指定卡片大小
+        child: Card(
+          shape: // 圆角
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          margin: EdgeInsets.only(
+            left: 17,
+            right: 17,
+          ),
+          elevation: 1,
+          child: ListView.separated(
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(
+                height: 0.0,
+                margin: EdgeInsetsDirectional.only(start: 16, end: 16),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom:
+                        Divider.createBorderSide(context, color: colorEEEFF3),
+                  ),
+                ),
+              );
+            },
+            padding: EdgeInsets.only(top: 0),
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              Widget widget;
+              if (bottomCards[index].code == HomeCard.EXERCISE) {
+                // 运动训练
+                widget =
+                    createCommonCard("ic_home_sport", bottomCards[index].name,
+                        subWidget: RichText(
+                          text: TextSpan(children: <TextSpan>[
+                            TextSpan(
+                                text: "35 ",
+                                style: TextStyles.get11Text_00CDA2()),
+                            TextSpan(
+                                text: "分钟",
+                                style: TextStyles.get11TextA8ACBC()),
+                          ]),
+                        ));
+              } else if (bottomCards[index].code == HomeCard.MEASURE_RECORD) {
+                // 围度记录
+                widget = createCommonCard(
+                    "ic_home_circumference", bottomCards[index].name);
+              } else if (bottomCards[index].code == HomeCard.STEPS_RECORD) {
+                // 步数记录
+                widget =
+                    createCommonCard("ic_home_step", bottomCards[index].name);
+              } else if (bottomCards[index].code == HomeCard.BABY) {
+                // 宝宝记录
+                widget =
+                    createCommonCard("ic_home_crd", bottomCards[index].name);
+              } else if (bottomCards[index].code == HomeCard.DIET_PLAN) {
+                // 饮食计划
+                widget = createCommonCard(
+                    "ic_home_food_plan", bottomCards[index].name);
+              } else if (bottomCards[index].code == HomeCard.SLEEP_RECORD) {
+                // 睡眠记录
+                widget =
+                    createCommonCard("ic_home_sleep", bottomCards[index].name);
+              } else if (bottomCards[index].code == HomeCard.PERIODS_RECORD) {
+                // 经期记录
+                widget = createCommonCard(
+                    "ic_home_menstruation", bottomCards[index].name);
+              }
+              return widget;
+            },
+            itemCount: bottomCards.length,
+          ),
         ),
       ),
     );

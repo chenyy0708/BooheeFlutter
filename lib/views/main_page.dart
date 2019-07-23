@@ -2,8 +2,8 @@ import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/views/shop_pages/shop_page.dart';
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
 import 'NetPage_2.dart';
+import 'home_page.dart';
 import 'mine_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -13,7 +13,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<StatefulWidget>
     with SingleTickerProviderStateMixin {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   List<Widget> _list = List();
   List<Widget> _selectIcon = [
     Image.asset(
@@ -96,6 +96,9 @@ class _MainPageState extends State<StatefulWidget>
         children: _list,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 10,
+        unselectedFontSize: 10,
+        backgroundColor: Colors.white,
         items: _myTabs,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

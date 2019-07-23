@@ -74,12 +74,15 @@ flutter:
   - images/ic_home_sleep.png
   - images/ic_home_sport.png
   - images/ic_home_step.png
-  - images/ic_home_steps.png
   - images/ic_home_weight.png
   - images/ic_home_chart_simple.png
   - images/ic_home_dietician.png
   - images/ic_arrow_grey.png
   - images/ic_home_habit.png
+  - images/ic_home_circumference.png
+  - images/ic_home_crd.png
+  - images/ic_home_food_plan.png
+  - images/ic_home_menstruation.png
       # To add assets to your application, add an assets section, like this:
       # assets:
       #  - images/a_dot_burr.jpeg
