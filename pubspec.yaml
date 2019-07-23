@@ -70,6 +70,12 @@ flutter:
   - images/launch_image.png
   - images/ic_boohee_logo.png
   - images/ic_home_calorie.png
+  - images/ic_home_chart_diet.jpg
+  - images/ic_home_sleep.png
+  - images/ic_home_sport.png
+  - images/ic_home_step.png
+  - images/ic_home_steps.png
+  - images/ic_home_weight.png
   - images/ic_home_chart_simple.png
       # To add assets to your application, add an assets section, like this:
       # assets:

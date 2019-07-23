@@ -61,11 +61,11 @@ class _HomePageState extends State<HomePage> {
               if (topCards[index].code == HomeCard.DIET_SPORT_RECORD) {
                 widget = createDietSportRecord(topCards[index]);
               } else if (topCards[index].code == HomeCard.WISDOM) {
-                widget = createWisdom();
+                widget = createWisdom(topCards[index]);
               } else if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
-                widget = createWeightRecord();
+                widget = createWeightRecord(topCards[index]);
               } else if (topCards[index].code == HomeCard.HEALTH_HABITS) {
-                widget = createHealthHabits();
+                widget = createHealthHabits(topCards[index]);
               }
               return widget;
             }, childCount: topCards.length)),
@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                   height: 18,
                   width: 18,
                 ),
+                PaddingStyles.getPadding(6),
                 Text(
                   topCard.name,
                   style: TextStyles.get14TextBold_373D52(),
@@ -114,12 +115,22 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 RichText(
                   text: TextSpan(children: <TextSpan>[
-                    TextSpan(text: "还可以吃", style: TextStyles.get12TextA8ACBC()),
-                    TextSpan(text: "230", style: TextStyles.get15Text_373D52()),
-                    TextSpan(text: "还可以吃", style: TextStyles.get12TextA8ACBC()),
+                    TextSpan(
+                        text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
+                    TextSpan(
+                        text: "230", style: TextStyles.get15TextBold_373D52()),
+                    TextSpan(
+                        text: " 还可以吃", style: TextStyles.get12TextA8ACBC()),
                   ]),
                 ),
-                Image.asset(Utils.getImgPath("ic_home_chart_simple"))
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Image.asset(
+                        Utils.getImgPath("ic_home_chart_diet", format: "jpg"))
+                  ],
+                ))
               ],
             ))
           ],
@@ -129,7 +140,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 智慧营养师
-  Widget createWisdom() {
+  Widget createWisdom([Data topCard]) {
     return Card(
       shape: // 圆角
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -147,7 +158,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // 体重记录
-  Widget createWeightRecord() {
+  Widget createWeightRecord([Data topCard]) {
     return Card(
       shape: // 圆角
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -156,16 +167,56 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
-        alignment: Alignment.center,
-        child: Text(
-          "体重记录",
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  Utils.getImgPath("ic_home_weight"),
+                  height: 18,
+                  width: 18,
+                ),
+                PaddingStyles.getPadding(6),
+                Text(
+                  topCard.name,
+                  style: TextStyles.get14TextBold_373D52(),
+                )
+              ],
+            ),
+            Expanded(
+                child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                PaddingStyles.getPadding(24),
+                RichText(
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "58.9 ",
+                        style: TextStyles.get15TextBold_373D52()),
+                    TextSpan(text: "公斤", style: TextStyles.get12TextA8ACBC()),
+                  ]),
+                ),
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Image.asset(
+                      Utils.getImgPath("ic_home_chart_simple"),
+                      width: 93,
+                      height: 41,
+                    )
+                  ],
+                ))
+              ],
+            ))
+          ],
         ),
       ),
     );
   }
 
   // 健康习惯
-  Widget createHealthHabits() {
+  Widget createHealthHabits([Data topCard]) {
     return Card(
       shape: // 圆角
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
