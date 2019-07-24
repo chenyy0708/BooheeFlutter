@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   // 头部透明度
   int appbarAlpha = 0;
   Color appbarTitleColor = colorA8ACBC;
+  Color appbarBg = Color(0x1FFFFFFF);
   String appbarLeftIcon = "ic_search_grey";
   String appbarRightIcon = "ic_message_grey";
 
@@ -41,17 +42,19 @@ class _HomePageState extends State<HomePage> {
     loadData();
     //监听滚动事件，打印滚动位置
     _controller.addListener(() {
-      print(_controller.offset); //打印滚动位置
       if (_controller.offset < 100) {
         double alpha = _controller.offset / 100;
         appbarAlpha = (255 * alpha).toInt();
         appbarTitleColor = colorA8ACBC;
-        appbarLeftIcon = "ic_search_white";
-        appbarRightIcon = "ic_message_white";
-      } else {
+        appbarBg = Color(0x1FFFFFFF);
         appbarLeftIcon = "ic_search_grey";
         appbarRightIcon = "ic_message_grey";
+      } else {
+        appbarAlpha = 255;
+        appbarLeftIcon = "ic_search_white";
+        appbarRightIcon = "ic_message_white";
         appbarTitleColor = Colors.white;
+        appbarBg = color0EB794;
       }
       setState(() {});
     });
@@ -103,15 +106,15 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: 104,
       color: Color.fromARGB(appbarAlpha, 0, 205, 162),
-      padding: EdgeInsets.only(left: 17, right: 17, top: 45, bottom: 20),
+      padding: EdgeInsets.only(left: 17, right: 17, top: 42, bottom: 17),
       child: Row(
         children: <Widget>[
           Container(
-            height: 34,
-            width: 305,
+            height: 40,
+            width: 300,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Color(0x1FFFFFFF),
+                color: appbarBg,
                 borderRadius: BorderRadius.circular(17),
               ),
               child: Row(
@@ -119,8 +122,8 @@ class _HomePageState extends State<HomePage> {
                   PaddingStyles.getPadding(12),
                   Image.asset(
                     Utils.getImgPath(appbarLeftIcon),
-                    width: 20,
-                    height: 20,
+                    width: 24,
+                    height: 24,
                   ),
                   PaddingStyles.getPadding(7),
                   Text(
@@ -134,8 +137,8 @@ class _HomePageState extends State<HomePage> {
           PaddingStyles.getPadding(14),
           Image.asset(
             Utils.getImgPath(appbarRightIcon),
-            width: 20,
-            height: 20,
+            width: 24,
+            height: 24,
           )
         ],
       ),
