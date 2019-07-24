@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/http/http.dart';
@@ -46,19 +48,71 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Widget createHeaderImg() {
+    return Stack(children: <Widget>[
+      Image.network(
+        "http://up.boohee.cn//house//u//one//wallpaper//1661_big.jpg",
+        height: 181,
+        width: double.infinity,
+        fit: BoxFit.fitWidth,
+      ),
+      Container(
+        color: Colors.black38,
+        height: 181,
+      )
+    ]);
+  }
+
+  Widget createSearchBar() {
+    return Container(
+      height: 84,
+//      color: color00CDA2,
+      padding: EdgeInsets.only(left: 17, right: 17, top: 50),
+      child: Row(
+        children: <Widget>[
+          Container(
+            height: 34,
+            width: 305,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Color(0x1FFFFFFF),
+                borderRadius: BorderRadius.circular(17),
+              ),
+              child: Row(
+                children: <Widget>[
+                  PaddingStyles.getPadding(12),
+                  Image.asset(
+                    Utils.getImgPath("ic_search_grey"),
+                    width: 20,
+                    height: 20,
+                  ),
+                  PaddingStyles.getPadding(7),
+                  Text(
+                    "搜索食物和热量",
+                    style: TextStyles.get14TextA8ACBC(),
+                  )
+                ],
+              ),
+            ),
+          ),
+          PaddingStyles.getPadding(14),
+          Image.asset(
+            Utils.getImgPath("ic_message_grey"),
+            width: 20,
+            height: 20,
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         CustomScrollView(
           slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: Image.network(
-                "http://up.boohee.cn//house//u//one//wallpaper//1661_big.jpg",
-                height: 181,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
+            SliverToBoxAdapter(child: createHeaderImg()),
             SliverList(
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
@@ -77,14 +131,7 @@ class _HomePageState extends State<HomePage> {
             createToolsCards()
           ],
         ),
-//        Container(
-//          margin: EdgeInsets.only(top: 50, left: 17, right: 17),
-//          height: 34,
-//          child: AppBar(
-//            backgroundColor: mainColor,
-//            title: Text("首页"),
-//          ),
-//        )
+        createSearchBar()
       ],
     );
   }
@@ -388,7 +435,7 @@ class _HomePageState extends State<HomePage> {
               } else if (bottomCards[index].code == HomeCard.BABY) {
                 // 宝宝记录
                 widget =
-                    createCommonCard("ic_home_crd", bottomCards[index].name);
+                    createCommonCard("ic_home_baby", bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.DIET_PLAN) {
                 // 饮食计划
                 widget = createCommonCard(
