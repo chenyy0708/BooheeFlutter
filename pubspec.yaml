@@ -87,6 +87,8 @@ flutter:
   - images/ic_home_menstruation.png
   - images/ic_message_grey.png
   - images/ic_search_grey.png
+  - images/ic_message_white.png
+  - images/ic_search_white.png
       # To add assets to your application, add an assets section, like this:
       # assets:
       #  - images/a_dot_burr.jpeg

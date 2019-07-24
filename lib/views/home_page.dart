@@ -26,10 +26,35 @@ class _HomePageState extends State<HomePage> {
     HomeCard.WEIGHT_RECORD,
   ];
 
+  // 滑动监听
+  ScrollController _controller = new ScrollController();
+
+  // 头部透明度
+  int appbarAlpha = 0;
+  Color appbarTitleColor = colorA8ACBC;
+  String appbarLeftIcon = "ic_search_grey";
+  String appbarRightIcon = "ic_message_grey";
+
   @override
   void initState() {
     super.initState();
     loadData();
+    //监听滚动事件，打印滚动位置
+    _controller.addListener(() {
+      print(_controller.offset); //打印滚动位置
+      if (_controller.offset < 100) {
+        double alpha = _controller.offset / 100;
+        appbarAlpha = (255 * alpha).toInt();
+        appbarTitleColor = colorA8ACBC;
+        appbarLeftIcon = "ic_search_white";
+        appbarRightIcon = "ic_message_white";
+      } else {
+        appbarLeftIcon = "ic_search_grey";
+        appbarRightIcon = "ic_message_grey";
+        appbarTitleColor = Colors.white;
+      }
+      setState(() {});
+    });
   }
 
   void loadData() {
@@ -76,9 +101,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget createSearchBar() {
     return Container(
-      height: 84,
-//      color: color00CDA2,
-      padding: EdgeInsets.only(left: 17, right: 17, top: 50),
+      height: 104,
+      color: Color.fromARGB(appbarAlpha, 0, 205, 162),
+      padding: EdgeInsets.only(left: 17, right: 17, top: 45, bottom: 20),
       child: Row(
         children: <Widget>[
           Container(
@@ -93,14 +118,14 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   PaddingStyles.getPadding(12),
                   Image.asset(
-                    Utils.getImgPath("ic_search_grey"),
+                    Utils.getImgPath(appbarLeftIcon),
                     width: 20,
                     height: 20,
                   ),
                   PaddingStyles.getPadding(7),
                   Text(
                     "搜索食物和热量",
-                    style: TextStyles.get14TextA8ACBC(),
+                    style: TextStyle(fontSize: 14, color: appbarTitleColor),
                   )
                 ],
               ),
@@ -108,7 +133,7 @@ class _HomePageState extends State<HomePage> {
           ),
           PaddingStyles.getPadding(14),
           Image.asset(
-            Utils.getImgPath("ic_message_grey"),
+            Utils.getImgPath(appbarRightIcon),
             width: 20,
             height: 20,
           )
@@ -122,6 +147,7 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: <Widget>[
         CustomScrollView(
+          controller: _controller,
           slivers: <Widget>[
             SliverToBoxAdapter(child: createHeaderImg()),
             SliverList(
@@ -467,5 +493,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    //为了避免内存泄露，需要调用_controller.dispose
+    _controller.dispose();
+    super.dispose();
   }
 }
