@@ -6,8 +6,7 @@ import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-
-typedef onTabClickListener = void Function();
+import 'package:toast/toast.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -102,7 +101,8 @@ class _HomePageState extends State<HomePage> {
         height: 111,
         child: GestureDetector(
           onTap: () {
-            print("fwefwegwerwef");
+            Toast.show(topCard.name, context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
           },
           child: Column(
             children: <Widget>[

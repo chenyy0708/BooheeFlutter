@@ -33,6 +33,8 @@ dependencies:
 #  flustars: ^0.2.6+1
   # 路由
   fluro: ^1.5.0
+  # toast
+  toast: ^0.1.5
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git
