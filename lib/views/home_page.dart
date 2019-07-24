@@ -96,7 +96,28 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           width: double.infinity,
           height: 156,
-          child: Text("测试"),
+          child: Stack(
+            children: <Widget>[
+              new Align(
+                alignment: FractionalOffset.center,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: CircularProgressIndicator(
+                        value: 0.3,
+                        strokeWidth: 8.0,
+                        backgroundColor: Color(0xFFF5F6FA),
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(color00CDA2),
+                      ),
+                      width: 90,
+                      height: 90,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       )
     ]);
