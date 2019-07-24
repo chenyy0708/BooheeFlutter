@@ -59,6 +59,17 @@ class _HomePageState extends State<HomePage> {
       Container(
         color: Colors.black38,
         height: 181,
+      ),
+      Card(
+        shape: // 圆角
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        margin: EdgeInsets.only(left: 17, right: 17, top: 104),
+        elevation: 1,
+        child: Container(
+          width: double.infinity,
+          height: 156,
+          child: Text("测试"),
+        ),
       )
     ]);
   }
