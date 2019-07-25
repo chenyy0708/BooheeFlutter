@@ -30,11 +30,13 @@ dependencies:
   # 刷新控件
   flutter_easyrefresh: ^1.2.7
   # 聚合工具类
-#  flustars: ^0.2.6+1
+  #  flustars: ^0.2.6+1
   # 路由
   fluro: ^1.5.0
   # toast
   toast: ^0.1.5
+  # 进度条
+  percent_indicator: ^2.1.1
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git
@@ -61,34 +63,34 @@ flutter:
   uses-material-design: true
 
   assets:
-  - images/ic_tab_bar_home_grey.png
-  - images/ic_tab_bar_me_grey.png
-  - images/ic_tab_bar_partner_grey.png
-  - images/ic_tab_bar_shop_grey.png
-  - images/ic_tab_bar_home_green.png
-  - images/ic_tab_bar_me_green.png
-  - images/ic_tab_bar_partner_green.png
-  - images/ic_tab_bar_shop_green.png
-  - images/launch_image.png
-  - images/ic_boohee_logo.png
-  - images/ic_home_calorie.png
-  - images/ic_home_chart_diet.jpg
-  - images/ic_home_sleep.png
-  - images/ic_home_sport.png
-  - images/ic_home_step.png
-  - images/ic_home_weight.png
-  - images/ic_home_chart_simple.png
-  - images/ic_home_dietician.png
-  - images/ic_arrow_grey.png
-  - images/ic_home_habit.png
-  - images/ic_home_circumference.png
-  - images/ic_home_baby.png
-  - images/ic_home_food_plan.png
-  - images/ic_home_menstruation.png
-  - images/ic_message_grey.png
-  - images/ic_search_grey.png
-  - images/ic_message_white.png
-  - images/ic_search_white.png
+    - images/ic_tab_bar_home_grey.png
+    - images/ic_tab_bar_me_grey.png
+    - images/ic_tab_bar_partner_grey.png
+    - images/ic_tab_bar_shop_grey.png
+    - images/ic_tab_bar_home_green.png
+    - images/ic_tab_bar_me_green.png
+    - images/ic_tab_bar_partner_green.png
+    - images/ic_tab_bar_shop_green.png
+    - images/launch_image.png
+    - images/ic_boohee_logo.png
+    - images/ic_home_calorie.png
+    - images/ic_home_chart_diet.jpg
+    - images/ic_home_sleep.png
+    - images/ic_home_sport.png
+    - images/ic_home_step.png
+    - images/ic_home_weight.png
+    - images/ic_home_chart_simple.png
+    - images/ic_home_dietician.png
+    - images/ic_arrow_grey.png
+    - images/ic_home_habit.png
+    - images/ic_home_circumference.png
+    - images/ic_home_baby.png
+    - images/ic_home_food_plan.png
+    - images/ic_home_menstruation.png
+    - images/ic_message_grey.png
+    - images/ic_search_grey.png
+    - images/ic_message_white.png
+    - images/ic_search_white.png
       # To add assets to your application, add an assets section, like this:
       # assets:
       #  - images/a_dot_burr.jpeg
@@ -117,5 +119,10 @@ flutter:
       #       - asset: fonts/TrajanPro_Bold.ttf
       #         weight: 700
       #
-    # For details regarding fonts from package dependencies,
+      # For details regarding fonts from package dependencies,
     # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Bold.otf

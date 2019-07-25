@@ -8,6 +8,8 @@ import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:toast/toast.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   Color appbarBg = Color(0x1FFFFFFF);
   String appbarLeftIcon = "ic_search_grey";
   String appbarRightIcon = "ic_message_grey";
+  double percent = 0.0;
 
   @override
   void initState() {
@@ -74,6 +77,11 @@ class _HomePageState extends State<HomePage> {
           .toList();
       setState(() {});
     });
+    // 体重记录
+    Observable.just(3).delay(new Duration(milliseconds: 3 * 1000)).listen((_) {
+      percent = 0.8;
+      setState(() {});
+    });
   }
 
   Widget createHeaderImg() {
@@ -97,19 +105,93 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
           height: 156,
           child: Stack(
+            alignment: Alignment.center,
             children: <Widget>[
-              Center(
-                child: Container(
-                  child: CircularProgressIndicator(
-                    value: 0.3,
-                    strokeWidth: 8.0,
-                    backgroundColor: Color(0xFFF5F6FA),
-                    valueColor: new AlwaysStoppedAnimation<Color>(color00CDA2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 2, bottom: 2, right: 4, left: 4),
+                        child: Text(
+                          "初始(公斤)",
+                          style: TextStyles.get10TextA8ACBC(),
+                        ),
+                      ),
+                      Text(
+                        "58.5",
+                        style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 23,
+                            color: color373D52),
+                      ),
+                    ],
                   ),
-                  width: 90,
-                  height: 90,
-                ),
-              )
+                  PaddingStyles.getPadding(30),
+                  CircularPercentIndicator(
+                    animation: true,
+                    radius: 95.0,
+                    lineWidth: 8.0,
+                    percent: percent,
+                    animationDuration: 800,
+                    circularStrokeCap: CircularStrokeCap.round,
+                    backgroundColor: Color(0xFFF5F6FA),
+                    center: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "已减去(公斤)",
+                          style: TextStyles.get10TextA8ACBC(),
+                        ),
+                        Text(
+                          "3.2",
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontFamily: "Montserrat",
+                              color: color373D52),
+                        ),
+                      ],
+                    ),
+                    progressColor: color00CDA2,
+                  ),
+                  PaddingStyles.getPadding(30),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color(0x2100cda2),
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 2, bottom: 2, right: 4, left: 4),
+                            child: Text(
+                              "目标(公斤)",
+                              style:
+                                  TextStyle(fontSize: 10, color: color00CDA2),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "52.5",
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontFamily: "Montserrat",
+                            color: color00CDA2),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ),

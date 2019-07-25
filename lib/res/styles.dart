@@ -37,6 +37,10 @@ class TextStyles {
   static TextStyle get12TextA8ACBC() {
     return TextStyle(fontSize: 12, color: colorA8ACBC);
   }
+
+  static TextStyle get10TextA8ACBC() {
+    return TextStyle(fontSize: 10, color: colorA8ACBC);
+  }
 }
 
 class PaddingStyles {
