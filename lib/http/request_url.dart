@@ -6,6 +6,9 @@ import 'package:boohee_flutter/utils/sp_util.dart';
 class HomeRequestUrl {
   // 首页卡片
   static const String home_tools = "/api/v2/tools";
+
+  // 壁纸
+  static const String home_wallpaper = "/api/v1/home/items2";
 }
 
 class RequestUrl {

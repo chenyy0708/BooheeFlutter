@@ -5,6 +5,7 @@ import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/home_tools.dart';
+import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,8 @@ class _HomePageState extends State<HomePage> {
   Color appbarBg = Color(0x1FFFFFFF);
   String appbarLeftIcon = "ic_search_grey";
   String appbarRightIcon = "ic_message_grey";
+  String homeWallPaper =
+      "http://up.boohee.cn//house//u//one//wallpaper//1661_big.jpg";
   double percent = 0.0;
 
   @override
@@ -77,6 +80,8 @@ class _HomePageState extends State<HomePage> {
           .toList();
       setState(() {});
     });
+    // 壁纸
+    loadWallpaper();
     // 体重记录
     Observable.just(3).delay(new Duration(milliseconds: 3 * 1000)).listen((_) {
       percent = 0.8;
@@ -84,10 +89,22 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // 首页壁纸
+  void loadWallpaper() {
+    dio
+        .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
+            url: HomeRequestUrl.home_wallpaper))
+        .then((response) {
+      HomeWallPaper wallPaper = HomeWallPaper.fromJson(response.data);
+      homeWallPaper = wallPaper.welcomeImg.backImgSmall;
+      setState(() {});
+    });
+  }
+
   Widget createHeaderImg() {
     return Stack(children: <Widget>[
       Image.network(
-        "http://up.boohee.cn//house//u//one//wallpaper//1661_big.jpg",
+        homeWallPaper,
         height: 181,
         width: double.infinity,
         fit: BoxFit.fitWidth,
