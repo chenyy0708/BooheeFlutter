@@ -8,6 +8,7 @@ import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/utils.dart';
+import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rxdart/rxdart.dart';
@@ -113,11 +114,8 @@ class _HomePageState extends State<HomePage> {
         color: Colors.black38,
         height: 181,
       ),
-      Card(
-        shape: // 圆角
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      CardView(
         margin: EdgeInsets.only(left: 17, right: 17, top: 104),
-        elevation: 1,
         child: Container(
           width: double.infinity,
           height: 156,
@@ -292,11 +290,8 @@ class _HomePageState extends State<HomePage> {
 
   // 饮食运动记录
   Widget createDietSportRecord([Data topCard]) {
-    return Card(
-      shape: // 圆角
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+    return CardView(
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
-      elevation: 1,
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
@@ -356,11 +351,8 @@ class _HomePageState extends State<HomePage> {
 
   // 智慧营养师
   Widget createWisdom([Data topCard]) {
-    return Card(
-      shape: // 圆角
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+    return CardView(
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
-      elevation: 1,
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
@@ -399,11 +391,8 @@ class _HomePageState extends State<HomePage> {
 
   // 体重记录
   Widget createWeightRecord([Data topCard]) {
-    return Card(
-      shape: // 圆角
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+    return CardView(
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
-      elevation: 1,
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
@@ -457,11 +446,8 @@ class _HomePageState extends State<HomePage> {
 
   // 健康习惯
   Widget createHealthHabits(String iconUrl, String title) {
-    return Card(
-      shape: // 圆角
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+    return CardView(
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
-      elevation: 1,
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 61,
@@ -539,14 +525,11 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         margin: EdgeInsets.only(top: 13, bottom: 30),
         height: (58 * bottomCards.length).toDouble(), // 指定卡片大小
-        child: Card(
-          shape: // 圆角
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        child: CardView(
           margin: EdgeInsets.only(
             left: 17,
             right: 17,
           ),
-          elevation: 1,
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) {
               return Container(

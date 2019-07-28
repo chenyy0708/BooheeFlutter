@@ -4,6 +4,7 @@ import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
+import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_footer.dart';
@@ -152,11 +153,8 @@ class _ShopPageState extends State<ShopPage> {
     return SliverToBoxAdapter(
       child: Container(
         height: 162, // 指定卡片大小
-        child: Card(
-          shape: // 圆角
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        child: CardView(
           margin: EdgeInsets.only(left: 17, right: 17, top: 13),
-          elevation: 1,
           child: Padding(
             padding: EdgeInsets.only(top: 13, left: 10, right: 10),
             child: GridView.builder(
@@ -209,10 +207,8 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   Widget getGoodsItemContainer(Goods item) {
-    return Card(
+    return CardView(
       margin: EdgeInsets.all(0.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      elevation: 1,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
