@@ -10,6 +10,7 @@ import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
+import 'package:boohee_flutter/widget/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rxdart/rxdart.dart';
@@ -420,7 +421,22 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   topCard.name,
                   style: TextStyles.get14TextBold_373D52(),
-                )
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    RoundButton(
+                      backgroundColor: color00CDA2,
+                      buttonText: Text(
+                        "体脂称",
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),onPressed: (){
+                      print("1");
+                    },
+                    )
+                  ],
+                ),
               ],
             ),
             Expanded(
