@@ -110,9 +110,19 @@ class _HomePageState extends State<HomePage> {
         width: double.infinity,
         fit: BoxFit.fitWidth,
       ),
-      Container(
-        color: Colors.black38,
-        height: 181,
+      ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 3.0,
+            sigmaY: 3.0,
+          ),
+          child: Container(
+            color: Colors.transparent,
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 181,
+          ),
+        ),
       ),
       CardView(
         margin: EdgeInsets.only(left: 17, right: 17, top: 104),
