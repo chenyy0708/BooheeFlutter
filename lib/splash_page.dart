@@ -1,5 +1,7 @@
+import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
+import 'package:boohee_flutter/utils/utils.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:rxdart/rxdart.dart';
 import 'app/route/application.dart';
 import 'app/route/fluro_navigator.dart';
 import 'app/route/routes.dart';
+import 'common/colors.dart';
 import 'common/constant.dart';
 import 'http/http.dart';
 import 'http/request_url.dart';
@@ -53,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
                   Image.network(
                     adImageUrl,
                     width: double.infinity,
-                    height: ScreenUtil.getScreenH(context) - 100,
+                    height: ScreenUtil.getScreenH(context) - 70,
                     fit: BoxFit.cover,
                   ),
                   Offstage(
@@ -72,9 +75,27 @@ class _SplashPageState extends State<SplashPage> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 100,
-                child: Text("底部"),
+              Container(
+                height: 70,
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      Utils.getImgPath("ic_boohee_logo"),
+                      height: 35,
+                      width: 35,
+                    ),
+                    PaddingStyles.getPadding(10),
+                    Text(
+                      "薄荷健康",
+                      style: TextStyle(
+                          color: color373D52,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
               )
             ],
           ),
