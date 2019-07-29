@@ -9,6 +9,9 @@ import 'app/route/application.dart';
 import 'app/route/fluro_navigator.dart';
 import 'app/route/routes.dart';
 import 'common/constant.dart';
+import 'http/http.dart';
+import 'http/request_url.dart';
+import 'model/splash_ad.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -47,6 +50,7 @@ class _SplashPageState extends State<SplashPage> {
   void _loadLoginStatus() async {
     await SpUtil.getInstance();
     if (!mounted) return;
+    _loadSplashAd();
     _loadLocale();
     _initAsync();
   }
@@ -63,10 +67,19 @@ class _SplashPageState extends State<SplashPage> {
   void _initAsync() {
     Observable.just(3).delay(new Duration(milliseconds: 1000)).listen((_) {
       if (isLogin) {
-        NavigatorUtils.push(context, Routes.root,replace: true);
+        NavigatorUtils.push(context, Routes.root, replace: true);
       } else {
         NavigatorUtils.push(context, Routes.login, replace: true);
       }
     });
   }
+}
+
+void _loadSplashAd() {
+  dio
+      .get(RequestUrl.getBaseUrl(RequestUrl.status,
+          url: HomeRequestUrl.splash_ad))
+      .then((response) {
+    SplashAd splashAd = SplashAd.fromJson(response.data);
+  });
 }

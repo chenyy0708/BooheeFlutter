@@ -9,6 +9,9 @@ class HomeRequestUrl {
 
   // 壁纸
   static const String home_wallpaper = "/api/v1/home/items2";
+
+  // 广告
+  static const String splash_ad = "/api/v1/app_square/start_up_with_ad";
 }
 
 class RequestUrl {
@@ -19,6 +22,7 @@ class RequestUrl {
   static const String bingo = "bingo";
   static const String record = "record";
   static const String columbus = "columbus";
+  static const String status = "status";
 
   static const String KEY = "ifood";
   static const String SECRET = "0d1efea355c74c17deaf5fb10c6ca68f57af7ecc";
