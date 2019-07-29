@@ -1,5 +1,5 @@
+import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
-import 'package:boohee_flutter/utils/utils.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,12 @@ class _SplashPageState extends State<SplashPage> {
 
   bool isLogin = false;
 
+  // 因为offstage属性为true是隐藏，false为显示，所以默认属性为true
+  bool inVisible = true;
+
+  String adImageUrl = "";
+  String adTitle = "";
+
   @override
   void initState() {
     super.initState();
@@ -37,11 +43,41 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: new Image.asset(
-          Utils.getImgPath('launch_image'),
-          width: double.infinity,
-          fit: BoxFit.fill,
+        body: Container(
           height: double.infinity,
+          child: Column(
+            children: <Widget>[
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: <Widget>[
+                  Image.network(
+                    adImageUrl,
+                    width: double.infinity,
+                    height: ScreenUtil.getScreenH(context) - 100,
+                    fit: BoxFit.cover,
+                  ),
+                  Offstage(
+                    offstage: inVisible,
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      color: Colors.black38,
+                      child: Center(
+                        child: Text(
+                          adTitle,
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 100,
+                child: Text("底部"),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -65,7 +101,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _initAsync() {
-    Observable.just(3).delay(new Duration(milliseconds: 1000)).listen((_) {
+    Observable.just(3).delay(new Duration(milliseconds: 3000)).listen((_) {
       if (isLogin) {
         NavigatorUtils.push(context, Routes.root, replace: true);
       } else {
@@ -73,13 +109,17 @@ class _SplashPageState extends State<SplashPage> {
       }
     });
   }
-}
 
-void _loadSplashAd() {
-  dio
-      .get(RequestUrl.getBaseUrl(RequestUrl.status,
-          url: HomeRequestUrl.splash_ad))
-      .then((response) {
-    SplashAd splashAd = SplashAd.fromJson(response.data);
-  });
+  void _loadSplashAd() {
+    dio
+        .get(RequestUrl.getBaseUrl(RequestUrl.status,
+            url: HomeRequestUrl.splash_ad))
+        .then((response) {
+      var _splashAd = SplashAd.fromJson(response.data);
+      adImageUrl = _splashAd.startUpUrl;
+      adTitle = _splashAd.text;
+      inVisible = !adTitle.isNotEmpty;
+      setState(() {});
+    });
+  }
 }
