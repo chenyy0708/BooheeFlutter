@@ -32,9 +32,7 @@ class _SplashPageState extends State<SplashPage> {
 
   // 因为offstage属性为true是隐藏，false为显示，所以默认属性为true
   bool inVisible = true;
-
-  String adImageUrl = "";
-  String adTitle = "";
+  SplashAd splashAd;
 
   @override
   void initState() {
@@ -54,7 +52,7 @@ class _SplashPageState extends State<SplashPage> {
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
                   Image.network(
-                    adImageUrl,
+                    splashAd == null ? "" : splashAd.startUpUrl,
                     width: double.infinity,
                     height: ScreenUtil.getScreenH(context) - 70,
                     fit: BoxFit.cover,
@@ -67,7 +65,7 @@ class _SplashPageState extends State<SplashPage> {
                       color: Colors.black38,
                       child: Center(
                         child: Text(
-                          adTitle,
+                          splashAd == null ? "" : splashAd.text,
                           style: TextStyle(color: Colors.white, fontSize: 15),
                         ),
                       ),
@@ -136,10 +134,8 @@ class _SplashPageState extends State<SplashPage> {
         .get(RequestUrl.getBaseUrl(RequestUrl.status,
             url: HomeRequestUrl.splash_ad))
         .then((response) {
-      var _splashAd = SplashAd.fromJson(response.data);
-      adImageUrl = _splashAd.startUpUrl;
-      adTitle = _splashAd.text;
-      inVisible = !adTitle.isNotEmpty;
+      splashAd = SplashAd.fromJson(response.data);
+      inVisible = !splashAd.text.isNotEmpty;
       setState(() {});
     });
   }

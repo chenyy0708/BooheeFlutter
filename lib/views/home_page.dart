@@ -9,6 +9,7 @@ import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
+import 'package:boohee_flutter/widget/home_common_card.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rxdart/rxdart.dart';
@@ -495,40 +496,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // 通用的卡片布局
-  Widget createCommonCard(String iconUrl, String title,
-      // ignore: avoid_init_to_null
-      {Widget subWidget: null}) {
-    return Container(
-      padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-      height: 58,
-      child: Row(
-        children: <Widget>[
-          Image.asset(
-            Utils.getImgPath(iconUrl),
-            height: 18,
-            width: 18,
-          ),
-          PaddingStyles.getPadding(6),
-          Text(
-            title,
-            style: TextStyles.get14TextBold_373D52(),
-          ),
-          Expanded(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              subWidget == null ? Text("") : subWidget,
-              Image.asset(
-                Utils.getImgPath("ic_arrow_grey"),
-              )
-            ],
-          ))
-        ],
-      ),
-    );
-  }
-
   // 底部健康工具列表
   Widget createToolsCards() {
     return SliverToBoxAdapter(
@@ -559,42 +526,44 @@ class _HomePageState extends State<HomePage> {
               Widget widget;
               if (bottomCards[index].code == HomeCard.EXERCISE) {
                 // 运动训练
-                widget =
-                    createCommonCard("ic_home_sport", bottomCards[index].name,
-                        subWidget: RichText(
-                          text: TextSpan(children: <TextSpan>[
-                            TextSpan(
-                                text: "35 ",
-                                style: TextStyles.get11Text_00CDA2()),
-                            TextSpan(
-                                text: "分钟",
-                                style: TextStyles.get11TextA8ACBC()),
-                          ]),
-                        ));
+                widget = CommonCard(
+                    title: bottomCards[index].name,
+                    iconUrl: "ic_home_sport",
+                    subWidget: RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "35 ", style: TextStyles.get11Text_00CDA2()),
+                        TextSpan(
+                            text: "分钟", style: TextStyles.get11TextA8ACBC()),
+                      ]),
+                    ));
               } else if (bottomCards[index].code == HomeCard.MEASURE_RECORD) {
                 // 围度记录
-                widget = createCommonCard(
-                    "ic_home_circumference", bottomCards[index].name);
+                widget = CommonCard(
+                    iconUrl: "ic_home_circumference",
+                    title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.STEPS_RECORD) {
                 // 步数记录
-                widget =
-                    createCommonCard("ic_home_step", bottomCards[index].name);
+                widget = CommonCard(
+                    iconUrl: "ic_home_step", title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.BABY) {
                 // 宝宝记录
-                widget =
-                    createCommonCard("ic_home_baby", bottomCards[index].name);
+                widget = CommonCard(
+                    iconUrl: "ic_home_baby", title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.DIET_PLAN) {
                 // 饮食计划
-                widget = createCommonCard(
-                    "ic_home_food_plan", bottomCards[index].name);
+                widget = CommonCard(
+                    iconUrl: "ic_home_food_plan",
+                    title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.SLEEP_RECORD) {
                 // 睡眠记录
-                widget =
-                    createCommonCard("ic_home_sleep", bottomCards[index].name);
+                widget = CommonCard(
+                    iconUrl: "ic_home_sleep", title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.PERIODS_RECORD) {
                 // 经期记录
-                widget = createCommonCard(
-                    "ic_home_menstruation", bottomCards[index].name);
+                widget = CommonCard(
+                    iconUrl: "ic_home_menstruation",
+                    title: bottomCards[index].name);
               }
               return widget;
             },
