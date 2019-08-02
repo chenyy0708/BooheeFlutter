@@ -7,19 +7,28 @@ class CardView extends StatelessWidget {
   final Widget child;
   final double elevation;
   final double radius;
+  final Function onPressed;
 
   CardView(
-      {Key key, this.margin, this.child, this.elevation: 1, this.radius: 12})
+      {Key key,
+      this.margin,
+      this.child,
+      this.onPressed,
+      this.elevation: 1,
+      this.radius: 12})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: // 圆角
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
-      margin: margin,
-      elevation: elevation,
-      child: child,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Card(
+        shape: // 圆角
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+        margin: margin,
+        elevation: elevation,
+        child: child,
+      ),
     );
   }
 }

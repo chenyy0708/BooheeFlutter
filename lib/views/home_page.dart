@@ -7,6 +7,7 @@ import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
+import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
@@ -303,6 +304,7 @@ class _HomePageState extends State<HomePage> {
   // 饮食运动记录
   Widget createDietSportRecord([Data topCard]) {
     return CardView(
+      onPressed: (){ToastUtils.showToast(context, topCard.name)},
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
@@ -422,21 +424,19 @@ class _HomePageState extends State<HomePage> {
                   topCard.name,
                   style: TextStyles.get14TextBold_373D52(),
                 ),
-                Row(
+                Expanded(
+                    child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     RoundButton(
-                      backgroundColor: color00CDA2,
-                      buttonText: Text(
-                        "体脂称",
-                        style: TextStyle(fontSize: 10, color: Colors.white),
-                      ),onPressed: (){
-                      print("1");
-                    },
+                      text: "体脂秤",
+                      onPressed: () {
+                        print("1");
+                      },
                     )
                   ],
-                ),
+                )),
               ],
             ),
             Expanded(
