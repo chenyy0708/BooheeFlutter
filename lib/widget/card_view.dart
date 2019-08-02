@@ -20,13 +20,13 @@ class CardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Card(
-        shape: // 圆角
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
-        margin: margin,
-        elevation: elevation,
+    return Card(
+      shape: // 圆角
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+      margin: margin,
+      elevation: elevation,
+      child: InkWell(
+        onTap: onPressed,
         child: child,
       ),
     );

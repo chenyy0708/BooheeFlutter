@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
   void loadData() {
     dio
         .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-        url: HomeRequestUrl.home_tools))
+            url: HomeRequestUrl.home_tools))
         .then((response) {
       HomeTools homeTools = HomeTools.fromJson(response.data);
       topCards = homeTools.data
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
   void loadWallpaper() {
     dio
         .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-        url: HomeRequestUrl.home_wallpaper))
+            url: HomeRequestUrl.home_wallpaper))
         .then((response) {
       HomeWallPaper wallPaper = HomeWallPaper.fromJson(response.data);
       homeWallPaper = wallPaper.welcomeImg.backImgSmall;
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               "目标(公斤)",
                               style:
-                              TextStyle(fontSize: 10, color: color00CDA2),
+                                  TextStyle(fontSize: 10, color: color00CDA2),
                             ),
                           ),
                         ),
@@ -220,6 +220,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              Positioned(
+                child: RoundButton(
+                  padding:
+                      EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
+                  text: "打卡",
+                  onPressed: () {
+                    ToastUtils.showToast(context, "打卡");
+                  },
+                ),
+                right: 16,
+                bottom: 17,
+              )
             ],
           ),
         ),
@@ -280,21 +292,19 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: createHeaderImg()),
             SliverList(
                 delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                      Widget widget;
-                      if (topCards[index].code == HomeCard.DIET_SPORT_RECORD) {
-                        widget = createDietSportRecord(topCards[index]);
-                      } else if (topCards[index].code == HomeCard.WISDOM) {
-                        widget = createWisdom(topCards[index]);
-                      } else
-                      if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
-                        widget = createWeightRecord(topCards[index]);
-                      } else
-                      if (topCards[index].code == HomeCard.HEALTH_HABITS) {
-                        widget = createHealthHabits("ic_home_habit", "健康习惯");
-                      }
-                      return widget;
-                    }, childCount: topCards.length)),
+                    (BuildContext context, int index) {
+              Widget widget;
+              if (topCards[index].code == HomeCard.DIET_SPORT_RECORD) {
+                widget = createDietSportRecord(topCards[index]);
+              } else if (topCards[index].code == HomeCard.WISDOM) {
+                widget = createWisdom(topCards[index]);
+              } else if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
+                widget = createWeightRecord(topCards[index]);
+              } else if (topCards[index].code == HomeCard.HEALTH_HABITS) {
+                widget = createHealthHabits("ic_home_habit", "健康习惯");
+              }
+              return widget;
+            }, childCount: topCards.length)),
             createToolsCards()
           ],
         ),
@@ -307,7 +317,7 @@ class _HomePageState extends State<HomePage> {
   Widget createDietSportRecord([Data topCard]) {
     return CardView(
       onPressed: () {
-        ToastUtils.showToast(context, topCard.name)
+        ToastUtils.showToast(context, topCard.name);
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
@@ -336,33 +346,30 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  PaddingStyles.getPadding(24),
+                  RichText(
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
+                      TextSpan(
+                          text: "230",
+                          style: TextStyles.get15TextBold_373D52()),
+                      TextSpan(
+                          text: " 还可以吃", style: TextStyles.get12TextA8ACBC()),
+                    ]),
+                  ),
+                  Expanded(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      PaddingStyles.getPadding(24),
-                      RichText(
-                        text: TextSpan(children: <TextSpan>[
-                          TextSpan(
-                              text: "还可以吃 ",
-                              style: TextStyles.get12TextA8ACBC()),
-                          TextSpan(
-                              text: "230",
-                              style: TextStyles.get15TextBold_373D52()),
-                          TextSpan(
-                              text: " 还可以吃",
-                              style: TextStyles.get12TextA8ACBC()),
-                        ]),
-                      ),
-                      Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Image.asset(
-                                  Utils.getImgPath(
-                                      "ic_home_chart_diet", format: "jpg"))
-                            ],
-                          ))
+                      Image.asset(
+                          Utils.getImgPath("ic_home_chart_diet", format: "jpg"))
                     ],
                   ))
+                ],
+              ))
             ],
           ),
         ),
@@ -373,6 +380,9 @@ class _HomePageState extends State<HomePage> {
   // 智慧营养师
   Widget createWisdom([Data topCard]) {
     return CardView(
+      onPressed: () {
+        ToastUtils.showToast(context, topCard.name);
+      },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
@@ -395,15 +405,15 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    PaddingStyles.getPadding(24),
-                    Text(
-                      "晚餐：米饭、番茄炒蛋、水煮鱼片",
-                      style: TextStyles.get12TextA8ACBC(),
-                    )
-                  ],
-                ))
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                PaddingStyles.getPadding(24),
+                Text(
+                  "晚餐：米饭、番茄炒蛋、水煮鱼片",
+                  style: TextStyles.get12TextA8ACBC(),
+                )
+              ],
+            ))
           ],
         ),
       ),
@@ -413,6 +423,9 @@ class _HomePageState extends State<HomePage> {
   // 体重记录
   Widget createWeightRecord([Data topCard]) {
     return CardView(
+      onPressed: () {
+        ToastUtils.showToast(context, topCard.name);
+      },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
@@ -433,46 +446,45 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        RoundButton(
-                          text: "体脂秤",
-                          onPressed: () {
-                            ToastUtils.showToast(context, "体脂秤");
-                          },
-                        )
-                      ],
-                    )),
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    RoundButton(
+                      text: "体脂秤",
+                      onPressed: () {
+                        ToastUtils.showToast(context, "体脂秤");
+                      },
+                    )
+                  ],
+                )),
               ],
             ),
             Expanded(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                PaddingStyles.getPadding(24),
+                RichText(
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "58.9 ",
+                        style: TextStyles.get15TextBold_373D52()),
+                    TextSpan(text: "公斤", style: TextStyles.get12TextA8ACBC()),
+                  ]),
+                ),
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    PaddingStyles.getPadding(24),
-                    RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: "58.9 ",
-                            style: TextStyles.get15TextBold_373D52()),
-                        TextSpan(
-                            text: "公斤", style: TextStyles.get12TextA8ACBC()),
-                      ]),
-                    ),
-                    Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Image.asset(
-                              Utils.getImgPath("ic_home_chart_simple"),
-                              width: 93,
-                              height: 41,
-                            )
-                          ],
-                        ))
+                    Image.asset(
+                      Utils.getImgPath("ic_home_chart_simple"),
+                      width: 93,
+                      height: 41,
+                    )
                   ],
                 ))
+              ],
+            ))
           ],
         ),
       ),
@@ -482,6 +494,9 @@ class _HomePageState extends State<HomePage> {
   // 健康习惯
   Widget createHealthHabits(String iconUrl, String title) {
     return CardView(
+      onPressed: () {
+        ToastUtils.showToast(context, title);
+      },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
@@ -500,22 +515,20 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: "今日完成: ",
-                            style: TextStyles.get11TextA8ACBC()),
-                        TextSpan(
-                            text: "57%", style: TextStyles.get11Text_00CDA2()),
-                      ]),
-                    ),
-                    Image.asset(
-                      Utils.getImgPath("ic_arrow_grey"),
-                    )
-                  ],
-                ))
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "今日完成: ", style: TextStyles.get11TextA8ACBC()),
+                    TextSpan(text: "57%", style: TextStyles.get11Text_00CDA2()),
+                  ]),
+                ),
+                Image.asset(
+                  Utils.getImgPath("ic_arrow_grey"),
+                )
+              ],
+            ))
           ],
         ),
       ),
@@ -541,7 +554,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   border: Border(
                     bottom:
-                    Divider.createBorderSide(context, color: colorEEEFF3),
+                        Divider.createBorderSide(context, color: colorEEEFF3),
                   ),
                 ),
               );
@@ -553,6 +566,9 @@ class _HomePageState extends State<HomePage> {
               if (bottomCards[index].code == HomeCard.EXERCISE) {
                 // 运动训练
                 widget = CommonCard(
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
                     title: bottomCards[index].name,
                     iconUrl: "ic_home_sport",
                     subWidget: RichText(
@@ -566,28 +582,49 @@ class _HomePageState extends State<HomePage> {
               } else if (bottomCards[index].code == HomeCard.MEASURE_RECORD) {
                 // 围度记录
                 widget = CommonCard(
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
                     iconUrl: "ic_home_circumference",
                     title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.STEPS_RECORD) {
                 // 步数记录
                 widget = CommonCard(
-                    iconUrl: "ic_home_step", title: bottomCards[index].name);
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
+                    iconUrl: "ic_home_step",
+                    title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.BABY) {
                 // 宝宝记录
                 widget = CommonCard(
-                    iconUrl: "ic_home_baby", title: bottomCards[index].name);
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
+                    iconUrl: "ic_home_baby",
+                    title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.DIET_PLAN) {
                 // 饮食计划
                 widget = CommonCard(
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
                     iconUrl: "ic_home_food_plan",
                     title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.SLEEP_RECORD) {
                 // 睡眠记录
                 widget = CommonCard(
-                    iconUrl: "ic_home_sleep", title: bottomCards[index].name);
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
+                    iconUrl: "ic_home_sleep",
+                    title: bottomCards[index].name);
               } else if (bottomCards[index].code == HomeCard.PERIODS_RECORD) {
                 // 经期记录
                 widget = CommonCard(
+                    onPressed: () {
+                      ToastUtils.showToast(context, bottomCards[index].name);
+                    },
                     iconUrl: "ic_home_menstruation",
                     title: bottomCards[index].name);
               }
