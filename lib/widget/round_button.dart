@@ -18,6 +18,8 @@ class RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      padding: EdgeInsets.all(0),
       height: 1,
       minWidth: 1,
       child: FlatButton(

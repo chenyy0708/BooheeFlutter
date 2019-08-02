@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
   void loadData() {
     dio
         .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-            url: HomeRequestUrl.home_tools))
+        url: HomeRequestUrl.home_tools))
         .then((response) {
       HomeTools homeTools = HomeTools.fromJson(response.data);
       topCards = homeTools.data
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
   void loadWallpaper() {
     dio
         .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-            url: HomeRequestUrl.home_wallpaper))
+        url: HomeRequestUrl.home_wallpaper))
         .then((response) {
       HomeWallPaper wallPaper = HomeWallPaper.fromJson(response.data);
       homeWallPaper = wallPaper.welcomeImg.backImgSmall;
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               "目标(公斤)",
                               style:
-                                  TextStyle(fontSize: 10, color: color00CDA2),
+                              TextStyle(fontSize: 10, color: color00CDA2),
                             ),
                           ),
                         ),
@@ -280,19 +280,21 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: createHeaderImg()),
             SliverList(
                 delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-              Widget widget;
-              if (topCards[index].code == HomeCard.DIET_SPORT_RECORD) {
-                widget = createDietSportRecord(topCards[index]);
-              } else if (topCards[index].code == HomeCard.WISDOM) {
-                widget = createWisdom(topCards[index]);
-              } else if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
-                widget = createWeightRecord(topCards[index]);
-              } else if (topCards[index].code == HomeCard.HEALTH_HABITS) {
-                widget = createHealthHabits("ic_home_habit", "健康习惯");
-              }
-              return widget;
-            }, childCount: topCards.length)),
+                        (BuildContext context, int index) {
+                      Widget widget;
+                      if (topCards[index].code == HomeCard.DIET_SPORT_RECORD) {
+                        widget = createDietSportRecord(topCards[index]);
+                      } else if (topCards[index].code == HomeCard.WISDOM) {
+                        widget = createWisdom(topCards[index]);
+                      } else
+                      if (topCards[index].code == HomeCard.WEIGHT_RECORD) {
+                        widget = createWeightRecord(topCards[index]);
+                      } else
+                      if (topCards[index].code == HomeCard.HEALTH_HABITS) {
+                        widget = createHealthHabits("ic_home_habit", "健康习惯");
+                      }
+                      return widget;
+                    }, childCount: topCards.length)),
             createToolsCards()
           ],
         ),
@@ -304,7 +306,9 @@ class _HomePageState extends State<HomePage> {
   // 饮食运动记录
   Widget createDietSportRecord([Data topCard]) {
     return CardView(
-      onPressed: (){ToastUtils.showToast(context, topCard.name)},
+      onPressed: () {
+        ToastUtils.showToast(context, topCard.name)
+      },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
@@ -332,30 +336,33 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                   child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  PaddingStyles.getPadding(24),
-                  RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
-                      TextSpan(
-                          text: "230",
-                          style: TextStyles.get15TextBold_373D52()),
-                      TextSpan(
-                          text: " 还可以吃", style: TextStyles.get12TextA8ACBC()),
-                    ]),
-                  ),
-                  Expanded(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Image.asset(
-                          Utils.getImgPath("ic_home_chart_diet", format: "jpg"))
+                      PaddingStyles.getPadding(24),
+                      RichText(
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: "还可以吃 ",
+                              style: TextStyles.get12TextA8ACBC()),
+                          TextSpan(
+                              text: "230",
+                              style: TextStyles.get15TextBold_373D52()),
+                          TextSpan(
+                              text: " 还可以吃",
+                              style: TextStyles.get12TextA8ACBC()),
+                        ]),
+                      ),
+                      Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Image.asset(
+                                  Utils.getImgPath(
+                                      "ic_home_chart_diet", format: "jpg"))
+                            ],
+                          ))
                     ],
                   ))
-                ],
-              ))
             ],
           ),
         ),
@@ -388,15 +395,15 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
                 child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                PaddingStyles.getPadding(24),
-                Text(
-                  "晚餐：米饭、番茄炒蛋、水煮鱼片",
-                  style: TextStyles.get12TextA8ACBC(),
-                )
-              ],
-            ))
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    PaddingStyles.getPadding(24),
+                    Text(
+                      "晚餐：米饭、番茄炒蛋、水煮鱼片",
+                      style: TextStyles.get12TextA8ACBC(),
+                    )
+                  ],
+                ))
           ],
         ),
       ),
@@ -426,45 +433,46 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                     child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    RoundButton(
-                      text: "体脂秤",
-                      onPressed: () {
-                        print("1");
-                      },
-                    )
-                  ],
-                )),
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        RoundButton(
+                          text: "体脂秤",
+                          onPressed: () {
+                            ToastUtils.showToast(context, "体脂秤");
+                          },
+                        )
+                      ],
+                    )),
               ],
             ),
             Expanded(
                 child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                PaddingStyles.getPadding(24),
-                RichText(
-                  text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                        text: "58.9 ",
-                        style: TextStyles.get15TextBold_373D52()),
-                    TextSpan(text: "公斤", style: TextStyles.get12TextA8ACBC()),
-                  ]),
-                ),
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Image.asset(
-                      Utils.getImgPath("ic_home_chart_simple"),
-                      width: 93,
-                      height: 41,
-                    )
+                    PaddingStyles.getPadding(24),
+                    RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "58.9 ",
+                            style: TextStyles.get15TextBold_373D52()),
+                        TextSpan(
+                            text: "公斤", style: TextStyles.get12TextA8ACBC()),
+                      ]),
+                    ),
+                    Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Image.asset(
+                              Utils.getImgPath("ic_home_chart_simple"),
+                              width: 93,
+                              height: 41,
+                            )
+                          ],
+                        ))
                   ],
                 ))
-              ],
-            ))
           ],
         ),
       ),
@@ -492,20 +500,22 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
                 child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                RichText(
-                  text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                        text: "今日完成: ", style: TextStyles.get11TextA8ACBC()),
-                    TextSpan(text: "57%", style: TextStyles.get11Text_00CDA2()),
-                  ]),
-                ),
-                Image.asset(
-                  Utils.getImgPath("ic_arrow_grey"),
-                )
-              ],
-            ))
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "今日完成: ",
+                            style: TextStyles.get11TextA8ACBC()),
+                        TextSpan(
+                            text: "57%", style: TextStyles.get11Text_00CDA2()),
+                      ]),
+                    ),
+                    Image.asset(
+                      Utils.getImgPath("ic_arrow_grey"),
+                    )
+                  ],
+                ))
           ],
         ),
       ),
@@ -531,7 +541,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   border: Border(
                     bottom:
-                        Divider.createBorderSide(context, color: colorEEEFF3),
+                    Divider.createBorderSide(context, color: colorEEEFF3),
                   ),
                 ),
               );
