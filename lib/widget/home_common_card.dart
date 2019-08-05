@@ -3,6 +3,7 @@ import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// 首页通用卡片样式
 class CommonCard extends StatelessWidget {
   final String iconUrl;
   final String title;

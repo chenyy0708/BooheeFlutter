@@ -1,6 +1,7 @@
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:flutter/material.dart';
 
+/// 通用的圆角button按钮
 class RoundButton extends StatelessWidget {
   final Color backgroundColor;
   final Text buttonText;

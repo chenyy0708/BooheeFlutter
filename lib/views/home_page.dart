@@ -10,6 +10,7 @@ import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
+import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
 import 'package:boohee_flutter/widget/round_button.dart';
 import 'package:flutter/material.dart';
@@ -240,45 +241,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget createSearchBar() {
-    return Container(
-      height: 104,
-      color: Color.fromARGB(appbarAlpha, 0, 205, 162),
-      padding: EdgeInsets.only(left: 17, right: 17, top: 42, bottom: 17),
-      child: Row(
-        children: <Widget>[
-          Container(
-            height: 40,
-            width: 300,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: appbarBg,
-                borderRadius: BorderRadius.circular(17),
-              ),
-              child: Row(
-                children: <Widget>[
-                  PaddingStyles.getPadding(12),
-                  Image.asset(
-                    Utils.getImgPath(appbarLeftIcon),
-                    width: 24,
-                    height: 24,
-                  ),
-                  PaddingStyles.getPadding(7),
-                  Text(
-                    "搜索食物和热量",
-                    style: TextStyle(fontSize: 14, color: appbarTitleColor),
-                  )
-                ],
-              ),
-            ),
-          ),
-          PaddingStyles.getPadding(14),
-          Image.asset(
-            Utils.getImgPath(appbarRightIcon),
-            width: 24,
-            height: 24,
-          )
-        ],
-      ),
+    return SearchBar(
+      text: "搜索食物和热量",
+      searchBarBg: appbarBg,
+      appbarLeftIcon: appbarLeftIcon,
+      appbarRightIcon: appbarRightIcon,
+      appbarTitleColor: appbarTitleColor,
+      appbarAlpha: appbarAlpha,
     );
   }
 
