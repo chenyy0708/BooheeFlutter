@@ -18,8 +18,8 @@ class HomeRequestUrl {
 }
 
 class RequestUrl {
-  static const String domain = ".iboohee.cn";
-//  static const String domain = ".boohee.com";
+//  static const String domain = ".iboohee.cn";
+  static const String domain = ".boohee.com";
   static const String passport = "passport";
   static const String one = "one";
   static const String bingo = "bingo";
