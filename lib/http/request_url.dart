@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/base64_utils.dart';
@@ -54,12 +56,11 @@ class RequestUrl {
       data.putIfAbsent(
           "user_key", () => SpUtil.getString(Constant.user_key, defValue: ""));
     }
+    data.putIfAbsent("device_token", () => "868028037744143");
+    String json = jsonEncode(data);
     params.putIfAbsent("app_key", () => key);
-    params.putIfAbsent(
-        "context_params",
-        () =>
-            "eyJsb2dpbiI6IjE4MzcwNjIyMDMwIiwicGFzc3dvcmQiOiJxcTEyMzQ1NiIsImRldmljZV90b2tlbiI6Ijg2ODAyODAzNzc0NDE0MyJ9");
-    params.putIfAbsent("sign", () => "VOe6bXKlPuqBMxZgMt+L7hP6yco=");
+    params.putIfAbsent("context_params", () => contextParams(json));
+    params.putIfAbsent("sign", () => signature(json));
     return params;
   }
 
@@ -70,9 +71,9 @@ class RequestUrl {
 
   // 参数签名
   static String signature(String json) {
-//    String key = KEY;
-//    String secret = SECRET;
-//    String context = contextParams(json);
-    return Base64.encodeBase64(json);
+    String key = KEY;
+    String secret = SECRET;
+    String context = contextParams(json);
+    return Base64.encryptHMAC(key + context, secret);
   }
 }
