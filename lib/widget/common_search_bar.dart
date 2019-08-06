@@ -5,7 +5,7 @@ import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 /// 通用的搜索头部Widget
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatelessWidget implements PreferredSizeWidget {
   final Color searchBarBg;
   final Color appbarTitleColor;
   final int appbarAlpha;
@@ -85,4 +85,7 @@ class SearchBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(200);
 }

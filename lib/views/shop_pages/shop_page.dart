@@ -5,6 +5,7 @@ import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
+import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_footer.dart';
@@ -83,9 +84,9 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("商店"),
-        backgroundColor: mainColor,
+      appBar: SearchBar(
+        isShowCartIcon: true,
+        text: "商店搜索",
       ),
       body: EasyRefresh(
         autoControl: false,
