@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:boohee_flutter/common/constant.dart';
+import 'package:boohee_flutter/http/app_config.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
@@ -17,8 +18,8 @@ class HomeRequestUrl {
 }
 
 class RequestUrl {
-//  static const String domain = ".iboohee.cn";
-  static const String domain = ".boohee.com";
+  static const String domain = ".iboohee.cn";
+//  static const String domain = ".boohee.com";
   static const String passport = "passport";
   static const String one = "one";
   static const String bingo = "bingo";
@@ -71,8 +72,8 @@ class RequestUrl {
 
   // 参数签名
   static String signature(String json) {
-    String key = KEY;
-    String secret = SECRET;
+    String key = AppConfig.isProduction() ? KEY : QA_KEY;
+    String secret = AppConfig.isProduction() ? SECRET : QA_SECRET;
     String context = contextParams(json);
     return Base64.encryptHMAC(key + context, secret);
   }
