@@ -1,5 +1,4 @@
 import 'package:boohee_flutter/res/styles.dart';
-import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:fluro/fluro.dart';
@@ -48,13 +47,14 @@ class _SplashPageState extends State<SplashPage> {
           height: double.infinity,
           child: Column(
             children: <Widget>[
-              Stack(
+              Expanded(
+                  child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
                   Image.network(
                     splashAd == null ? "" : splashAd.startUpUrl,
                     width: double.infinity,
-                    height: ScreenUtil.getScreenH(context) - 70,
+                    height: double.infinity,
                     fit: BoxFit.cover,
                   ),
                   Offstage(
@@ -72,7 +72,7 @@ class _SplashPageState extends State<SplashPage> {
                     ),
                   )
                 ],
-              ),
+              )),
               Container(
                 height: 70,
                 width: double.infinity,
@@ -120,7 +120,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _initAsync() {
-    Observable.just(3).delay(new Duration(milliseconds: 3000)).listen((_) {
+    Observable.just(3).delay(new Duration(milliseconds: 10 * 1000)).listen((_) {
       if (isLogin) {
         NavigatorUtils.push(context, Routes.root, replace: true);
       } else {
