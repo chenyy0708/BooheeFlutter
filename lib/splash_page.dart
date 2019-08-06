@@ -1,10 +1,11 @@
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
+import 'package:boohee_flutter/utils/timer_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
+import 'package:boohee_flutter/widget/round_button.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 
 import 'app/route/application.dart';
 import 'app/route/fluro_navigator.dart';
@@ -32,10 +33,25 @@ class _SplashPageState extends State<SplashPage> {
   // 因为offstage属性为true是隐藏，false为显示，所以默认属性为true
   bool inVisible = true;
   SplashAd splashAd;
+  TimerUtil _timerUtil;
+  int countdownTime = 5 * 1000;
+  int currentTime = 5;
 
   @override
   void initState() {
     super.initState();
+    _timerUtil = new TimerUtil(mTotalTime: countdownTime);
+    _timerUtil.setOnTimerTickCallback((int tick) {
+      double _tick = tick / 1000;
+      setState(() {
+        currentTime = _tick.toInt();
+      });
+      if (_tick == 0) {
+        goHome();
+      }
+    });
+    // 开始倒计时
+    _timerUtil.startCountDown();
     _loadLoginStatus();
   }
 
@@ -73,27 +89,51 @@ class _SplashPageState extends State<SplashPage> {
                   )
                 ],
               )),
-              Container(
-                height: 70,
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      Utils.getImgPath("ic_boohee_logo"),
-                      height: 35,
-                      width: 35,
+              Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 70,
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(
+                          Utils.getImgPath("ic_boohee_logo"),
+                          height: 35,
+                          width: 35,
+                        ),
+                        PaddingStyles.getPadding(10),
+                        Text(
+                          "薄荷健康",
+                          style: TextStyle(
+                              color: color373D52,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
                     ),
-                    PaddingStyles.getPadding(10),
-                    Text(
-                      "薄荷健康",
-                      style: TextStyle(
-                          color: color373D52,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: RoundButton(
+                          padding: EdgeInsets.only(
+                              left: 5, right: 5, top: 2, bottom: 2),
+                          backgroundColor: Colors.black45,
+                          radius: 2,
+                          buttonText: Text(
+                            "跳过广告 $currentTime",
+                            style: TextStyle(fontSize: 12, color: Colors.white),
+                          ),
+                          onPressed: () {
+                            _timerUtil.cancel();
+                            goHome();
+                          },
+                        )),
+                  )
+                ],
               )
             ],
           ),
@@ -107,7 +147,6 @@ class _SplashPageState extends State<SplashPage> {
     if (!mounted) return;
     _loadSplashAd();
     _loadLocale();
-    _initAsync();
   }
 
   void _loadLocale() {
@@ -115,16 +154,6 @@ class _SplashPageState extends State<SplashPage> {
       String token = SpUtil.getString(Constant.token, defValue: "");
       if (token.isNotEmpty) {
         isLogin = true;
-      }
-    });
-  }
-
-  void _initAsync() {
-    Observable.just(3).delay(new Duration(milliseconds: 10 * 1000)).listen((_) {
-      if (isLogin) {
-        NavigatorUtils.push(context, Routes.root, replace: true);
-      } else {
-        NavigatorUtils.push(context, Routes.login, replace: true);
       }
     });
   }
@@ -138,5 +167,19 @@ class _SplashPageState extends State<SplashPage> {
       inVisible = !splashAd.text.isNotEmpty;
       setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timerUtil != null) _timerUtil.cancel(); //记得中dispose里面把timer cancel。
+  }
+
+  void goHome() {
+    if (isLogin) {
+      NavigatorUtils.push(context, Routes.root, replace: true);
+    } else {
+      NavigatorUtils.push(context, Routes.login, replace: true);
+    }
   }
 }

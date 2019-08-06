@@ -8,12 +8,14 @@ class RoundButton extends StatelessWidget {
   final Function onPressed;
   final String text;
   final EdgeInsetsGeometry padding;
+  final double radius;
 
   RoundButton(
       {this.backgroundColor,
       this.buttonText,
       this.onPressed,
       this.padding,
+      this.radius: 20,
       this.text});
 
   @override
@@ -27,14 +29,14 @@ class RoundButton extends StatelessWidget {
         padding:
             padding ?? EdgeInsets.only(left: 7, right: 7, top: 4, bottom: 4),
         shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(20)),
+            borderRadius: new BorderRadius.circular(radius)),
         color: this.backgroundColor ?? color00CDA2,
         child: buttonText ??
             Text(
               text,
               style: TextStyle(fontSize: 10, color: Colors.white),
             ),
-        onPressed: onPressed,
+        onPressed: onPressed ?? () {},
       ),
     );
   }
