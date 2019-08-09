@@ -25,12 +25,7 @@ class _ShopPageState extends State<ShopPage> {
   double bannerHeight = 200;
   int mId = 9;
 
-  GlobalKey<RefreshHeaderState> _headerKey =
-      new GlobalKey<RefreshHeaderState>();
-  GlobalKey<RefreshFooterState> _footerKey =
-      new GlobalKey<RefreshFooterState>();
-  GlobalKey<EasyRefreshState> _easyRefreshKey =
-      new GlobalKey<EasyRefreshState>();
+  EasyRefreshController _controller = EasyRefreshController();
 
   @override
   void initState() {
@@ -56,7 +51,8 @@ class _ShopPageState extends State<ShopPage> {
           _categoriseList.add(it);
         }
       });
-      _easyRefreshKey.currentState.callRefreshFinish();
+      _controller.finishRefresh(success: true);
+      _controller.resetLoadState();
       // 计算Banner的高度
       double screenWidth = MediaQuery.of(context).size.width;
       if (_bannerList.length > 0) {
@@ -76,7 +72,11 @@ class _ShopPageState extends State<ShopPage> {
       ShopRecommendList data = ShopRecommendList.fromJson(response.data);
       if (page == 1) _goodsList.clear();
       _goodsList.addAll(data.goods);
-      _easyRefreshKey.currentState.callLoadMoreFinish();
+      if (page == data.totalPages) {
+        _controller.finishLoad();
+      } else {
+        _controller.finishLoad();
+      }
       setState(() {});
     });
   }
@@ -89,15 +89,10 @@ class _ShopPageState extends State<ShopPage> {
         text: "商店搜索",
       ),
       body: EasyRefresh(
-        autoControl: false,
-        autoLoad: true,
-        key: _easyRefreshKey,
-        refreshHeader: MaterialHeader(
-          key: _headerKey,
+        header: MaterialHeader(
           valueColor: AlwaysStoppedAnimation(mainColor),
         ),
-        refreshFooter: MaterialFooter(
-          key: _footerKey,
+        footer: MaterialFooter(
           valueColor: AlwaysStoppedAnimation(mainColor),
         ),
         child: CustomScrollView(
@@ -107,11 +102,11 @@ class _ShopPageState extends State<ShopPage> {
             createGoodsGridView(),
           ],
         ),
-        onRefresh: () {
+        onRefresh: () async {
           page = 1;
           loadData();
         },
-        loadMore: () {
+        onLoad: () async {
           page++;
           getRecommendList(page);
         },

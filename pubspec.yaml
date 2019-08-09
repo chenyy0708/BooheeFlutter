@@ -28,7 +28,7 @@ dependencies:
   # 轮播图
   banner: ^0.1.3
   # 刷新控件
-  flutter_easyrefresh: ^1.2.7
+  flutter_easyrefresh: ^2.0.2
   # 聚合工具类
   #  flustars: ^0.2.6+1
   # 路由
