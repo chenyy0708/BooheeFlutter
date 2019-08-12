@@ -37,6 +37,9 @@ dependencies:
   toast: ^0.1.5
   # 进度条
   percent_indicator: ^2.1.1
+  # webview
+#  flutter_webview_plugin: ^0.3.5
+  webview_flutter: ^0.3.11+2
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git

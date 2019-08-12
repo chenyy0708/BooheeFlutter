@@ -37,6 +37,12 @@ class NavigatorUtils {
     Navigator.pop(context);
   }
 
+  /// 通用的浏览器page
+  static void goBrowserPage(BuildContext context, String url) {
+    Application.router.navigateTo(context, "/web?url=$url",
+        replace: false, clearStack: false, transition: TransitionType.native);
+  }
+
   /// 带参数返回
   static void goBackWithParams(BuildContext context, result) {
     Navigator.pop(context, result);

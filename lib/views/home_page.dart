@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/http/http.dart';
@@ -16,7 +17,6 @@ import 'package:boohee_flutter/widget/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:toast/toast.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -286,61 +286,54 @@ class _HomePageState extends State<HomePage> {
   Widget createDietSportRecord([Data topCard]) {
     return CardView(
       onPressed: () {
-        ToastUtils.showToast(context, topCard.name);
+        NavigatorUtils.goBrowserPage(context, "https://www.jianshu.com/p/955c0f0b5d2d");
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
-        child: GestureDetector(
-          onTap: () {
-            Toast.show(topCard.name, context,
-                duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-          },
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Image.asset(
-                    Utils.getImgPath("ic_home_calorie"),
-                    height: 18,
-                    width: 18,
-                  ),
-                  PaddingStyles.getPadding(6),
-                  Text(
-                    topCard.name,
-                    style: TextStyles.get14TextBold_373D52(),
-                  )
-                ],
-              ),
-              Expanded(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  PaddingStyles.getPadding(24),
-                  RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
-                      TextSpan(
-                          text: "230",
-                          style: TextStyles.get15TextBold_373D52()),
-                      TextSpan(
-                          text: " 还可以吃", style: TextStyles.get12TextA8ACBC()),
-                    ]),
-                  ),
-                  Expanded(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Image.asset(
-                          Utils.getImgPath("ic_home_chart_diet", format: "jpg"))
-                    ],
-                  ))
-                ],
-              ))
-            ],
-          ),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  Utils.getImgPath("ic_home_calorie"),
+                  height: 18,
+                  width: 18,
+                ),
+                PaddingStyles.getPadding(6),
+                Text(
+                  topCard.name,
+                  style: TextStyles.get14TextBold_373D52(),
+                )
+              ],
+            ),
+            Expanded(
+                child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                PaddingStyles.getPadding(24),
+                RichText(
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
+                    TextSpan(
+                        text: "230", style: TextStyles.get15TextBold_373D52()),
+                    TextSpan(
+                        text: " 还可以吃", style: TextStyles.get12TextA8ACBC()),
+                  ]),
+                ),
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Image.asset(
+                        Utils.getImgPath("ic_home_chart_diet", format: "jpg"))
+                  ],
+                ))
+              ],
+            ))
+          ],
         ),
       ),
     );
