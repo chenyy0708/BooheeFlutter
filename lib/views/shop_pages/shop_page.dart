@@ -51,8 +51,6 @@ class _ShopPageState extends State<ShopPage> {
           _categoriseList.add(it);
         }
       });
-      _controller.finishRefresh(success: true);
-      _controller.resetLoadState();
       // 计算Banner的高度
       double screenWidth = MediaQuery.of(context).size.width;
       if (_bannerList.length > 0) {
@@ -60,6 +58,8 @@ class _ShopPageState extends State<ShopPage> {
             (_bannerList[0].defaultPhotoHeight /
                 _bannerList[0].defaultPhotoWidth);
       }
+      _controller.finishRefresh();
+      _controller.resetLoadState();
       setState(() {});
       getRecommendList(page);
     });
@@ -73,7 +73,7 @@ class _ShopPageState extends State<ShopPage> {
       if (page == 1) _goodsList.clear();
       _goodsList.addAll(data.goods);
       if (page == data.totalPages) {
-        _controller.finishLoad();
+        _controller.finishLoad(noMore: true);
       } else {
         _controller.finishLoad();
       }
@@ -84,34 +84,36 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SearchBar(
-        isShowCartIcon: true,
-        text: "商店搜索",
-      ),
-      body: EasyRefresh(
-        header: MaterialHeader(
-          valueColor: AlwaysStoppedAnimation(mainColor),
+        appBar: SearchBar(
+          isShowCartIcon: true,
+          text: "商店搜索",
         ),
-        footer: MaterialFooter(
-          valueColor: AlwaysStoppedAnimation(mainColor),
-        ),
-        child: CustomScrollView(
+        body: EasyRefresh.custom(
           slivers: <Widget>[
             createBannerView(),
             createCategoryGridView(),
             createGoodsGridView(),
           ],
-        ),
-        onRefresh: () async {
-          page = 1;
-          loadData();
-        },
-        onLoad: () async {
-          page++;
-          getRecommendList(page);
-        },
-      ),
-    );
+          header: MaterialHeader(
+            valueColor: AlwaysStoppedAnimation(mainColor),
+          ),
+          footer: MaterialFooter(
+            valueColor: AlwaysStoppedAnimation(mainColor),
+          ),
+          taskIndependence: true,
+          enableControlFinishRefresh: true,
+          enableControlFinishLoad: true,
+          firstRefresh: true,
+          controller: _controller,
+          onRefresh: () async {
+            page = 1;
+            loadData();
+          },
+          onLoad: () async {
+            page++;
+            getRecommendList(page);
+          },
+        ));
   }
 
   // 轮播图
