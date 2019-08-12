@@ -105,9 +105,11 @@ class _LoginPageState extends State<LoginPage> {
       SpUtil.putString(Constant.login_user, login);
       SpUtil.putString(Constant.token, loginUser.token);
       SpUtil.putString(Constant.user_key, loginUser.user.userKey);
+      // 更新dio中的header对象
+      RequestUrl.initDioHeader(dio);
       if (loginUser != null && loginUser.token.isNotEmpty) {
         // 登录成功，跳转首页
-        NavigatorUtils.push(context, Routes.root,replace: true);
+        NavigatorUtils.push(context, Routes.root, replace: true);
       }
     });
   }
