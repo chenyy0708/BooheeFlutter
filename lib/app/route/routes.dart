@@ -13,7 +13,7 @@ import './route_handlers.dart';
 class Routes {
   static String root = "/home";
   static String login = "/login";
-  static String webView = "/web";
+  static String webView = "/browserweb";
 
   static void configureRoutes(Router router) {
     router.define(root, handler: rootHandler);

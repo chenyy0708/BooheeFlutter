@@ -1,3 +1,4 @@
+import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -18,7 +19,7 @@ class _BrowserPageState extends State<BrowserPage> {
   String webViewUrl;
 
   _BrowserPageState(String url) {
-    webViewUrl = url;
+    webViewUrl = Base64.decodeBase64(url);
   }
 
   @override

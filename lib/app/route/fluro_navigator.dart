@@ -1,3 +1,5 @@
+import 'package:boohee_flutter/app/route/routes.dart';
+import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +41,7 @@ class NavigatorUtils {
 
   /// 通用的浏览器page
   static void goBrowserPage(BuildContext context, String url) {
-    Application.router.navigateTo(context, "/web?url=$url",
+    Application.router.navigateTo(context, '${Routes.webView}?web_url=$url',
         replace: false, clearStack: false, transition: TransitionType.native);
   }
 

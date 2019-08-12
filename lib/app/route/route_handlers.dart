@@ -24,6 +24,6 @@ var loginHandler = new Handler(
 
 var webViewHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  String param = params["url"][0];
+  String param = params["web_url"]?.first;
   return new BrowserPage(param);
 });
