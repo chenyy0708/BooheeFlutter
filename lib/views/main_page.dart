@@ -1,4 +1,5 @@
 import 'package:boohee_flutter/common/colors.dart';
+import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/views/shop_pages/shop_page.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,11 @@ class _MainPageState extends State<StatefulWidget>
       height: 22,
     ),
     Image.asset(
+      "images/ic_home_tabbar_plus.png",
+      width: 36,
+      height: 36,
+    ),
+    Image.asset(
       "images/ic_tab_bar_shop_green.png",
       width: 22,
       height: 22,
@@ -49,6 +55,11 @@ class _MainPageState extends State<StatefulWidget>
       height: 22,
     ),
     Image.asset(
+      "images/ic_home_tabbar_plus.png",
+      width: 36,
+      height: 36,
+    ),
+    Image.asset(
       "images/ic_tab_bar_shop_grey.png",
       width: 22,
       height: 22,
@@ -62,6 +73,7 @@ class _MainPageState extends State<StatefulWidget>
   static List<String> tabData = [
     "首页",
     "伙伴",
+    "",
     "商店",
     "我",
   ];
@@ -80,7 +92,11 @@ class _MainPageState extends State<StatefulWidget>
         ),
       ));
     }
-    _list..add(HomePage())..add(DiscoverPage())..add(ShopPage())..add(MinePage());
+    _list
+      ..add(HomePage())
+      ..add(DiscoverPage())
+      ..add(ShopPage())
+      ..add(MinePage());
   }
 
   @override
@@ -110,6 +126,10 @@ class _MainPageState extends State<StatefulWidget>
 
   // 导航tab 点击回调
   void _onItemTapped(int index) {
+    if (index == 2) {
+      ToastUtils.showToast(context, "暂无");
+      return;
+    }
     // 刷新widget
     setState(() {
       _selectedIndex = index;

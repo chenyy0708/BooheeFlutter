@@ -98,6 +98,7 @@ flutter:
     - images/ic_me_order.png
     - images/ic_me_shopping_cart.png
     - images/ic_me_ticket.png
+    - images/ic_home_tabbar_plus.png
       # To add assets to your application, add an assets section, like this:
       # assets:
       #  - images/a_dot_burr.jpeg
