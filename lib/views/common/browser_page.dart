@@ -17,6 +17,7 @@ class BrowserPage extends StatefulWidget {
 
 class _BrowserPageState extends State<BrowserPage> {
   String webViewUrl;
+  String title;
 
   _BrowserPageState(String url) {
     webViewUrl = Base64.decodeBase64(url);
@@ -26,7 +27,7 @@ class _BrowserPageState extends State<BrowserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("WebView"),
+        title: Text(title ?? ""),
       ),
       body: WebView(
         initialUrl: webViewUrl,
