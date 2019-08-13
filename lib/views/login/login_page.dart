@@ -5,6 +5,7 @@ import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/http/http.dart';
 import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/login_user.dart';
+import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -100,9 +101,7 @@ class _LoginPageState extends State<LoginPage> {
         .then((response) async {
       LoginUser loginUser = LoginUser.fromJson(response.data);
       await SpUtil.getInstance();
-      var login = loginUser.toString();
-      // 保存登陆信息
-      SpUtil.putString(Constant.login_user, login);
+      AccountUtils.saveUser(loginUser);
       SpUtil.putString(Constant.token, loginUser.token);
       SpUtil.putString(Constant.user_key, loginUser.user.userKey);
       // 更新dio中的header对象
