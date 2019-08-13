@@ -93,7 +93,7 @@ class _SplashPageState extends State<SplashPage> {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Container(
-                    height: 120,
+                    height: 105,
                     width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
