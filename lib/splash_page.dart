@@ -44,6 +44,7 @@ class _SplashPageState extends State<SplashPage> {
     _timerUtil.setOnTimerTickCallback((int tick) {
       double _tick = tick / 1000;
       setState(() {
+
         currentTime = _tick.toInt();
       });
       if (_tick == 0) {
