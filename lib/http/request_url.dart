@@ -8,14 +8,19 @@ import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:dio/dio.dart';
 
 class HomeRequestUrl {
-  // 首页卡片
+  /// 首页卡片
   static const String home_tools = "/api/v2/tools";
 
-  // 壁纸
+  /// 壁纸
   static const String home_wallpaper = "/api/v1/home/items2";
 
-  // 广告
+  /// 广告
   static const String splash_ad = "/api/v1/app_square/start_up_with_ad";
+}
+
+class MineRequestUrl {
+  /// 我的-菜单
+  static const String mine_cards = "/api/v1/cards";
 }
 
 class RequestUrl {

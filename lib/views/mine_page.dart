@@ -1,5 +1,8 @@
 import 'package:boohee_flutter/common/colors.dart';
+import 'package:boohee_flutter/http/http.dart';
+import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/login_user.dart';
+import 'package:boohee_flutter/model/mine_cards.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/utils.dart';
@@ -15,11 +18,13 @@ class MinePage extends StatefulWidget {
 
 class _MinePageState extends State<MinePage> {
   User mUser;
+  List<Data> mCards = [];
 
   @override
   void initState() {
     super.initState();
     mUser = AccountUtils.getUser();
+    getMineCards();
     setState(() {});
   }
 
@@ -28,11 +33,15 @@ class _MinePageState extends State<MinePage> {
     return Scaffold(
       appBar: Toolbar(),
       body: CustomScrollView(
-        slivers: <Widget>[SliverToBoxAdapter(child: createMineHeader())],
+        slivers: <Widget>[
+          SliverToBoxAdapter(child: createMineHeader()),
+          createMenuTab()
+        ],
       ),
     );
   }
 
+  /// 我的页面头部
   Widget createMineHeader() {
     return Stack(
       children: <Widget>[
@@ -133,7 +142,7 @@ class _MinePageState extends State<MinePage> {
                   ),
                   bottom: Text(
                     "订单",
-                    style: TextStyles.get12TextBold_373D52(),
+                    style: TextStyles.get12Text_373D52(),
                   ),
                   margin: 5,
                 ),
@@ -145,7 +154,7 @@ class _MinePageState extends State<MinePage> {
                   ),
                   bottom: Text(
                     "购物车",
-                    style: TextStyles.get12TextBold_373D52(),
+                    style: TextStyles.get12Text_373D52(),
                   ),
                   margin: 5,
                 ),
@@ -157,7 +166,7 @@ class _MinePageState extends State<MinePage> {
                   ),
                   bottom: Text(
                     "优惠券",
-                    style: TextStyles.get12TextBold_373D52(),
+                    style: TextStyles.get12Text_373D52(),
                   ),
                   margin: 5,
                 ),
@@ -169,7 +178,7 @@ class _MinePageState extends State<MinePage> {
                   ),
                   bottom: Text(
                     "收货地址",
-                    style: TextStyles.get12TextBold_373D52(),
+                    style: TextStyles.get12Text_373D52(),
                   ),
                   margin: 5,
                 )
@@ -178,6 +187,58 @@ class _MinePageState extends State<MinePage> {
           ),
         )
       ],
+    );
+  }
+
+  /// 分类
+  Widget createMenuTab() {
+    return SliverToBoxAdapter(
+      child: Container(
+        height: 176,
+        child: CardView(
+          margin: EdgeInsets.only(left: 17, right: 17, top: 14),
+          child: Padding(
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(), // 禁用GradView滚动事件
+                itemCount: mCards.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return createCard(mCards[index]);
+                }),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// 卡片，后台配置
+  void getMineCards() {
+    dio
+        .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
+            url: MineRequestUrl.mine_cards))
+        .then((response) {
+      MineCards mineCards = MineCards.fromJson(response.data);
+      mCards = mineCards.data;
+      setState(() {});
+    });
+  }
+
+  /// 菜单卡片
+  Widget createCard(Data mCard) {
+    return TopBottom(
+      top: Image.network(
+        mCard.iconUrl,
+        width: 22,
+        height: 22,
+      ),
+      bottom: Text(
+        mCard.name,
+        style: TextStyles.get12Text_373D52(),
+      ),
+      margin: 6,
     );
   }
 }

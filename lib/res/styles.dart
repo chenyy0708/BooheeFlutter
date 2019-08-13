@@ -39,9 +39,8 @@ class TextStyles {
     return TextStyle(fontSize: 12, color: colorA8ACBC);
   }
 
-  static TextStyle get12TextBold_373D52() {
-    return TextStyle(
-        fontSize: 12, color: color373D52, fontWeight: FontWeight.w700);
+  static TextStyle get12Text_373D52() {
+    return TextStyle(fontSize: 12, color: color373D52);
   }
 
   static TextStyle get10TextA8ACBC() {
