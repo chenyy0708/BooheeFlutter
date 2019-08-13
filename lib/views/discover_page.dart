@@ -20,7 +20,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[Text("伙伴模块")],
+          children: <Widget>[Text("伙伴")],
         ),
       ),
     );
