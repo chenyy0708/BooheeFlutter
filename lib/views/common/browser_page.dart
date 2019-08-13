@@ -27,7 +27,7 @@ class _BrowserPageState extends State<BrowserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title ?? ""),
+        title: Text(title ?? "hahahahaa"),
       ),
       body: WebView(
         initialUrl: webViewUrl,
