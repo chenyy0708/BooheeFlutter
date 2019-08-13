@@ -54,6 +54,9 @@ class _HomePageState extends State<HomePage> {
     loadData();
     //监听滚动事件，打印滚动位置
     _controller.addListener(() {
+      if (_controller.offset < 0) {
+        return;
+      }
       if (_controller.offset < 100) {
         double alpha = _controller.offset / 100;
         appbarAlpha = (255 * alpha).toInt();
@@ -118,8 +121,8 @@ class _HomePageState extends State<HomePage> {
       ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: 3.0,
-            sigmaY: 3.0,
+            sigmaX: 1.0,
+            sigmaY: 1.0,
           ),
           child: Container(
             color: Colors.transparent,
