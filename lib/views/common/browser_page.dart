@@ -1,3 +1,4 @@
+import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,15 @@ class _BrowserPageState extends State<BrowserPage> {
   String title;
 
   _BrowserPageState(String url) {
-    webViewUrl = Base64.decodeBase64(url);
+    webViewUrl = Base64.decodeBase64(url.replaceAll("Chen*boohee", "/"));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title ?? "hahahahaa"),
+        backgroundColor: mainColor,
+        title: Text(title ?? "薄荷"),
       ),
       body: WebView(
         initialUrl: webViewUrl,

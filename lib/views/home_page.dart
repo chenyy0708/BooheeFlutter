@@ -9,6 +9,7 @@ import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/base64_utils.dart';
+import 'package:boohee_flutter/utils/browser_url.dart';
 import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
@@ -351,7 +352,10 @@ class _HomePageState extends State<HomePage> {
   Widget createWisdom([Data topCard]) {
     return CardView(
       onPressed: () {
-        ToastUtils.showToast(context, topCard.name);
+        BrowserUrlManager.handleUrl(BrowserUrlManager.getSmartAnalysisUrl())
+            .then((url) {
+          NavigatorUtils.goBrowserPage(context, url);
+        });
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
@@ -381,9 +385,13 @@ class _HomePageState extends State<HomePage> {
             SizeBoxFactory.getVerticalSizeBox(22),
             Padding(
               padding: EdgeInsets.only(left: 39),
-              child: Text(
-                "晚餐：米饭、番茄炒蛋、水煮鱼片",
-                style: TextStyles.get12TextA8ACBC(),
+              child: RichText(
+                text: TextSpan(children: <TextSpan>[
+                  TextSpan(text: "晚餐: ", style: TextStyles.get12Text_373D52()),
+                  TextSpan(
+                      text: "米饭、番茄炒蛋、水煮鱼片",
+                      style: TextStyles.get12TextA8ACBC()),
+                ]),
               ),
             ),
             SizeBoxFactory.getVerticalSizeBox(22),
