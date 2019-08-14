@@ -645,7 +645,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   spots: [
                                     FlSpot(1, 65),
-                                    FlSpot(2, 70),
+                                    FlSpot(2, 66),
                                     FlSpot(3, 65),
                                     FlSpot(4, 64),
                                     FlSpot(5, 62),
