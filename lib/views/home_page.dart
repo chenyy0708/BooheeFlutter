@@ -8,7 +8,6 @@ import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
-import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:boohee_flutter/utils/browser_url.dart';
 import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/utils/utils.dart';
@@ -291,8 +290,10 @@ class _HomePageState extends State<HomePage> {
   Widget createDietSportRecord([Data topCard]) {
     return CardView(
       onPressed: () {
-        NavigatorUtils.goBrowserPage(context,
-            "https://www.jianshu.com/p/955c0f0b5d2d");
+        // 饮食运动记录
+        BrowserUrlManager.handleUrl(BrowserUrlManager.URL_CALORY).then((url) {
+          NavigatorUtils.goBrowserPage(context, url);
+        });
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(

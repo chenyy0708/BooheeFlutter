@@ -44,7 +44,9 @@ class NavigatorUtils {
     /// 这里使用替换/主要是路由不支持链接中带有/和&，否则会出错
     url = Base64.encodeBase64(url).replaceAll("/", "Chen*boohee");
     Application.router.navigateTo(context, '${Routes.webView}?web_url=$url',
-        replace: false, clearStack: false, transition: TransitionType.native);
+        replace: false,
+        clearStack: false,
+        transition: TransitionType.inFromBottom);
   }
 
   /// 带参数返回

@@ -7,7 +7,11 @@ class BrowserUrlManager {
 
 //  static const String URL_BASE = "https://pixiu.iboohee.cn/";
 
+  /// 智慧营养师首页
   static const String URL_PAY_SMART_ANALYSIS = URL_BASE + "recipe-detail?date=";
+
+  /// 饮食运动记录h5
+  static const String URL_CALORY = "https://calory.boohee.com/";
 
   static String getSmartAnalysisUrl() {
     return URL_PAY_SMART_ANALYSIS +

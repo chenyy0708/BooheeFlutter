@@ -14,6 +14,8 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<StatefulWidget>
     with SingleTickerProviderStateMixin {
+  DateTime _lastPressedAt; //上次点击时间
+
   int _selectedIndex = 0;
   List<Widget> _list = List();
   List<Widget> _selectIcon = [
@@ -106,23 +108,35 @@ class _MainPageState extends State<StatefulWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        // --是因为页面只有4个，但是底部tab的index是5个导致tab索引混乱
-        index: _selectedIndex > 2 ? _selectedIndex - 1 : _selectedIndex,
-        children: _list,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 10,
-        unselectedFontSize: 10,
-        backgroundColor: Colors.white,
-        items: _myTabs,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        fixedColor: mainColor,
-      ),
-    );
+    return WillPopScope(
+        child: Scaffold(
+          body: IndexedStack(
+            // --是因为页面只有4个，但是底部tab的index是5个导致tab索引混乱
+            index: _selectedIndex > 2 ? _selectedIndex - 1 : _selectedIndex,
+            children: _list,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
+            backgroundColor: Colors.white,
+            items: _myTabs,
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            type: BottomNavigationBarType.fixed,
+            fixedColor: mainColor,
+          ),
+        ),
+        onWillPop: () async {
+          if (_lastPressedAt == null ||
+              DateTime.now().difference(_lastPressedAt) >
+                  Duration(seconds: 2)) {
+            //两次点击间隔超过1秒则重新计时
+            _lastPressedAt = DateTime.now();
+            ToastUtils.showToast(context, "再按一次返回退出APP");
+            return false;
+          }
+          return true;
+        });
   }
 
   // 导航tab 点击回调

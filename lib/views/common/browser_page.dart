@@ -31,23 +31,34 @@ class _BrowserPageState extends State<BrowserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: mainColor,
-        title: Text(title ?? "薄荷"),
-      ),
-      body: WebView(
-        initialUrl: webViewUrl,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        },
-        javascriptChannels: <JavascriptChannel>[
-          _toasterJavascriptChannel(context),
-        ].toSet(),
-        onPageFinished: (String url) {},
-      ),
-    );
+    return WillPopScope(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: mainColor,
+            title: Text(title ?? "薄荷"),
+          ),
+          body: WebView(
+            initialUrl: webViewUrl,
+            javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (WebViewController webViewController) {
+              _controller.complete(webViewController);
+            },
+            javascriptChannels: <JavascriptChannel>[
+              _toasterJavascriptChannel(context),
+            ].toSet(),
+            onPageFinished: (String url) {},
+          ),
+        ),
+        onWillPop: () async {
+          var controller = await _controller.future;
+          if (await controller.canGoBack()) {
+            // 是否可以回退到上一步
+            controller.goBack();
+            return false;
+          } else {
+            return true;
+          }
+        });
   }
 
   JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
