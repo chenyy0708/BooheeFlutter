@@ -359,6 +359,7 @@ class _HomePageState extends State<HomePage> {
                     height: 60,
                     child: FlChart(
                       chart: BarChart(BarChartData(
+                        barTouchData: BarTouchData(enabled: false),
                         titlesData: FlTitlesData(
                           show: true,
                           bottomTitles: SideTitles(
@@ -615,6 +616,7 @@ class _HomePageState extends State<HomePage> {
                     height: 41,
                     child: FlChart(
                         chart: LineChart(LineChartData(
+                          lineTouchData: LineTouchData(enabled: false),
                             minY: 58.5,
                             maxY: 70,
                             titlesData: FlTitlesData(
