@@ -355,35 +355,73 @@ class _HomePageState extends State<HomePage> {
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
-        padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-        height: 111,
+        padding: EdgeInsets.only(
+          top: 19,
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Image.asset(
-                  Utils.getImgPath("ic_home_dietician"),
-                  height: 18,
-                  width: 18,
-                ),
-                PaddingStyles.getPadding(6),
-                Text(
-                  topCard.name,
-                  style: TextStyles.get14TextBold_373D52(),
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                children: <Widget>[
+                  Image.asset(
+                    Utils.getImgPath("ic_home_dietician"),
+                    height: 18,
+                    width: 18,
+                  ),
+                  PaddingStyles.getPadding(6),
+                  Text(
+                    "饮食计划",
+                    style: TextStyles.get14TextBold_373D52(),
+                  )
+                ],
+              ),
             ),
-            Expanded(
+            SizeBoxFactory.getVerticalSizeBox(22),
+            Padding(
+              padding: EdgeInsets.only(left: 39),
+              child: Text(
+                "晚餐：米饭、番茄炒蛋、水煮鱼片",
+                style: TextStyles.get12TextA8ACBC(),
+              ),
+            ),
+            SizeBoxFactory.getVerticalSizeBox(22),
+            Container(
+              width: double.infinity,
+              height: 39,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Color(0x33FEC407),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12.0),
+                      bottomRight: Radius.circular(12.0)),
+                ),
                 child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                PaddingStyles.getPadding(24),
-                Text(
-                  "晚餐：米饭、番茄炒蛋、水煮鱼片",
-                  style: TextStyles.get12TextA8ACBC(),
-                )
-              ],
-            ))
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      Utils.getImgPath("ic_dietician_logo"),
+                      width: 20,
+                      height: 20,
+                    ),
+                    SizeBoxFactory.getHorizontalSizeBox(4),
+                    Text(
+                      "智慧营养师",
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: colorFEBB07,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Image.asset(
+                      Utils.getImgPath("ic_arrow_light_yellow"),
+                      width: 20,
+                      height: 20,
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
