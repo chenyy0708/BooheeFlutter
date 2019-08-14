@@ -25,27 +25,30 @@ class CommonCard extends StatelessWidget {
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 58,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Image.asset(
-              Utils.getImgPath(iconUrl),
-              height: 18,
-              width: 18,
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  Utils.getImgPath(iconUrl),
+                  height: 18,
+                  width: 18,
+                ),
+                PaddingStyles.getPadding(6),
+                Text(
+                  title,
+                  style: TextStyles.get14TextBold_373D52(),
+                )
+              ],
             ),
-            PaddingStyles.getPadding(6),
-            Text(
-              title,
-              style: TextStyles.get14TextBold_373D52(),
-            ),
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            Row(
               children: <Widget>[
                 subWidget == null ? Text("") : subWidget,
                 Image.asset(
                   Utils.getImgPath("ic_arrow_grey"),
                 )
               ],
-            ))
+            )
           ],
         ),
       ),

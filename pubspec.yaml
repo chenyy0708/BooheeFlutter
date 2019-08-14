@@ -39,6 +39,8 @@ dependencies:
   percent_indicator: ^2.1.1
   # webview
   webview_flutter: ^0.3.11+2
+  # 折线图
+  fl_chart: ^0.1.5
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git

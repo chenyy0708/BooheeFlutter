@@ -298,6 +298,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
               children: <Widget>[
@@ -313,31 +314,33 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            Expanded(
-                child: Row(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                PaddingStyles.getPadding(24),
-                RichText(
-                  text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                        text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
-                    TextSpan(
-                        text: "230", style: TextStyles.get15TextBold_373D52()),
-                    TextSpan(
-                        text: " 还可以吃", style: TextStyles.get12TextA8ACBC()),
-                  ]),
-                ),
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Row(
                   children: <Widget>[
-                    Image.asset(
-                        Utils.getImgPath("ic_home_chart_diet", format: "jpg"))
+                    PaddingStyles.getPadding(24),
+                    RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "还可以吃 ", style: TextStyles.get12TextA8ACBC()),
+                        TextSpan(
+                            text: "230",
+                            style: TextStyles.get15TextBold_373D52()),
+                        TextSpan(
+                            text: " 千卡", style: TextStyles.get12TextA8ACBC()),
+                      ]),
+                    )
                   ],
-                ))
+                ),
+                Image.asset(
+                  Utils.getImgPath("ic_home_chart_diet", format: "jpg"),
+                  width: 100,
+                  height: 45,
+                )
               ],
-            ))
+            )
           ],
         ),
       ),
@@ -398,60 +401,58 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 111,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Image.asset(
-                  Utils.getImgPath("ic_home_weight"),
-                  height: 18,
-                  width: 18,
-                ),
-                PaddingStyles.getPadding(6),
-                Text(
-                  topCard.name,
-                  style: TextStyles.get14TextBold_373D52(),
-                ),
-                Expanded(
-                    child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    RoundButton(
-                      text: "体脂秤",
-                      onPressed: () {
-                        ToastUtils.showToast(context, "体脂秤");
-                      },
-                    )
-                  ],
-                )),
-              ],
-            ),
-            Expanded(
-                child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                PaddingStyles.getPadding(24),
-                RichText(
-                  text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                        text: "58.9 ",
-                        style: TextStyles.get15TextBold_373D52()),
-                    TextSpan(text: "公斤", style: TextStyles.get12TextA8ACBC()),
-                  ]),
-                ),
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Row(
                   children: <Widget>[
                     Image.asset(
-                      Utils.getImgPath("ic_home_chart_simple"),
-                      width: 93,
-                      height: 41,
+                      Utils.getImgPath("ic_home_weight"),
+                      height: 18,
+                      width: 18,
+                    ),
+                    SizeBoxFactory.getHorizontalSizeBox(6),
+                    Text(
+                      topCard.name,
+                      style: TextStyles.get14TextBold_373D52(),
                     )
                   ],
-                ))
+                ),
+                RoundButton(
+                  text: "体脂秤",
+                  onPressed: () {
+                    ToastUtils.showToast(context, "体脂秤");
+                  },
+                ),
               ],
-            ))
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    PaddingStyles.getPadding(24),
+                    RichText(
+                      text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "58.9 ",
+                            style: TextStyles.get15TextBold_373D52()),
+                        TextSpan(
+                            text: "公斤", style: TextStyles.get12TextA8ACBC()),
+                      ]),
+                    )
+                  ],
+                ),
+                Image.asset(
+                  Utils.getImgPath("ic_home_chart_simple"),
+                  width: 93,
+                  height: 41,
+                )
+              ],
+            )
           ],
         ),
       ),
@@ -469,20 +470,23 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
         height: 61,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Image.asset(
-              Utils.getImgPath(iconUrl),
-              height: 18,
-              width: 18,
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  Utils.getImgPath(iconUrl),
+                  height: 18,
+                  width: 18,
+                ),
+                SizeBoxFactory.getHorizontalSizeBox(6),
+                Text(
+                  title,
+                  style: TextStyles.get14TextBold_373D52(),
+                )
+              ],
             ),
-            PaddingStyles.getPadding(6),
-            Text(
-              title,
-              style: TextStyles.get14TextBold_373D52(),
-            ),
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            Row(
               children: <Widget>[
                 RichText(
                   text: TextSpan(children: <TextSpan>[
@@ -495,7 +499,7 @@ class _HomePageState extends State<HomePage> {
                   Utils.getImgPath("ic_arrow_grey"),
                 )
               ],
-            ))
+            )
           ],
         ),
       ),
