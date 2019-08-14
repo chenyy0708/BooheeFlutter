@@ -108,7 +108,8 @@ class _MainPageState extends State<StatefulWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: _selectedIndex,
+        // --是因为页面只有4个，但是底部tab的index是5个导致tab索引混乱
+        index: _selectedIndex > 2 ? _selectedIndex - 1 : _selectedIndex,
         children: _list,
       ),
       bottomNavigationBar: BottomNavigationBar(
