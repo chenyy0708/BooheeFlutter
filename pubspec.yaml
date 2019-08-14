@@ -38,7 +38,8 @@ dependencies:
   # 进度条
   percent_indicator: ^2.1.1
   # webview
-  webview_flutter: ^0.3.11+2
+  webview_flutter: ^0.3.11+3
+#  flutter_webview_plugin: ^0.3.5
   # 折线图
   fl_chart: ^0.1.5
   auto_size:

@@ -292,7 +292,7 @@ class _HomePageState extends State<HomePage> {
     return CardView(
       onPressed: () {
         NavigatorUtils.goBrowserPage(context,
-            Base64.encodeBase64("https://www.jianshu.com/p/955c0f0b5d2d"));
+            "https://www.jianshu.com/p/955c0f0b5d2d");
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(

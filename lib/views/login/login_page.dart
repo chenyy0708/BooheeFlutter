@@ -39,10 +39,10 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              new Padding(
-                padding: new EdgeInsets.fromLTRB(
-                    leftRightPadding, 50.0, leftRightPadding, 10.0),
-                child: new Image.asset(Utils.getImgPath("ic_boohee_logo")),
+              Image.asset(
+                Utils.getImgPath("ic_boohee_logo"),
+                width: 100,
+                height: 100,
               ),
               new Padding(
                 padding: new EdgeInsets.fromLTRB(
