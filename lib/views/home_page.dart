@@ -15,6 +15,7 @@ import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
 import 'package:boohee_flutter/widget/round_button.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rxdart/rxdart.dart';
@@ -286,6 +287,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  BarChartGroupData makeGroupData(int x, double y) {
+    return BarChartGroupData(x: x, barRods: [
+      BarChartRodData(
+        y: y,
+        color: color00CDA2,
+        width: 4,
+        isRound: true,
+        backDrawRodData: BackgroundBarChartRodData(
+          show: true,
+          y: 20,
+          color: Colors.white12,
+        ),
+      ),
+    ]);
+  }
+
   // 饮食运动记录
   Widget createDietSportRecord([Data topCard]) {
     return CardView(
@@ -298,7 +315,6 @@ class _HomePageState extends State<HomePage> {
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-        height: 111,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -336,10 +352,110 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                Image.asset(
-                  Utils.getImgPath("ic_home_chart_diet", format: "jpg"),
-                  width: 100,
-                  height: 45,
+                Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Container(
+                    width: 93,
+                    height: 60,
+                    child: FlChart(
+                      chart: BarChart(BarChartData(
+                        titlesData: FlTitlesData(
+                          show: true,
+                          bottomTitles: SideTitles(
+                              showTitles: true,
+                              textStyle:
+                                  TextStyle(color: colorA8ACBC, fontSize: 10),
+                              getTitles: (double value) {
+                                switch (value.toInt()) {
+                                  case 0:
+                                    return '早';
+                                  case 1:
+                                    return '中';
+                                  case 2:
+                                    return '晚';
+                                  case 3:
+                                    return '加';
+                                  case 4:
+                                    return '运动';
+                                }
+                              }),
+                          leftTitles: SideTitles(
+                            showTitles: false,
+                          ),
+                        ),
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                        barGroups: [
+                          BarChartGroupData(x: 0, barRods: [
+                            BarChartRodData(
+                              y: 10,
+                              color: color00CDA2,
+                              width: 3,
+                              isRound: true,
+                              backDrawRodData: BackgroundBarChartRodData(
+                                show: true,
+                                y: 20,
+                                color: Color(0xFFF5F6FA),
+                              ),
+                            ),
+                          ]),
+                          BarChartGroupData(x: 1, barRods: [
+                            BarChartRodData(
+                              y: 12,
+                              color: color00CDA2,
+                              width: 3,
+                              isRound: true,
+                              backDrawRodData: BackgroundBarChartRodData(
+                                show: true,
+                                y: 20,
+                                color: Color(0xFFF5F6FA),
+                              ),
+                            ),
+                          ]),
+                          BarChartGroupData(x: 2, barRods: [
+                            BarChartRodData(
+                              y: 15,
+                              color: color00CDA2,
+                              width: 3,
+                              isRound: true,
+                              backDrawRodData: BackgroundBarChartRodData(
+                                show: true,
+                                y: 20,
+                                color: Color(0xFFF5F6FA),
+                              ),
+                            ),
+                          ]),
+                          BarChartGroupData(x: 3, barRods: [
+                            BarChartRodData(
+                              y: 20,
+                              color: Color(0xfffe8d60),
+                              width: 3,
+                              isRound: true,
+                              backDrawRodData: BackgroundBarChartRodData(
+                                show: true,
+                                y: 20,
+                                color: Color(0xFFF5F6FA),
+                              ),
+                            ),
+                          ]),
+                          BarChartGroupData(x: 4, barRods: [
+                            BarChartRodData(
+                              y: 10,
+                              color: color00CDA2,
+                              width: 3,
+                              isRound: true,
+                              backDrawRodData: BackgroundBarChartRodData(
+                                show: true,
+                                y: 20,
+                                color: Color(0xFFF5F6FA),
+                              ),
+                            ),
+                          ])
+                        ],
+                      )),
+                    ),
+                  ),
                 )
               ],
             )
@@ -418,9 +534,9 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "智慧营养师",
                       style: TextStyle(
-                          fontSize: 14,
-                          color: colorFEBB07,
-                          fontWeight: FontWeight.w700),
+                        fontSize: 14,
+                        color: colorFEBB07,
+                      ),
                     ),
                     Image.asset(
                       Utils.getImgPath("ic_arrow_light_yellow"),
@@ -446,7 +562,6 @@ class _HomePageState extends State<HomePage> {
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
         padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-        height: 111,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -475,30 +590,71 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    PaddingStyles.getPadding(24),
-                    RichText(
-                      text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: "58.9 ",
-                            style: TextStyles.get15TextBold_373D52()),
-                        TextSpan(
-                            text: "公斤", style: TextStyles.get12TextA8ACBC()),
-                      ]),
-                    )
-                  ],
-                ),
-                Image.asset(
-                  Utils.getImgPath("ic_home_chart_simple"),
-                  width: 93,
-                  height: 41,
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 7),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      PaddingStyles.getPadding(24),
+                      RichText(
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: "58.9 ",
+                              style: TextStyles.get15TextBold_373D52()),
+                          TextSpan(
+                              text: "公斤", style: TextStyles.get12TextA8ACBC()),
+                        ]),
+                      )
+                    ],
+                  ),
+                  Container(
+                    width: 93,
+                    height: 41,
+                    child: FlChart(
+                        chart: LineChart(LineChartData(
+                            minY: 58.5,
+                            maxY: 70,
+                            titlesData: FlTitlesData(
+                                show: false,
+                                leftTitles: SideTitles(showTitles: false),
+                                bottomTitles: SideTitles(showTitles: false),
+                                rightTitles: SideTitles(showTitles: false),
+                                topTitles: SideTitles(showTitles: false)),
+                            borderData: FlBorderData(show: false),
+                            gridData: FlGridData(
+                              show: false,
+                            ),
+                            lineBarsData: [
+                              LineChartBarData(
+                                  preventCurveOverShooting: true,
+                                  colors: [Color(0x5700CDA2)],
+                                  isCurved: true,
+                                  barWidth: 2,
+                                  isStrokeCapRound: true,
+                                  dotData: FlDotData(
+                                      show: true,
+                                      dotColor: color00CDA2,
+                                      dotSize: 2),
+                                  belowBarData: BelowBarData(
+                                    show: false,
+                                  ),
+                                  spots: [
+                                    FlSpot(1, 65),
+                                    FlSpot(2, 70),
+                                    FlSpot(3, 65),
+                                    FlSpot(4, 64),
+                                    FlSpot(5, 62),
+                                    FlSpot(6, 68),
+                                    FlSpot(7, 60),
+                                  ])
+                            ],
+                            backgroundColor: Colors.transparent))),
+                  )
+                ],
+              ),
             )
           ],
         ),
