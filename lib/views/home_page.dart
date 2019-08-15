@@ -27,7 +27,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // 顶部卡片
+  /// 控制顶部搜索框的颜色
+  SearchBarController _searchBarController = new SearchBarController(
+      alpha: 0,
+      searchBarBg: Color(0x1FFFFFFF),
+      appbarTitleColor: colorA8ACBC,
+      appbarLeftIcon: "ic_search_grey",
+      appbarRightIcon: "ic_message_grey");
+
+  /// 是否需要设置渐变色
+  bool _isNeedSetAlpha = false;
+
+  /// 用于单独控制搜索框的状态
+  GlobalKey<SearchBarState> _mTitleKey = new GlobalKey();
+
+  /// 顶部卡片
   List<Data> topCards = List();
   List<Data> bottomCards = List();
   List<String> topCardItems = [
@@ -37,15 +51,9 @@ class _HomePageState extends State<HomePage> {
     HomeCard.WEIGHT_RECORD,
   ];
 
-  // 滑动监听
+  /// 滑动监听
   ScrollController _controller = new ScrollController();
 
-  // 头部透明度
-  int appbarAlpha = 0;
-  Color appbarTitleColor = colorA8ACBC;
-  Color appbarBg = Color(0x1FFFFFFF);
-  String appbarLeftIcon = "ic_search_grey";
-  String appbarRightIcon = "ic_message_grey";
   double percent = 0.0;
 
   @override
@@ -53,25 +61,34 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     loadData();
     //监听滚动事件，打印滚动位置
+    _searchBarController.value.alpha = 0;
     _controller.addListener(() {
       if (_controller.offset < 0) {
         return;
       }
       if (_controller.offset < 100) {
+        // 变化头部颜色
+        _isNeedSetAlpha = true;
         double alpha = _controller.offset / 100;
-        appbarAlpha = (255 * alpha).toInt();
-        appbarTitleColor = colorA8ACBC;
-        appbarBg = Color(0x1FFFFFFF);
-        appbarLeftIcon = "ic_search_grey";
-        appbarRightIcon = "ic_message_grey";
+        _searchBarController.value.alpha = (255 * alpha).toInt();
+        _searchBarController.value.appbarTitleColor = colorA8ACBC;
+        _searchBarController.value.searchBarBg = Color(0x1FFFFFFF);
+        _searchBarController.value.appbarLeftIcon = "ic_search_grey";
+        _searchBarController.value.appbarRightIcon = "ic_message_grey";
+        _mTitleKey.currentState.setState(() {}); // 刷新单个控件的状态,防止卡顿
       } else {
-        appbarAlpha = 255;
-        appbarLeftIcon = "ic_search_white";
-        appbarRightIcon = "ic_message_white";
-        appbarTitleColor = Colors.white;
-        appbarBg = color0EB794;
+        if (_isNeedSetAlpha) {
+          // 防止多次渲染
+          // 变为深色
+          _searchBarController.value.appbarLeftIcon = "ic_search_white";
+          _searchBarController.value.appbarRightIcon = "ic_message_white";
+          _searchBarController.value.appbarTitleColor = Colors.white;
+          _searchBarController.value.searchBarBg = color0EB794;
+          _searchBarController.value.alpha = 255;
+          _mTitleKey.currentState.setState(() {});
+          _isNeedSetAlpha = false;
+        }
       }
-      setState(() {});
     });
   }
 
@@ -233,7 +250,8 @@ class _HomePageState extends State<HomePage> {
                       EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
                   text: "打卡",
                   onPressed: () {
-                    NavigatorUtils.goWallPaper(context, wallPaper.welcomeImg.backImg);
+                    NavigatorUtils.goWallPaper(
+                        context, wallPaper.welcomeImg.backImg);
                   },
                 ),
                 right: 16,
@@ -249,11 +267,8 @@ class _HomePageState extends State<HomePage> {
   Widget createSearchBar() {
     return SearchBar(
       text: "搜索食物和热量",
-      searchBarBg: appbarBg,
-      appbarLeftIcon: appbarLeftIcon,
-      appbarRightIcon: appbarRightIcon,
-      appbarTitleColor: appbarTitleColor,
-      appbarAlpha: appbarAlpha,
+      controller: _searchBarController,
+      key: _mTitleKey,
     );
   }
 
@@ -262,6 +277,7 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: <Widget>[
         CustomScrollView(
+          physics: BouncingScrollPhysics(),
           controller: _controller,
           slivers: <Widget>[
             SliverToBoxAdapter(child: createHeaderImg()),
@@ -818,6 +834,7 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     //为了避免内存泄露，需要调用_controller.dispose
     _controller.dispose();
+    _searchBarController.dispose();
     super.dispose();
   }
 }
