@@ -49,6 +49,18 @@ class NavigatorUtils {
         transition: TransitionType.inFromBottom);
   }
 
+  /// 壁纸
+  static void goWallPaper(BuildContext context, String imageUrl) {
+    /// 这里使用替换/主要是路由不支持链接中带有/和&，否则会出错
+    imageUrl = Base64.encodeBase64(imageUrl).replaceAll("/", "Chen*boohee");
+    Application.router.navigateTo(
+        context, '${Routes.wallPaper}?image_url=$imageUrl',
+        replace: false,
+        clearStack: false,
+        transition: TransitionType.custom,
+        transitionBuilder: Routes.transitionTopToBottom());
+  }
+
   /// 带参数返回
   static void goBackWithParams(BuildContext context, result) {
     Navigator.pop(context, result);

@@ -6,13 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-// ignore: must_be_immutable
 class BrowserPage extends StatefulWidget {
-  String webViewUrl;
+  final String webViewUrl;
 
-  BrowserPage(String url) {
-    webViewUrl = url;
-  }
+  BrowserPage( {this.webViewUrl});
 
   @override
   _BrowserPageState createState() => _BrowserPageState(webViewUrl);

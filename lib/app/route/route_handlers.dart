@@ -7,6 +7,7 @@
  * See LICENSE for distribution and usage details.
  */
 import 'package:boohee_flutter/views/common/browser_page.dart';
+import 'package:boohee_flutter/views/common/wallpaper_page.dart';
 import 'package:boohee_flutter/views/login/login_page.dart';
 import 'package:boohee_flutter/views/main_page.dart';
 import 'package:fluro/fluro.dart';
@@ -25,5 +26,15 @@ var loginHandler = new Handler(
 var webViewHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   String param = params["web_url"]?.first;
-  return new BrowserPage(param);
+  return new BrowserPage(
+    webViewUrl: param,
+  );
+});
+
+var wallPaperHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  String param = params["image_url"]?.first;
+  return new WallPaperPage(
+    wallPaperImageUrl: param,
+  );
 });

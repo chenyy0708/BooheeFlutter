@@ -42,6 +42,8 @@ dependencies:
 #  flutter_webview_plugin: ^0.3.5
   # 折线图
   fl_chart: ^0.1.5
+  # Image Cache
+  extended_image: ^0.5.5
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git
@@ -68,7 +70,41 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images
+    - images/ic_tab_bar_home_grey.png
+    - images/ic_tab_bar_me_grey.png
+    - images/ic_tab_bar_partner_grey.png
+    - images/ic_tab_bar_shop_grey.png
+    - images/ic_tab_bar_home_green.png
+    - images/ic_tab_bar_me_green.png
+    - images/ic_tab_bar_partner_green.png
+    - images/ic_tab_bar_shop_green.png
+    - images/ic_boohee_logo.png
+    - images/ic_home_calorie.png
+    - images/ic_home_sleep.png
+    - images/ic_home_sport.png
+    - images/ic_home_step.png
+    - images/ic_home_weight.png
+    - images/ic_home_dietician.png
+    - images/ic_arrow_grey.png
+    - images/ic_home_habit.png
+    - images/ic_home_circumference.png
+    - images/ic_home_baby.png
+    - images/ic_home_food_plan.png
+    - images/ic_home_menstruation.png
+    - images/ic_message_grey.png
+    - images/ic_search_grey.png
+    - images/ic_message_white.png
+    - images/ic_search_white.png
+    - images/ic_shop_cart_white.png
+    - images/ic_settings_white.png
+    - images/ic_me_address.png
+    - images/ic_me_order.png
+    - images/ic_me_shopping_cart.png
+    - images/ic_me_ticket.png
+    - images/ic_home_tabbar_plus.png
+    - images/ic_arrow_light_yellow.png
+    - images/ic_dietician_logo.png
+    - images/ic_home_default_wallpaper.webp
       # To add assets to your application, add an assets section, like this:
       # assets:
       #  - images/a_dot_burr.jpeg

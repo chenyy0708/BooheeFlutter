@@ -15,6 +15,7 @@ import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
 import 'package:boohee_flutter/widget/round_button.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -45,8 +46,6 @@ class _HomePageState extends State<HomePage> {
   Color appbarBg = Color(0x1FFFFFFF);
   String appbarLeftIcon = "ic_search_grey";
   String appbarRightIcon = "ic_message_grey";
-  String homeWallPaper =
-      "http://up.boohee.cn//house//u//one//wallpaper//1661_big.jpg";
   double percent = 0.0;
 
   @override
@@ -99,25 +98,27 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  HomeWallPaper wallPaper;
+
   // 首页壁纸
   void loadWallpaper() {
     dio
         .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
             url: HomeRequestUrl.home_wallpaper))
         .then((response) {
-      HomeWallPaper wallPaper = HomeWallPaper.fromJson(response.data);
-      homeWallPaper = wallPaper.welcomeImg.backImgSmall;
+      wallPaper = HomeWallPaper.fromJson(response.data);
       setState(() {});
     });
   }
 
   Widget createHeaderImg() {
     return Stack(children: <Widget>[
-      Image.network(
-        homeWallPaper,
+      ExtendedImage.network(
+        wallPaper == null ? "" : wallPaper.welcomeImg.backImgSmall,
         height: 181,
         width: double.infinity,
         fit: BoxFit.fitWidth,
+        enableLoadState: false,
       ),
       ClipRect(
         child: BackdropFilter(
@@ -232,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                       EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
                   text: "打卡",
                   onPressed: () {
-                    ToastUtils.showToast(context, "打卡");
+                    NavigatorUtils.goWallPaper(context, wallPaper.welcomeImg.backImg);
                   },
                 ),
                 right: 16,
@@ -616,7 +617,7 @@ class _HomePageState extends State<HomePage> {
                     height: 41,
                     child: FlChart(
                         chart: LineChart(LineChartData(
-                          lineTouchData: LineTouchData(enabled: false),
+                            lineTouchData: LineTouchData(enabled: false),
                             minY: 58.5,
                             maxY: 70,
                             titlesData: FlTitlesData(

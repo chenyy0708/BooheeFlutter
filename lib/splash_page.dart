@@ -3,6 +3,7 @@ import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/timer_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/round_button.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,11 +69,12 @@ class _SplashPageState extends State<SplashPage> {
                   child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
-                  Image.network(
+                  ExtendedImage.network(
                     splashAd == null ? "" : splashAd.startUpUrl,
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
+                    enableLoadState: false,
                   ),
                   Offstage(
                     offstage: inVisible,
