@@ -33,6 +33,7 @@ class _MinePageState extends State<MinePage> {
     return Scaffold(
       appBar: Toolbar(),
       body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverToBoxAdapter(child: createMineHeader()),
           createMenuTab()

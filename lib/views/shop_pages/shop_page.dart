@@ -6,6 +6,7 @@ import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_footer.dart';
@@ -136,7 +137,7 @@ class _ShopPageState extends State<ShopPage> {
       margin: EdgeInsets.only(top: 13.0, left: 17, right: 17),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(data.defaultPhotoUrl),
+          image: ExtendedNetworkImageProvider(data.defaultPhotoUrl,cache: true),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.all(
@@ -173,7 +174,7 @@ class _ShopPageState extends State<ShopPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Image.network(
+        ExtendedImage.network(
           item.iconUrl,
           width: 35,
           height: 35,
@@ -215,7 +216,7 @@ class _ShopPageState extends State<ShopPage> {
             height: 165,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(item.bigPhotoUrl),
+                image: ExtendedNetworkImageProvider(item.bigPhotoUrl,cache: true),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.only(

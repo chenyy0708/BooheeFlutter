@@ -17,12 +17,10 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 /// 壁纸+减肥进度条Widget
 class HomeHeaderWidget extends StatelessWidget {
   final String wallImg;
-  final String wallBigImg;
   final double progressPercent;
 
   HomeHeaderWidget({
     this.wallImg,
-    this.wallBigImg,
     this.progressPercent: 0,
   });
 
@@ -149,7 +147,6 @@ class HomeHeaderWidget extends StatelessWidget {
                       EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
                   text: "打卡",
                   onPressed: () {
-                    NavigatorUtils.goWallPaper(context, wallBigImg);
                   },
                 ),
                 right: 16,

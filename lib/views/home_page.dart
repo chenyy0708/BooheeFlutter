@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/http/http.dart';
@@ -94,10 +95,11 @@ class _HomePageState extends State<HomePage> {
         EasyRefresh.custom(
           header: WallPaperHeader(
               wallPaperUrl:
-                  wallPaper != null ? wallPaper.welcomeImg.backImgSmall : ""),
+                  wallPaper != null ? wallPaper.welcomeImg.backImg : ""),
           scrollController: _controller,
           onRefresh: () async {
-            print("刷新");
+            NavigatorUtils.goWallPaper(
+                context, wallPaper != null ? wallPaper.welcomeImg.backImg : "");
           },
           slivers: <Widget>[
             SliverToBoxAdapter(
@@ -105,7 +107,6 @@ class _HomePageState extends State<HomePage> {
               /// 壁纸+减肥进度条Widget
               wallImg:
                   wallPaper != null ? wallPaper.welcomeImg.backImgSmall : "",
-              wallBigImg: wallPaper != null ? wallPaper.welcomeImg.backImg : "",
               progressPercent: percent,
             )),
             SliverList(

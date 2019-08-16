@@ -6,20 +6,20 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class WallPaperHeader extends Header {
   final Key key;
-  final double displacement;
   final String wallPaperUrl;
+
+  final LinkHeaderNotifier linkNotifier = LinkHeaderNotifier();
 
   WallPaperHeader({
     this.key,
-    this.displacement = 100.0,
     this.wallPaperUrl,
     bool enableHapticFeedback = false,
   }) : super(
-          float: true,
-          extent: 100,
-          triggerDistance: 40.0,
-          enableInfiniteRefresh: false,
+          extent: 60.0,
+          triggerDistance: 60.0,
+          float: false,
           enableHapticFeedback: enableHapticFeedback,
+          enableInfiniteRefresh: false,
         );
 
   @override
@@ -35,9 +35,50 @@ class WallPaperHeader extends Header {
       bool enableInfiniteRefresh,
       bool success,
       bool noMore) {
+    linkNotifier.contentBuilder(
+        context,
+        refreshState,
+        pulledExtent,
+        refreshTriggerPullDistance,
+        refreshIndicatorExtent,
+        axisDirection,
+        float,
+        completeDuration,
+        enableInfiniteRefresh,
+        success,
+        noMore);
+
+    return WallPaperHeaderPage(
+      wallPaperUrl: wallPaperUrl,
+      linkNotifier: linkNotifier,
+      key: key,
+    );
+  }
+}
+
+class WallPaperHeaderPage extends StatefulWidget {
+  final String wallPaperUrl;
+  final LinkHeaderNotifier linkNotifier;
+
+  WallPaperHeaderPage({this.wallPaperUrl, Key key, this.linkNotifier})
+      : super(key: key);
+
+  @override
+  _WallPaperHeaderPageState createState() => _WallPaperHeaderPageState();
+}
+
+class _WallPaperHeaderPageState extends State<WallPaperHeaderPage> {
+  RefreshMode get _refreshState => widget.linkNotifier.refreshState;
+
+  double get _pulledExtent => widget.linkNotifier.pulledExtent;
+
+  double get _indicatorExtent => widget.linkNotifier.refreshIndicatorExtent;
+
+  @override
+  Widget build(BuildContext context) {
     return ExtendedImage.network(
-      wallPaperUrl,
-      fit: BoxFit.contain,
+      widget.wallPaperUrl,
+      fit: BoxFit.fitWidth,
     );
   }
 }
