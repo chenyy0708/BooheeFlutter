@@ -21,6 +21,8 @@ class _WallPaperPageState extends State<WallPaperPage> {
         Base64.decodeBase64(wallPaperImageUrl.replaceAll("Chen*boohee", "/"));
   }
 
+  double _top;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +35,20 @@ class _WallPaperPageState extends State<WallPaperPage> {
             wallPaperImageUrl,
             fit: BoxFit.contain,
           ),
-          onVerticalDragDown: (DragDownDetails details) {},
+          //垂直方向拖动事件
+          onVerticalDragUpdate: (DragUpdateDetails details) {
+            _top += details.delta.dy;
+          },
+          onVerticalDragDown: (DragDownDetails details) {
+            _top = 0;
+          },
           onVerticalDragEnd: (DragEndDetails details) {
-            NavigatorUtils.goBack(context);
+            if (details.velocity.pixelsPerSecond.dy < 0 && _top <= -200) {
+              // 向上滑
+              NavigatorUtils.goBack(context);
+            }
+            // 重置滑动值
+            _top = 0;
           },
         ),
       ),
