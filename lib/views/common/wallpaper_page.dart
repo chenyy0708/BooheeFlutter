@@ -33,7 +33,7 @@ class _WallPaperPageState extends State<WallPaperPage> {
         child: GestureDetector(
           child: ExtendedImage.network(
             wallPaperImageUrl,
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
           //垂直方向拖动事件
           onVerticalDragUpdate: (DragUpdateDetails details) {
