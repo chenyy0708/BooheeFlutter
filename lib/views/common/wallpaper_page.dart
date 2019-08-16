@@ -43,7 +43,7 @@ class _WallPaperPageState extends State<WallPaperPage> {
             _top = 0;
           },
           onVerticalDragEnd: (DragEndDetails details) {
-            if (details.velocity.pixelsPerSecond.dy < 0 && _top <= -200) {
+            if (details.velocity.pixelsPerSecond.dy < 0 && _top <= -150) {
               // 向上滑
               NavigatorUtils.goBack(context);
             }
