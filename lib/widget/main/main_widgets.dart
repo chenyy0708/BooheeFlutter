@@ -219,7 +219,7 @@ class DietSportRecordWidget extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: EdgeInsets.only(top: 8, right: 30),
                   child: Container(
                     width: 93,
                     height: 60,
@@ -472,7 +472,7 @@ class WeightRecordWidget extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 7),
+              padding: EdgeInsets.only(top: 7, right: 30),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -545,57 +545,57 @@ class WeightRecordWidget extends StatelessWidget {
   }
 }
 
-
 /// 健康习惯
 class HealthHabitsWidget extends StatelessWidget {
   final String iconUrl;
   final String title;
 
-  HealthHabitsWidget({this.iconUrl,this.title});
+  HealthHabitsWidget({this.iconUrl, this.title});
 
   @override
   Widget build(BuildContext context) {
-      return CardView(
-        onPressed: () {
-          ToastUtils.showToast(context, title);
-        },
-        margin: EdgeInsets.only(left: 17, right: 17, top: 13),
-        child: Container(
-          padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-          height: 61,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Image.asset(
-                    Utils.getImgPath(iconUrl),
-                    height: 18,
-                    width: 18,
-                  ),
-                  SizeBoxFactory.getHorizontalSizeBox(6),
-                  Text(
-                    title,
-                    style: TextStyles.get14TextBold_373D52(),
-                  )
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: "今日完成: ", style: TextStyles.get11TextA8ACBC()),
-                      TextSpan(text: "57%", style: TextStyles.get11Text_00CDA2()),
-                    ]),
-                  ),
-                  Image.asset(
-                    Utils.getImgPath("ic_arrow_grey"),
-                  )
-                ],
-              )
-            ],
-          ),
+    return CardView(
+      onPressed: () {
+        ToastUtils.showToast(context, title);
+      },
+      margin: EdgeInsets.only(left: 17, right: 17, top: 13),
+      child: Container(
+        padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
+        height: 61,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Image.asset(
+                  Utils.getImgPath(iconUrl),
+                  height: 18,
+                  width: 18,
+                ),
+                SizeBoxFactory.getHorizontalSizeBox(6),
+                Text(
+                  title,
+                  style: TextStyles.get14TextBold_373D52(),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "今日完成: ", style: TextStyles.get11TextA8ACBC()),
+                    TextSpan(text: "57%", style: TextStyles.get11Text_00CDA2()),
+                  ]),
+                ),
+                Image.asset(
+                  Utils.getImgPath("ic_arrow_grey"),
+                )
+              ],
+            )
+          ],
         ),
-      );
-  }}
+      ),
+    );
+  }
+}

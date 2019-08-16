@@ -13,6 +13,7 @@ import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
 import 'package:boohee_flutter/widget/main/main_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomePage extends StatefulWidget {
@@ -89,9 +90,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          controller: _controller,
+        EasyRefresh.custom(
+          scrollController: _controller,
           slivers: <Widget>[
             SliverToBoxAdapter(
                 child: HomeHeaderWidget(
