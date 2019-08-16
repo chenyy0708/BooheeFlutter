@@ -15,8 +15,8 @@ class WallPaperHeader extends Header {
     this.wallPaperUrl,
     bool enableHapticFeedback = false,
   }) : super(
-          extent: 60.0,
-          triggerDistance: 60.0,
+          extent: 120,
+          triggerDistance: 120,
           float: false,
           enableHapticFeedback: enableHapticFeedback,
           enableInfiniteRefresh: false,

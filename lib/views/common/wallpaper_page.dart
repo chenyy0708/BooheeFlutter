@@ -1,3 +1,4 @@
+import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/utils/base64_utils.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,15 @@ class _WallPaperPageState extends State<WallPaperPage> {
         color: Colors.black,
         height: double.infinity,
         width: double.infinity,
-        child: ExtendedImage.network(
-          wallPaperImageUrl,
-          fit: BoxFit.contain,
+        child: GestureDetector(
+          child: ExtendedImage.network(
+            wallPaperImageUrl,
+            fit: BoxFit.contain,
+          ),
+          onVerticalDragDown: (DragDownDetails details) {},
+          onVerticalDragEnd: (DragEndDetails details) {
+            NavigatorUtils.goBack(context);
+          },
         ),
       ),
     );
