@@ -10,6 +10,7 @@ import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
+import 'package:boohee_flutter/widget/header/home_wallpaper_header.dart';
 import 'package:boohee_flutter/widget/home_common_card.dart';
 import 'package:boohee_flutter/widget/main/main_widgets.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,13 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: <Widget>[
         EasyRefresh.custom(
+          header: WallPaperHeader(
+              wallPaperUrl:
+                  wallPaper != null ? wallPaper.welcomeImg.backImgSmall : ""),
           scrollController: _controller,
+          onRefresh: () async {
+            print("刷新");
+          },
           slivers: <Widget>[
             SliverToBoxAdapter(
                 child: HomeHeaderWidget(
