@@ -58,8 +58,8 @@ class SearchBarState extends State<SearchBar> {
                 color: _controller.value.searchBarBg,
                 borderRadius: BorderRadius.circular(100),
               ),
-              child: Container(
-                margin: EdgeInsets.only(top: 7, bottom: 7),
+              child: Padding(
+                padding: EdgeInsets.only(top: 7, bottom: 7),
                 child: Row(
                   children: <Widget>[
                     PaddingStyles.getPadding(14),
@@ -81,7 +81,7 @@ class SearchBarState extends State<SearchBar> {
             ),
           )),
           Offstage(
-            child: PaddingStyles.getPadding(14),
+            child: SizeBoxFactory.getHorizontalSizeBox(14),
             offstage: !widget.isShowCartIcon,
           ),
           Offstage(
@@ -92,7 +92,7 @@ class SearchBarState extends State<SearchBar> {
               height: 24,
             ),
           ),
-          PaddingStyles.getPadding(14),
+          SizeBoxFactory.getHorizontalSizeBox(14),
           Image.asset(
             Utils.getImgPath(_controller.value.appbarRightIcon),
             width: 24,
