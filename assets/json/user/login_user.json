@@ -1,0 +1,18 @@
+{
+  "user": {
+    "user_key": "3ad64cc4-ed8e-45b2-9a8a-125577b3e71e",
+    "user_name": "miniCheny",
+    "email": null,
+    "cellphone": "18370622030",
+    "cellphone_state": true,
+    "user_type": 0,
+    "created_at": "2019-02-28T00:10:09.000+08:00",
+    "nick_name": null,
+    "gender": null,
+    "birthday": null,
+    "height": null,
+    "avatar_url": "http://one.boohee.cn/one/2019/07/23/247f284a-805d-409b-ac9d-764e12a9624b",
+    "at_coin_balance": 0
+  },
+  "token": "hAw338p5x4xsGxK6hqHCN8zb8xMrpW8n"
+}

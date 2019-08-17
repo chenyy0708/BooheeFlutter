@@ -216,7 +216,6 @@ class _MinePageState extends State<MinePage> {
 
   /// 卡片，后台配置
   void getMineCards() {
-    /// 商店推荐商品
     Repository.loadAsset("mine_cards", fileDir: "me").then((json) {
       MineCards mineCards = MineCards.fromJson(Repository.toMap(json));
       mCards = mineCards.data;

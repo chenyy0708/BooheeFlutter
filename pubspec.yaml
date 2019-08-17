@@ -76,6 +76,7 @@ flutter:
     - assets/json/shop/shop_banner.json
     - assets/json/shop/shop_recommend_list.json
     - assets/json/me/mine_cards.json
+    - assets/json/user/login_user.json
     - images/ic_tab_bar_home_grey.png
     - images/ic_tab_bar_me_grey.png
     - images/ic_tab_bar_partner_grey.png

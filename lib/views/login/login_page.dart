@@ -2,10 +2,9 @@ import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/app/route/routes.dart';
 import 'package:boohee_flutter/common/Colors.dart';
 import 'package:boohee_flutter/common/constant.dart';
-import 'package:boohee_flutter/http/http.dart';
-import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/login_user.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
+import 'package:boohee_flutter/utils/repository_utils.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,21 +90,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() async {
-    var map = {
-      "login": _userNameController.text,
-      "password": _userPassController.text
-    };
-    dio
-        .post(RequestUrl.getBaseUrl(RequestUrl.passport, url: RequestUrl.login),
-            data: RequestUrl.signParams(map))
-        .then((response) async {
-      LoginUser loginUser = LoginUser.fromJson(response.data);
+    Repository.loadAsset("login_user", fileDir: "user").then((json) async {
+      LoginUser loginUser = LoginUser.fromJson(Repository.toMap(json));
       await SpUtil.getInstance();
       AccountUtils.saveUser(loginUser);
       SpUtil.putString(Constant.token, loginUser.token);
       SpUtil.putString(Constant.user_key, loginUser.user.userKey);
-      // 更新dio中的header对象
-      RequestUrl.initDioHeader(dio);
       if (loginUser != null && loginUser.token.isNotEmpty) {
         // 登录成功，跳转首页
         NavigatorUtils.push(context, Routes.root, replace: true);
