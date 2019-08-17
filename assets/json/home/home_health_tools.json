@@ -1,0 +1,83 @@
+{
+  "success": true,
+  "msg": "",
+  "data": [
+    {
+      "id": 1,
+      "name": "饮食&运动记录",
+      "code": "diet_exercise_record",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 3,
+      "name": "饮食计划",
+      "code": "wisdom",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 2,
+      "name": "体重记录",
+      "code": "weight_record",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 4,
+      "name": "健康习惯",
+      "code": "health_habits",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 5,
+      "name": "运动训练",
+      "code": "exercise",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 6,
+      "name": "围度记录",
+      "code": "measure_record",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 7,
+      "name": "经期记录",
+      "code": "periods_record",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 9,
+      "name": "步数记录",
+      "code": "steps_record",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 10,
+      "name": "睡眠记录",
+      "code": "sleep_record",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "id": 11,
+      "name": "宝宝记录",
+      "code": "baby",
+      "visible": true,
+      "editable": true
+    }
+  ],
+  "extra": {
+    "wisdom": {
+      "bought": true,
+      "show": true,
+      "name": "饮食计划"
+    }
+  }
+}

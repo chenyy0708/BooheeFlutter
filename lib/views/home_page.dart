@@ -3,11 +3,10 @@ import 'dart:ui';
 import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/common/constant.dart';
-import 'package:boohee_flutter/http/http.dart';
-import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/home_tools.dart';
 import 'package:boohee_flutter/model/home_wall_paper.dart';
 import 'package:boohee_flutter/res/styles.dart';
+import 'package:boohee_flutter/utils/repository_utils.dart';
 import 'package:boohee_flutter/utils/toast_utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
@@ -150,11 +149,8 @@ class _HomePageState extends State<HomePage> {
 
   /// 壁纸、底部定制tab数据
   void loadData() {
-    dio
-        .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-            url: HomeRequestUrl.home_tools))
-        .then((response) {
-      HomeTools homeTools = HomeTools.fromJson(response.data);
+    Repository.loadAsset("home_health_tools", fileDir: "home").then((json) {
+      HomeTools homeTools = HomeTools.fromJson(Repository.toMap(json));
       topCards = homeTools.data
           .where((item) => item.visible && topCardItems.contains(item.code))
           .toList();
@@ -163,8 +159,10 @@ class _HomePageState extends State<HomePage> {
           .toList();
       setState(() {});
     });
-    // 壁纸
-    loadWallpaper();
+    Repository.loadAsset("home_wallpaper", fileDir: "home").then((json) {
+      wallPaper = HomeWallPaper.fromJson(Repository.toMapForList(json));
+      setState(() {});
+    });
     // 体重记录圆环动画
     Observable.just(3).delay(new Duration(milliseconds: 3 * 1000)).listen((_) {
       percent = 0.8;
@@ -173,17 +171,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   HomeWallPaper wallPaper;
-
-  // 首页壁纸
-  void loadWallpaper() {
-    dio
-        .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-            url: HomeRequestUrl.home_wallpaper))
-        .then((response) {
-      wallPaper = HomeWallPaper.fromJson(response.data);
-      setState(() {});
-    });
-  }
 
   /// 底部健康工具列表
   Widget createToolsCards() {
