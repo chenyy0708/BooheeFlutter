@@ -1,0 +1,214 @@
+{
+  "banner_showcases": [
+    {
+      "id": 1961,
+      "exhibit": "3847",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/0618/k375.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 750,
+      "exhibit_type": "goods",
+      "page_title": ""
+    },
+    {
+      "id": 1630,
+      "exhibit": "3746",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/20180731/naidong375.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 700,
+      "exhibit_type": "goods",
+      "page_title": ""
+    },
+    {
+      "id": 2016,
+      "exhibit": "3100",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/0812/mp.jpg",
+      "default_photo_height": 340,
+      "default_photo_width": 640,
+      "exhibit_type": "goods",
+      "page_title": ""
+    },
+    {
+      "id": 1904,
+      "exhibit": "3609",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/0422/mm.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 750,
+      "exhibit_type": "goods",
+      "page_title": ""
+    },
+    {
+      "id": 2011,
+      "exhibit": "https://one.boohee.com/store/pages/august_week3?page_from=shopbanner",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/0812/banner750.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 750,
+      "exhibit_type": "page",
+      "page_title": "查看"
+    },
+    {
+      "id": 1753,
+      "exhibit": "3216",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/0812/dg.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 750,
+      "exhibit_type": "goods",
+      "page_title": ""
+    },
+    {
+      "id": 1948,
+      "exhibit": "https://bhapp.boohee.com/webapp/virtual_goods/nice_2019/intro?type=nice&source=store_home_banner",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/20190813/banner375.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 750,
+      "exhibit_type": "page",
+      "page_title": "查看"
+    },
+    {
+      "id": 1934,
+      "exhibit": "https://truck.boohee.com/nice/collections/29/apply?page_from=shopbanner",
+      "default_photo_url": "http://up.boohee.cn/house/u/shop/ad_page/20190812/banner375.jpg",
+      "default_photo_height": 375,
+      "default_photo_width": 750,
+      "exhibit_type": "page",
+      "page_title": "查看"
+    }
+  ],
+  "shop_modules": [
+    {
+      "position": 1,
+      "display": true,
+      "title": "❤️满200返200",
+      "sub_title": "鸡肉肠新包装>>",
+      "picture_url1": "http://up.boohee.cn/house/u/20190121spsl/160_CHANG.png",
+      "picture_url2": "http://up.boohee.cn/house/u/shop/ad_page/0513/sss.png",
+      "redirect_url": "https://one.boohee.com/store/pages/august_week3",
+      "new_tag": "2019-08-17 16:00:00"
+    },
+    {
+      "position": 2,
+      "display": true,
+      "title": "😊薄荷新人推荐",
+      "sub_title": "人气榜单在此>>",
+      "picture_url1": "http://up.boohee.cn/house/u/shop/ad_page/0722/bang.jpg",
+      "picture_url2": "http://up.boohee.cn/house/u/shop/ad_page/0422/c.png",
+      "redirect_url": "boohee://goods_list/86",
+      "new_tag": "2019-07-29 15:00:00"
+    },
+    {
+      "position": 3,
+      "display": true,
+      "title": "限时抢购",
+      "start_time": "2019-08-12T16:00:00.000+00:00",
+      "end_time": "2019-08-19T16:00:00.000+00:00",
+      "picture_url1": "http://up.boohee.cn/house/u/20190121spsl/zs_new.png",
+      "picture_url2": "http://up.boohee.cn/house/u/20190121spsl/kfdb1_1601.jpg",
+      "redirect_url": "https://truck.boohee.com/promotion",
+      "new_tag": "2019-07-08 00:00:00"
+    },
+    {
+      "position": 4,
+      "display": true,
+      "title": "顾问陪你瘦",
+      "sub_title": "送267元减脂包>>>",
+      "picture_url1": "http://up.boohee.cn/house/u/shop/ad_page/0806/160-160.png",
+      "picture_url2": "http://up.boohee.cn/house/u/shop/ad_page/0806/160-160l.png",
+      "redirect_url": "https://bhapp.boohee.com/webapp/virtual_goods/nice_2019/intro?type=nice&source=store_homepage_promotion",
+      "new_tag": ""
+    },
+    {
+      "position": 5,
+      "display": false,
+      "title": "春季礼包精选",
+      "picture_url1": "http://up.boohee.cn/house/u/shop/ad_page/0225/3.jpg",
+      "redirect_url": "boohee://goods_list/277",
+      "sub_title": "打包起来折扣更大",
+      "new_tag": ""
+    },
+    {
+      "position": 6,
+      "display": true,
+      "title": "节后减肥",
+      "sub_title": "进群更好瘦！",
+      "picture_url1": "http://up.boohee.cn/house/u/shop/ad_page/0221/yt.jpg",
+      "redirect_url": "http://nice.boohee.com/webapp/collections/19",
+      "new_tag": "2019-2-21"
+    },
+    {
+      "position": 7,
+      "display": true,
+      "title": "商品福利",
+      "sub_title": "入群早知道",
+      "picture_url1": "http://up.boohee.cn/house/u/shop/ad_page/20180806/libao1.jpg",
+      "redirect_url": "https://beauty.boohee.com/webapp/ice_room_banners/home?group_id=5",
+      "new_tag": ""
+    }
+  ],
+  "categories": [
+    {
+      "id": 9,
+      "name": "新品购",
+      "description": "所有商品按上新排序",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F9%2Fxin.png"
+    },
+    {
+      "id": 17,
+      "name": "控卡餐",
+      "description": "正餐",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F17%2Fmeal.png"
+    },
+    {
+      "id": 28,
+      "name": "高蛋白",
+      "description": "高蛋白",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F28%2Fgao.png"
+    },
+    {
+      "id": 27,
+      "name": "燃燃燃",
+      "description": "加强",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F27%2Fxiao.png"
+    },
+    {
+      "id": 25,
+      "name": "瘦身定制",
+      "description": "瘦身定制",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F25%2Fshou.png"
+    },
+    {
+      "id": 7,
+      "name": "人气秤",
+      "description": "硬件",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F7%2Fcheng.png"
+    },
+    {
+      "id": 18,
+      "name": "轻零食",
+      "description": "零食",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F18%2Fqing.png"
+    },
+    {
+      "id": 29,
+      "name": "低脂肪",
+      "description": "低脂肪",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F29%2Ffat.png"
+    },
+    {
+      "id": 13,
+      "name": "好喝的",
+      "description": "湿泡",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F13%2Fhao.png"
+    },
+    {
+      "id": 23,
+      "name": "BR肌密",
+      "description": "BR肌密",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F23%2Fa.png"
+    },
+    {
+      "id": 26,
+      "name": "其它",
+      "description": "其它",
+      "icon_url": "http://one.boohee.cn/uploads%2Fcategory%2Ficon%2F26%2Fa.png"
+    }
+  ]
+}

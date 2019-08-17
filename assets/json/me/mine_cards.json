@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "msg": "",
+  "data": [
+    {
+      "id": 7,
+      "name": "健康报告",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/report.png",
+      "url": "boohee://new_health_report/mine_health_report"
+    },
+    {
+      "id": 1,
+      "name": "NICE服务",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/NICE.png",
+      "url": "https://nice.boohee.cn/api/v1/contracts.html"
+    },
+    {
+      "id": 3,
+      "name": "智能设备",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/facility.png",
+      "url": "boohee://new_hardware_activity"
+    },
+    {
+      "id": 5,
+      "name": "我的收藏",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/mycollection.png",
+      "url": "boohee://new_my_collection"
+    },
+    {
+      "id": 6,
+      "name": "我的食物",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/myfood.png",
+      "url": "boohee://new_my_food"
+    },
+    {
+      "id": 2,
+      "name": "挑战赛",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/challenge.png",
+      "url": "boohee://new_challenge"
+    },
+    {
+      "id": 4,
+      "name": "打卡群",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/group.png",
+      "url": "boohee://new_clock_in_group"
+    },
+    {
+      "id": 8,
+      "name": "兑换",
+      "icon_url": "https://up.boohee.cn/house/u/mycard/exchange.png",
+      "url": "https://truck.boohee.com/wisdom/exchange"
+    }
+  ]
+}

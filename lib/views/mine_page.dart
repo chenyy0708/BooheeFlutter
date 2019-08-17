@@ -1,10 +1,9 @@
 import 'package:boohee_flutter/common/colors.dart';
-import 'package:boohee_flutter/http/http.dart';
-import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/login_user.dart';
 import 'package:boohee_flutter/model/mine_cards.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
+import 'package:boohee_flutter/utils/repository_utils.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/tool_bar.dart';
@@ -217,11 +216,9 @@ class _MinePageState extends State<MinePage> {
 
   /// 卡片，后台配置
   void getMineCards() {
-    dio
-        .get(RequestUrl.getBaseUrl(RequestUrl.bingo,
-            url: MineRequestUrl.mine_cards))
-        .then((response) {
-      MineCards mineCards = MineCards.fromJson(response.data);
+    /// 商店推荐商品
+    Repository.loadAsset("mine_cards", fileDir: "me").then((json) {
+      MineCards mineCards = MineCards.fromJson(Repository.toMap(json));
       mCards = mineCards.data;
       setState(() {});
     });

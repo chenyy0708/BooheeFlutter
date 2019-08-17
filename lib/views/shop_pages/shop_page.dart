@@ -1,15 +1,13 @@
 import 'package:banner/banner.dart';
 import 'package:boohee_flutter/common/colors.dart';
-import 'package:boohee_flutter/http/http.dart';
-import 'package:boohee_flutter/http/request_url.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
+import 'package:boohee_flutter/utils/repository_utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_easyrefresh/material_footer.dart';
 import 'package:flutter_easyrefresh/material_header.dart';
 
 class ShopPage extends StatefulWidget {
@@ -21,33 +19,19 @@ class _ShopPageState extends State<ShopPage> {
   List<Banner_showcases> _bannerList = [];
   List<Categories> _categoriseList = [];
   List<Goods> _goodsList = [];
-
-  int page = 1;
   double bannerHeight = 200;
-  int mId = 9;
-
   EasyRefreshController _controller = EasyRefreshController();
 
-  @override
-  void initState() {
-    super.initState();
-    loadData();
-  }
-
+  /// 加载数据
   void loadData() {
-    getBanner();
-  }
-
-  // 获取banner数据
-  void getBanner() {
-    dio.get(RequestUrl.shop_banner).then((response) {
-      if (page == 1) _categoriseList.clear();
-      ShopBanner data = ShopBanner.fromJson(response.data);
-      _bannerList = ShopBanner.fromJson(response.data).bannerShowcases;
+    /// 商店Banner
+    Repository.loadAsset("shop_banner", fileDir: "shop").then((json) {
+      _categoriseList.clear();
+      ShopBanner data = ShopBanner.fromJson(Repository.toMap(json));
+      _bannerList = data.bannerShowcases;
       // 保证数据最多为10条
       data.categories.forEach((it) {
         // 默认第一个分类
-        if (data.categories.indexOf(it) == 0) mId = it.id;
         if (data.categories.indexOf(it) < 10) {
           _categoriseList.add(it);
         }
@@ -60,24 +44,15 @@ class _ShopPageState extends State<ShopPage> {
                 _bannerList[0].defaultPhotoWidth);
       }
       _controller.finishRefresh();
-      _controller.resetLoadState();
       setState(() {});
-      getRecommendList(page);
     });
-  }
 
-  // 商店推荐列表
-  void getRecommendList(int page) {
-    dio.get(RequestUrl.shop_recommend_list + mId.toString(),
-        queryParameters: {"page": page}).then((response) {
-      ShopRecommendList data = ShopRecommendList.fromJson(response.data);
-      if (page == 1) _goodsList.clear();
+    /// 商店推荐商品
+    Repository.loadAsset("shop_recommend_list", fileDir: "shop").then((json) {
+      ShopRecommendList data =
+          ShopRecommendList.fromJson(Repository.toMap(json));
+      _goodsList.clear();
       _goodsList.addAll(data.goods);
-      if (page == data.totalPages) {
-        _controller.finishLoad(noMore: true);
-      } else {
-        _controller.finishLoad();
-      }
       setState(() {});
     });
   }
@@ -98,21 +73,12 @@ class _ShopPageState extends State<ShopPage> {
           header: MaterialHeader(
             valueColor: AlwaysStoppedAnimation(mainColor),
           ),
-          footer: MaterialFooter(
-            valueColor: AlwaysStoppedAnimation(mainColor),
-          ),
           taskIndependence: true,
           enableControlFinishRefresh: true,
-          enableControlFinishLoad: true,
           firstRefresh: true,
           controller: _controller,
           onRefresh: () async {
-            page = 1;
             loadData();
-          },
-          onLoad: () async {
-            page++;
-            getRecommendList(page);
           },
         ));
   }
@@ -137,7 +103,8 @@ class _ShopPageState extends State<ShopPage> {
       margin: EdgeInsets.only(top: 13.0, left: 17, right: 17),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: ExtendedNetworkImageProvider(data.defaultPhotoUrl,cache: true),
+          image:
+              ExtendedNetworkImageProvider(data.defaultPhotoUrl, cache: true),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.all(
@@ -216,7 +183,8 @@ class _ShopPageState extends State<ShopPage> {
             height: 165,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: ExtendedNetworkImageProvider(item.bigPhotoUrl,cache: true),
+                image:
+                    ExtendedNetworkImageProvider(item.bigPhotoUrl, cache: true),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.only(
