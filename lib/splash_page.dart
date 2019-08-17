@@ -1,4 +1,5 @@
 import 'package:boohee_flutter/res/styles.dart';
+import 'package:boohee_flutter/utils/repository_utils.dart';
 import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/timer_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
@@ -13,8 +14,6 @@ import 'app/route/fluro_navigator.dart';
 import 'app/route/routes.dart';
 import 'common/colors.dart';
 import 'common/constant.dart';
-import 'http/http.dart';
-import 'http/request_url.dart';
 import 'model/splash_ad.dart';
 
 class SplashPage extends StatefulWidget {
@@ -45,7 +44,6 @@ class _SplashPageState extends State<SplashPage> {
     _timerUtil.setOnTimerTickCallback((int tick) {
       double _tick = tick / 1000;
       setState(() {
-
         currentTime = _tick.toInt();
       });
       if (_tick == 0) {
@@ -162,11 +160,8 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _loadSplashAd() {
-    dio
-        .get(RequestUrl.getBaseUrl(RequestUrl.status,
-            url: HomeRequestUrl.splash_ad))
-        .then((response) {
-      splashAd = SplashAd.fromJson(response.data);
+    Repository.loadAsset("splash_ad").then((json) {
+      splashAd = SplashAd.fromJson(Repository.toMapForList(json));
       inVisible = !splashAd.text.isNotEmpty;
       setState(() {});
     });

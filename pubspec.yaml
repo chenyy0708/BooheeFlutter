@@ -70,7 +70,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/json/splash_ad.json
+    - assets/json/common/splash_ad.json
     - images/ic_tab_bar_home_grey.png
     - images/ic_tab_bar_me_grey.png
     - images/ic_tab_bar_partner_grey.png

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 236,
+    "start_up_url": "http://up.boohee.cn/house/u/shop/ad_page/0812/jrw.jpg",
+    "is_ad": true,
+    "text": "低脂鸡胸肉丸新上市！自营满200返200",
+    "link": "https://one.boohee.com/store/pages/august_week3?page_from=launch_screen",
+    "pop_ads": []
+  },
+  {
+    "id": 237,
+    "start_up_url": "http://up.boohee.cn/house/u/shop/ad_page/0812/cc.jpg",
+    "is_ad": true,
+    "text": "5/7日体重突击，另返100元代金券",
+    "link": "https://one.boohee.com/store/pages/august_week3?page_from=launch_screen",
+    "pop_ads": []
+  },
+  {
+    "id": 3,
+    "start_up_url": "http://up.boohee.cn/house/u/one/screen/summer_kp.jpg",
+    "is_ad": false,
+    "text": "",
+    "link": "",
+    "pop_ads": []
+  }
+]
