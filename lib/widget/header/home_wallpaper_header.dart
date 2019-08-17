@@ -78,6 +78,7 @@ class _WallPaperHeaderPageState extends State<WallPaperHeaderPage> {
   Widget build(BuildContext context) {
     return ExtendedImage.network(
       widget.wallPaperUrl,
+      cache: true,
       fit: BoxFit.fitWidth,
     );
   }

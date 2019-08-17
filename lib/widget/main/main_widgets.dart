@@ -32,6 +32,7 @@ class HomeHeaderWidget extends StatelessWidget {
         height: 181,
         width: double.infinity,
         fit: BoxFit.fitWidth,
+        cache: true,
         enableLoadState: false,
       ),
       ClipRect(

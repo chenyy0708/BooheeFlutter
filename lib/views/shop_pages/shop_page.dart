@@ -144,6 +144,7 @@ class _ShopPageState extends State<ShopPage> {
         ExtendedImage.network(
           item.iconUrl,
           width: 35,
+          cache: true,
           height: 35,
         ),
         Text(
