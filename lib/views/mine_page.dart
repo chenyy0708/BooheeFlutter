@@ -250,16 +250,16 @@ class _MinePageState extends State<MinePage> {
 
   /// 退出登陆弹框
   void settingClick() {
-    showCupertinoDialog(
+    showDialog(
         context: context,
         builder: (context) {
-          return new CupertinoAlertDialog(
-            content: new Text(
+          return new AlertDialog(
+            content: Text(
               "是否确认退出登录?",
               style: TextStyles.get15Text_373D52(),
             ),
             actions: <Widget>[
-              new FlatButton(
+              FlatButton(
                 onPressed: () async {
                   // 清空登陆信息
                   SpUtil.clear();
@@ -274,7 +274,7 @@ class _MinePageState extends State<MinePage> {
                   style: TextStyle(color: mainColor),
                 ),
               ),
-              new FlatButton(
+              FlatButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
