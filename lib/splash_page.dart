@@ -34,24 +34,12 @@ class _SplashPageState extends State<SplashPage> {
   bool inVisible = true;
   SplashAd splashAd;
   TimerUtil _timerUtil;
-  int countdownTime = 5 * 1000;
-  int currentTime = 5;
+  int countdownTime = 3 * 1000;
+  int currentTime = 3;
 
   @override
   void initState() {
     super.initState();
-    _timerUtil = new TimerUtil(mTotalTime: countdownTime);
-    _timerUtil.setOnTimerTickCallback((int tick) {
-      double _tick = tick / 1000;
-      setState(() {
-        currentTime = _tick.toInt();
-      });
-      if (_tick == 0) {
-        goHome();
-      }
-    });
-    // 开始倒计时
-    _timerUtil.startCountDown();
     _loadLoginStatus();
   }
 
@@ -120,19 +108,23 @@ class _SplashPageState extends State<SplashPage> {
                     padding: EdgeInsets.only(right: 10),
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: RoundButton(
-                          padding: EdgeInsets.only(
-                              left: 5, right: 5, top: 2, bottom: 2),
-                          backgroundColor: Colors.black45,
-                          radius: 2,
-                          buttonText: Text(
-                            "跳过广告 $currentTime",
-                            style: TextStyle(fontSize: 12, color: Colors.white),
+                        child: Offstage(
+                          offstage: inVisible,
+                          child: RoundButton(
+                            padding: EdgeInsets.only(
+                                left: 5, right: 5, top: 2, bottom: 2),
+                            backgroundColor: Colors.black45,
+                            radius: 2,
+                            buttonText: Text(
+                              "跳过广告 $currentTime",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                            onPressed: () {
+                              _timerUtil.cancel();
+                              goHome();
+                            },
                           ),
-                          onPressed: () {
-                            _timerUtil.cancel();
-                            goHome();
-                          },
                         )),
                   )
                 ],
@@ -147,8 +139,8 @@ class _SplashPageState extends State<SplashPage> {
   void _loadLoginStatus() async {
     await SpUtil.getInstance();
     if (!mounted) return;
-    _loadSplashAd();
     _loadLocale();
+    _loadSplashAd();
   }
 
   void _loadLocale() {
@@ -163,7 +155,14 @@ class _SplashPageState extends State<SplashPage> {
   void _loadSplashAd() {
     Repository.loadAsset("splash_ad").then((json) {
       splashAd = SplashAd.fromJson(Repository.toMapForList(json));
-      inVisible = !splashAd.text.isNotEmpty;
+      inVisible = !splashAd.isAd;
+      if (inVisible) {
+        // 没有广告，倒计时1s
+        countdownTime = 1 * 1000;
+      }
+      initCountDown(countdownTime);
+      // 开始倒计时
+      _timerUtil.startCountDown();
       setState(() {});
     });
   }
@@ -180,5 +179,19 @@ class _SplashPageState extends State<SplashPage> {
     } else {
       NavigatorUtils.push(context, Routes.login, replace: true);
     }
+  }
+
+  /// 初始化倒计时
+  void initCountDown(int countdownTime) {
+    _timerUtil = new TimerUtil(mTotalTime: countdownTime);
+    _timerUtil.setOnTimerTickCallback((int tick) {
+      double _tick = tick / 1000;
+      setState(() {
+        currentTime = _tick.toInt();
+      });
+      if (_tick == 0) {
+        goHome();
+      }
+    });
   }
 }
