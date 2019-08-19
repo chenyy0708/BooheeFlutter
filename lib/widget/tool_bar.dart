@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 /// 通用的顶部标题栏
 class Toolbar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
+  final Function onTabRightOne;
 
-  Toolbar({this.text});
+  Toolbar({this.text, this.onTabRightOne});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +25,17 @@ class Toolbar extends StatelessWidget implements PreferredSizeWidget {
           Expanded(
               child: Container(
             margin: EdgeInsets.only(top: 11, bottom: 11),
-            child:
-                Text(text ?? "", style: TextStyle(fontSize: 14, color: Colors.white)),
+            child: Text(text ?? "",
+                style: TextStyle(fontSize: 14, color: Colors.white)),
           )),
           PaddingStyles.getPadding(14),
-          Image.asset(
-            Utils.getImgPath("ic_settings_white"),
-            width: 24,
-            height: 24,
+          InkWell(
+            child: Image.asset(
+              Utils.getImgPath("ic_settings_white"),
+              width: 24,
+              height: 24,
+            ),
+            onTap: onTabRightOne ?? () {},
           ),
           PaddingStyles.getPadding(14),
           Image.asset(

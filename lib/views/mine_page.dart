@@ -1,13 +1,17 @@
+import 'package:boohee_flutter/app/route/fluro_navigator.dart';
+import 'package:boohee_flutter/app/route/routes.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/model/login_user.dart';
 import 'package:boohee_flutter/model/mine_cards.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/repository_utils.dart';
+import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/tool_bar.dart';
 import 'package:boohee_flutter/widget/top_bottom_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MinePage extends StatefulWidget {
@@ -30,7 +34,11 @@ class _MinePageState extends State<MinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(),
+      appBar: Toolbar(
+        onTabRightOne: () {
+          settingClick();
+        },
+      ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
@@ -58,6 +66,7 @@ class _MinePageState extends State<MinePage> {
                   new ClipOval(
                     child: Image.network(
                       mUser.avatarUrl,
+                      fit: BoxFit.cover,
                       height: 60,
                       width: 60,
                     ),
@@ -237,5 +246,42 @@ class _MinePageState extends State<MinePage> {
       ),
       margin: 6,
     );
+  }
+
+  /// 退出登陆弹框
+  void settingClick() {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return new CupertinoAlertDialog(
+            content: new Text(
+              "是否确认退出登录?",
+              style: TextStyles.get15Text_373D52(),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () async {
+                  // 清空登陆信息
+                  SpUtil.clear();
+                  // 关闭弹框
+                  Navigator.of(context).pop();
+                  // 打开登陆页面
+                  NavigatorUtils.push(context, Routes.login,
+                      replace: true, clearStack: true);
+                },
+                child: new Text(
+                  "确定",
+                  style: TextStyle(color: mainColor),
+                ),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: new Text("取消", style: TextStyle(color: mainColor)),
+              ),
+            ],
+          );
+        });
   }
 }
