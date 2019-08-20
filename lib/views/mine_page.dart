@@ -11,6 +11,7 @@ import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/tool_bar.dart';
 import 'package:boohee_flutter/widget/top_bottom_widget.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,7 @@ class _MinePageState extends State<MinePage> {
                 children: <Widget>[
                   PaddingStyles.getPadding(17),
                   new ClipOval(
-                    child: Image.network(
+                    child: ExtendedImage.network(
                       mUser.avatarUrl,
                       fit: BoxFit.cover,
                       height: 60,
@@ -235,7 +236,7 @@ class _MinePageState extends State<MinePage> {
   /// 菜单卡片
   Widget createCard(Data mCard) {
     return TopBottom(
-      top: Image.network(
+      top: ExtendedImage.network(
         mCard.iconUrl,
         width: 22,
         height: 22,
