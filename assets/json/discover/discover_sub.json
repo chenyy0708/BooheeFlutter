@@ -1,0 +1,198 @@
+{
+  "banners": [
+    {
+      "id": 192,
+      "title": "薄荷×雀巢 3周群服务",
+      "link": "https://truck.boohee.com/nice/collections/29/apply",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/20190820/OPbanner240.jpg"
+    },
+    {
+      "id": 172,
+      "title": "甩掉秋膘，满200返200",
+      "link": "https://one.boohee.com/store/pages/august_week3?page_from=community",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/0812/banner250.jpg"
+    },
+    {
+      "id": 176,
+      "title": "成功故事0814",
+      "link": "https://status.boohee.com/story/new%20story190813?page_from=course",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/0813/banner.jpg"
+    },
+    {
+      "id": 169,
+      "title": "NICE服务（八月新的）",
+      "link": "https://bhapp.boohee.com/webapp/virtual_goods/nice_2019/intro?type=nice&source=faxianbanner",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/20190819/banner240.jpg"
+    },
+    {
+      "id": 157,
+      "title": "生蚝队长",
+      "link": "boohee://comments/67314724",
+      "pic_url": "http://up.boohee.cn/house/u/one/slider/20190819/guide_vol399_banner.jpg"
+    },
+    {
+      "id": 162,
+      "title": "怡文好好吃",
+      "link": "boohee://comments/67111786",
+      "pic_url": "http://up.boohee.cn/house/u/one/slider/20190813/guide_vol397_banner.jpg"
+    },
+    {
+      "id": 194,
+      "title": "雅琪",
+      "link": "boohee://comments/6912249",
+      "pic_url": "http://up.boohee.cn/house/u/one/slider/20190807/guide_vol395_banner.jpg"
+    }
+  ],
+
+  "labels": [
+    {
+      "title": "减肥知识",
+      "url": "boohee://status_knowledge",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/0505/ss.png"
+    },
+    {
+      "title": "饮食广场",
+      "url": "boohee://meal_square",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/0505/food.png"
+    },
+    {
+      "title": "瘦身定制",
+      "url": "https://bhapp.boohee.com/webapp/virtual_goods/nice_2019/intro?type=nice&source=labels",
+      "pic_url": "http://up.boohee.cn/house/u/shop/ad_page/0505/zhishi.png"
+    }
+  ]
+
+,
+  "sections": [
+    {
+      "name": "微信群",
+      "more_content_text": null,
+      "more_content_url": null,
+      "sub_contents": [
+        {
+          "title": "食物 值得认真对待",
+          "sub_title": "薄荷智慧营养师 7天群",
+          "img_url": "http://up.boohee.cn/house/u/one/slider/20190705/yys.png",
+          "redirect_url": "boohee://dietitian_purchase"
+        },
+        {
+          "title": "拿出超模的态度",
+          "sub_title": "超模25代餐 3周减重群",
+          "img_url": "http://up.boohee.cn/house/u/one/slider/20190705/qun.png",
+          "redirect_url": "boohee://goods/3751"
+        },
+        {
+          "title": "限制热量 平衡饮食",
+          "sub_title": "21天10斤挑战+群服务",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/mai.jpg",
+          "redirect_url": "boohee://goods/3863"
+        }
+      ]
+    },
+    {
+      "name": "成功故事",
+      "more_content_text": null,
+      "more_content_url": null,
+      "sub_contents": [
+        {
+          "title": "圆脸阿姨变美少女",
+          "sub_title": "（55.4-49.35）KG",
+          "img_url": "http://up.boohee.cn/house/u/one/slider/20190717/1.png",
+          "redirect_url": "https://status.boohee.com/story/new%20story190813?page_from=hbstory"
+        },
+        {
+          "title": "小肚子变马甲线！",
+          "sub_title": "（50-46.1）KG",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190627/88.jpg",
+          "redirect_url": "https://status.boohee.com/story/new%20story190806?page_from=hbstory"
+        },
+        {
+          "title": "穿上24码裤子不是梦",
+          "sub_title": "（64.7-54）KG",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190627/731.png",
+          "redirect_url": "https://status.boohee.com/story/new%20story190730?page_from=hbstory"
+        },
+        {
+          "title": "告别反弹，健康减重",
+          "sub_title": "（55-46.5）KG",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190627/724.png",
+          "redirect_url": "https://status.boohee.com/story/new%20story190723?page_from=hbstory"
+        },
+        {
+          "title": "更多成功故事",
+          "sub_title": "戳这里→",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190505/more.jpg",
+          "redirect_url": "https://one.boohee.com/store/pages/nice_story_list"
+        }
+      ]
+    },
+    {
+      "name": "推荐达人",
+      "more_content_text": null,
+      "more_content_url": null,
+      "sub_contents": [
+        {
+          "title": " 群星直播间",
+          "sub_title": "带你探索健康好物",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/0722/lab.jpg",
+          "redirect_url": "https://one.boohee.com/store/pages/boheezbj"
+        },
+        {
+          "title": "薄荷首席营养师",
+          "sub_title": "怡文好好吃",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/yw.jpg",
+          "redirect_url": "boohee://channel/vlog_yiwen"
+        },
+        {
+          "title": "爱吃爱笑的台湾营养师",
+          "sub_title": "雅琪的万事屋",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/yq.jpg",
+          "redirect_url": "boohee://channel/vlog_yaqi"
+        },
+        {
+          "title": "热爱嘻哈的健身小钢炮",
+          "sub_title": "生蚝队长",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/sh.jpg",
+          "redirect_url": "boohee://channel/vlog_oasher"
+        },
+        {
+          "title": "管不住嘴的减肥戏精",
+          "sub_title": "大圣好瘦",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/ds.jpg",
+          "redirect_url": "boohee://channel/vlog_dasheng"
+        }
+      ]
+    },
+    {
+      "name": "推荐课程",
+      "more_content_text": "更多课程",
+      "more_content_url": "boohee://recommond_courses",
+      "sub_contents": [
+        {
+          "title": "最科学的减肥",
+          "sub_title": "减肥必学的基础课知识",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/class_1.jpg",
+          "redirect_url": "boohee://training_course/1"
+        },
+        {
+          "title": "明星营养师教你怎么吃",
+          "sub_title": "这么吃才能瘦",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/class_2.jpg",
+          "redirect_url": "boohee://training_course/2"
+        },
+        {
+          "title": "让你吃饱又能瘦",
+          "sub_title": "减肥怎么吃主食",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/class_3.jpg",
+          "redirect_url": "boohee://training_course/3"
+        },
+        {
+          "title": "怎么运动才减得快？",
+          "sub_title": "运动减肥必学的基础课",
+          "img_url": "http://up.boohee.cn/house/u/shop/ad_page/20190212/class_4.jpg",
+          "redirect_url": "boohee://training_course/15"
+        }
+      ]
+    }
+  ]
+}

@@ -70,6 +70,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/json/discover/discover_sub.json
     - assets/json/common/splash_ad.json
     - assets/json/home/home_health_tools.json
     - assets/json/home/home_wallpaper.json
