@@ -52,11 +52,11 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
       header: MaterialHeader(
         valueColor: AlwaysStoppedAnimation(mainColor),
       ),
-      enableControlFinishRefresh: true,
       controller: _controller,
       onRefresh: () async {
         loadData();
         _controller.finishRefresh();
+        setState(() {});
       },
     );
   }
