@@ -78,6 +78,7 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
   void loadData() {
     Repository.loadAsset("discover_sub", fileDir: "discover").then((response) {
       _subDiscover = SubDiscover.fromJson(Repository.toMap(response));
+      mList.clear();
       mList.add(_subDiscover.labels);
       mList.addAll(_subDiscover.sections);
       setState(() {});
