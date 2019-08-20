@@ -56,8 +56,8 @@ class _DiscoverPageState extends State<DiscoverPage>
                 controller: _tabController,
                 children: <Widget>[
                   DiscoverChildPage(),
-                  new Center(child: new Text('船')),
-                  new Center(child: new Text('巴士')),
+                  new Center(child: new Text('精选')),
+                  new Center(child: new Text('好友圈')),
                 ],
               ))
             ],

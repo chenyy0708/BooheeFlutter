@@ -55,6 +55,7 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
       enableControlFinishRefresh: true,
       controller: _controller,
       onRefresh: () async {
+        loadData();
         _controller.finishRefresh();
       },
     );
@@ -139,13 +140,51 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
             sections.name,
             style: TextStyles.get15TextBold_373D52(),
           ),
-          ExtendedImage.network(
-            (sections.subContents[0].imgUrl),
-            height: 92,
-            width: 144,
-          )
+          _getHorizontalListView(sections.subContents)
         ],
       ),
     );
+  }
+
+  /// 横向列表
+  Widget _getHorizontalListView(List<Sub_contents> subContents) {
+    var horizontalList = ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 11, top: 14, bottom: 10),
+                height: 92,
+                width: 144,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: ExtendedNetworkImageProvider(
+                        subContents[index].imgUrl,
+                        cache: true),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12.0),
+                  ),
+                ),
+              ),
+              Text(
+                subContents[index].title,
+                style: TextStyle(fontSize: 13, color: color373D52),
+              ),
+              SizeBoxFactory.getVerticalSizeBox(1),
+              Text(
+                subContents[index].subTitle,
+                style: TextStyle(fontSize: 11, color: colorA8ACBC),
+              )
+            ],
+          );
+        },
+        itemCount: subContents.length);
+
+    return Expanded(
+        child: Container(width: double.infinity, child: horizontalList));
   }
 }
