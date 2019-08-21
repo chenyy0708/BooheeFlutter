@@ -68,7 +68,7 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
         height: ScreenUtil.getScreenW(context) * (250 / 750 * 1.0).toDouble(),
         child: BannerView(
           _subDiscover.banners
-              .map((bean) => (createBannerChildView(bean as Banners)))
+              .map((bean) => (createBannerChildView(bean)))
               .toList(),
           intervalDuration: Duration(seconds: 3),
           indicatorMargin: 5,

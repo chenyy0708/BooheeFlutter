@@ -87,10 +87,10 @@ class _ShopPageState extends State<ShopPage> {
   Widget createBannerView() {
     return SliverToBoxAdapter(
       child: Container(
-        height: ScreenUtil.getScreenW(context) * (250 / 750 * 1.0).toDouble(),
+        height: bannerHeight,
         child: BannerView(
           _bannerList
-              .map((bean) => (createBannerChildView(bean as Banner_showcases)))
+              .map((bean) => (createBannerChildView(bean)))
               .toList(),
           intervalDuration: Duration(seconds: 3),
           indicatorMargin: 5,
