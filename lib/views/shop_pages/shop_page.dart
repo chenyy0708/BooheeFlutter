@@ -23,6 +23,13 @@ class _ShopPageState extends State<ShopPage> {
   double bannerHeight = 200;
   EasyRefreshController _controller = EasyRefreshController();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
   /// 加载数据
   void loadData() {
     /// 商店Banner
