@@ -31,13 +31,13 @@ packages:
       url: "git://github.com/flutterchina/auto_size.git"
     source: git
     version: "0.0.1"
-  banner:
+  banner_view:
     dependency: "direct main"
     description:
-      name: banner
+      name: banner_view
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.3"
+    version: "1.1.2"
   boolean_selector:
     dependency: transitive
     description:

@@ -26,7 +26,8 @@ dependencies:
   # bean对象
   json_annotation: ^2.4.0
   # 轮播图
-  banner: ^0.1.3
+#  banner: ^0.1.3
+  banner_view: ^1.1.2
   # 刷新控件
   flutter_easyrefresh: ^2.0.2
   # 聚合工具类

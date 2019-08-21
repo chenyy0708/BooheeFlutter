@@ -1,4 +1,4 @@
-import 'package:banner/banner.dart';
+import 'package:banner_view/banner_view.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/model/discover/sub_discover.dart';
 import 'package:boohee_flutter/res/styles.dart';
@@ -7,6 +7,7 @@ import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/widget/top_bottom_widget.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/material_header.dart';
 
@@ -63,13 +64,46 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
 
   Widget createBannerView() {
     return SliverToBoxAdapter(
-      child: BannerView(
+      child: Container(
         height: ScreenUtil.getScreenW(context) * (250 / 750 * 1.0).toDouble(),
-        data: _subDiscover != null ? _subDiscover.banners : [],
-        buildShowView: (index, data) {
-          return createBannerChildView(data as Banners);
-        },
-        onBannerClickListener: (index, data) {},
+        child: BannerView(
+          _subDiscover.banners
+              .map((bean) => (createBannerChildView(bean as Banners)))
+              .toList(),
+          intervalDuration: Duration(seconds: 3),
+          indicatorMargin: 5,
+          indicatorNormal: new Container(
+            width: 8.0,
+            height: 5.0,
+            decoration: new BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.all(
+                new Radius.circular(20.0),
+              ),
+            ),
+          ),
+          indicatorSelected: new Container(
+            width: 15.0,
+            height: 5.0,
+            decoration: new BoxDecoration(
+              color: Color(0xFFEEEFF3),
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.all(
+                new Radius.circular(20.0),
+              ),
+            ),
+          ),
+          indicatorBuilder: (context, indicator) {
+            Widget cc = new Container(
+              margin: EdgeInsets.only(bottom: 8),
+              alignment: Alignment.bottomCenter,
+              height: double.infinity,
+              child: indicator,
+            );
+            return cc;
+          },
+        ),
       ),
     );
   }

@@ -1,8 +1,9 @@
-import 'package:banner/banner.dart';
+import 'package:banner_view/banner_view.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
 import 'package:boohee_flutter/utils/repository_utils.dart';
+import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:extended_image/extended_image.dart';
@@ -83,17 +84,48 @@ class _ShopPageState extends State<ShopPage> {
         ));
   }
 
-  // 轮播图
   Widget createBannerView() {
     return SliverToBoxAdapter(
-      child: BannerView(
-        height: bannerHeight,
-        // 轮播图
-        data: _bannerList,
-        buildShowView: (index, data) {
-          return createBannerChildView(data as Banner_showcases);
-        },
-        onBannerClickListener: (index, data) {},
+      child: Container(
+        height: ScreenUtil.getScreenW(context) * (250 / 750 * 1.0).toDouble(),
+        child: BannerView(
+          _bannerList
+              .map((bean) => (createBannerChildView(bean as Banner_showcases)))
+              .toList(),
+          intervalDuration: Duration(seconds: 3),
+          indicatorMargin: 5,
+          indicatorNormal: new Container(
+            width: 8.0,
+            height: 5.0,
+            decoration: new BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.all(
+                new Radius.circular(20.0),
+              ),
+            ),
+          ),
+          indicatorSelected: new Container(
+            width: 15.0,
+            height: 5.0,
+            decoration: new BoxDecoration(
+              color: Color(0xFFEEEFF3),
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.all(
+                new Radius.circular(20.0),
+              ),
+            ),
+          ),
+          indicatorBuilder: (context, indicator) {
+            Widget cc = new Container(
+              margin: EdgeInsets.only(bottom: 8),
+              alignment: Alignment.bottomCenter,
+              height: double.infinity,
+              child: indicator,
+            );
+            return cc;
+          },
+        ),
       ),
     );
   }
