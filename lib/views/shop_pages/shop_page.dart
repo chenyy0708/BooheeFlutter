@@ -2,8 +2,8 @@ import 'package:banner_view/banner_view.dart';
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/model/ShopBanner.dart';
 import 'package:boohee_flutter/model/ShopRecommendList.dart';
+import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/repository_utils.dart';
-import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/common_search_bar.dart';
 import 'package:extended_image/extended_image.dart';
@@ -96,9 +96,7 @@ class _ShopPageState extends State<ShopPage> {
       child: Container(
         height: bannerHeight,
         child: BannerView(
-          _bannerList
-              .map((bean) => (createBannerChildView(bean)))
-              .toList(),
+          _bannerList.map((bean) => (createBannerChildView(bean))).toList(),
           intervalDuration: Duration(seconds: 3),
           indicatorMargin: 5,
           indicatorNormal: new Container(
@@ -157,16 +155,17 @@ class _ShopPageState extends State<ShopPage> {
   Widget createCategoryGridView() {
     return SliverToBoxAdapter(
       child: Container(
-        height: 162, // 指定卡片大小
         child: CardView(
           margin: EdgeInsets.only(left: 17, right: 17, top: 13),
           child: Padding(
             padding: EdgeInsets.only(top: 13, left: 10, right: 10),
             child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(), // 禁用GradView滚动事件
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                // 禁用GradView滚动事件
                 itemCount: _categoriseList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5, childAspectRatio: 1.0),
+                    crossAxisCount: 5),
                 itemBuilder: (BuildContext context, int index) {
                   return getCategoryItemContainer(_categoriseList[index]);
                 }),
@@ -202,7 +201,7 @@ class _ShopPageState extends State<ShopPage> {
               crossAxisCount: 2,
               mainAxisSpacing: 10,
               crossAxisSpacing: 8,
-              childAspectRatio: 0.65),
+              childAspectRatio: 0.68),
           delegate: new SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return getGoodsItemContainer(_goodsList[index]);
@@ -218,9 +217,8 @@ class _ShopPageState extends State<ShopPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-              child: Container(
-            height: 165,
+          Container(
+            height: 150,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image:
@@ -231,46 +229,53 @@ class _ShopPageState extends State<ShopPage> {
                   topLeft: Radius.circular(10.0),
                   topRight: Radius.circular(10.0)),
             ),
-          )),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10, top: 8),
-            child: Text(
-              item.title.split("｜")[0] ?? "",
-              style: TextStyle(fontSize: 13, color: color373D52),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10, top: 1),
-            child: Text(
-              item.title.split("｜").length > 1 ? item.title.split("｜")[1] : "",
-              style: TextStyle(fontSize: 11, color: colorA8ACBC),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 12),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  "¥" + item.basePrice.toString(),
-                  style: TextStyle(fontSize: 11, color: colorFF6C65),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 8),
+                child: Text(
+                  item.title.split("｜")[0] ?? "",
+                  style: TextStyle(fontSize: 13, color: color373D52),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 8),
-                  child: Text(
-                    "¥" + item.marketPrice.toString(),
-                    style: TextStyle(
-                        fontSize: 11,
-                        color: colorA8ACBC,
-                        decoration: TextDecoration.lineThrough),
-                  ),
-                )
-              ],
-            ),
-          )
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 1),
+                child: Text(
+                  item.title.split("｜").length > 1
+                      ? item.title.split("｜")[1]
+                      : "",
+                  style: TextStyle(fontSize: 11, color: colorA8ACBC),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 12),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "¥" + item.basePrice.toString(),
+                      style: TextStyle(fontSize: 11, color: colorFF6C65),
+                    ),
+                    SizeBoxFactory.getHorizontalSizeBox(8),
+                    Text(
+                      "¥" + item.marketPrice.toString(),
+                      style: TextStyle(
+                          fontSize: 11,
+                          color: colorA8ACBC,
+                          decoration: TextDecoration.lineThrough),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ))
         ],
       ),
     );
