@@ -147,8 +147,7 @@ class HomeHeaderWidget extends StatelessWidget {
                   padding:
                       EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
                   text: "打卡",
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                 ),
                 right: 16,
                 bottom: 17,
@@ -558,8 +557,8 @@ class HealthHabitsWidget extends StatelessWidget {
       },
       margin: EdgeInsets.only(left: 17, right: 17, top: 13),
       child: Container(
-        padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-        height: 61,
+        margin: EdgeInsets.only(top: 20, bottom: 20),
+        padding: EdgeInsets.only(left: 15, right: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -588,6 +587,8 @@ class HealthHabitsWidget extends StatelessWidget {
                 ),
                 Image.asset(
                   Utils.getImgPath("ic_arrow_grey"),
+                  height: 18,
+                  width: 18,
                 )
               ],
             )

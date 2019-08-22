@@ -22,8 +22,8 @@ class CommonCard extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.only(top: 19, left: 15, right: 15, bottom: 19),
-        height: 58,
+        margin: EdgeInsets.only(top: 19, bottom: 19),
+        padding: EdgeInsets.only(left: 15, right: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -45,7 +45,11 @@ class CommonCard extends StatelessWidget {
               children: <Widget>[
                 subWidget == null ? Text("") : subWidget,
                 Image.asset(
-                  Utils.getImgPath("ic_arrow_grey"),
+                  Utils.getImgPath(
+                    "ic_arrow_grey",
+                  ),
+                  height: 18,
+                  width: 18,
                 )
               ],
             )

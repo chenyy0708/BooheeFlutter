@@ -177,13 +177,13 @@ class _HomePageState extends State<HomePage> {
     return SliverToBoxAdapter(
       child: Container(
         margin: EdgeInsets.only(top: 13, bottom: 30),
-        height: (58 * bottomCards.length).toDouble(), // 指定卡片大小
         child: CardView(
           margin: EdgeInsets.only(
             left: 17,
             right: 17,
           ),
           child: ListView.separated(
+            shrinkWrap: true,
             separatorBuilder: (BuildContext context, int index) {
               return Container(
                 height: 0.0,
