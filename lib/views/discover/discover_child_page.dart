@@ -138,12 +138,13 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
   Widget createTabView(List<Labels> list) {
     return Container(
       padding: EdgeInsets.only(top: 20),
-      height: 80,
       child: GridView.builder(
-          physics: NeverScrollableScrollPhysics(), // 禁用GradView滚动事件
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          // 禁用GradView滚动事件
           itemCount: list.length,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, childAspectRatio: 2.2),
           itemBuilder: (BuildContext context, int index) {
             return TopBottom(
               margin: 5,
@@ -165,7 +166,7 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
   /// 列表
   Widget createListChild(Sections sections) {
     return Container(
-      height: 180,
+      height: 172,
       margin: EdgeInsets.only(top: 33),
       padding: EdgeInsets.only(left: 17),
       child: Column(
@@ -208,11 +209,15 @@ class _DiscoverChildPageState extends State<DiscoverChildPage> {
               Text(
                 subContents[index].title,
                 style: TextStyle(fontSize: 13, color: color373D52),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               SizeBoxFactory.getVerticalSizeBox(1),
               Text(
                 subContents[index].subTitle,
                 style: TextStyle(fontSize: 11, color: colorA8ACBC),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               )
             ],
           );
