@@ -24,3 +24,9 @@
 ![](https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E6%88%91%E7%9A%84.png)
 
 
+<p align="center">
+	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E6%88%91%E7%9A%84.png" alt="Sample"  width="250" height="140">
+	<p align="center">
+		<em>图片示例2</em>
+	</p>
+</p>
