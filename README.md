@@ -10,12 +10,19 @@
 <p align="center">
 	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E5%90%AF%E5%8A%A8%E5%9B%BE.png" alt="Sample"  width="393" height="780">
 	<p align="center">
-		<em>首页</em>
+		<em>启动页</em>
 	</p>
 </p>
 
 <p align="center">
 	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E9%A6%96%E9%A1%B5.png" alt="Sample"  width="393" height="780">
+	<p align="center">
+		<em>首页</em>
+	</p>
+</p>
+
+<p align="center">
+	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E9%A6%96%E9%A1%B5%E6%8E%A8%E4%B8%8A.png" alt="Sample"  width="393" height="780">
 	<p align="center">
 		<em>首页推上</em>
 	</p>
