@@ -20,3 +20,35 @@
 		<em>首页</em>
 	</p>
 </p>
+
+<p align="center">
+	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E9%A6%96%E9%A1%B5.png" alt="Sample"  width="393" height="780">
+	<p align="center">
+		<em>首页推上</em>
+	</p>
+</p>
+
+
+<p align="center">
+	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E4%BC%99%E4%BC%B4.png" alt="Sample"  width="393" height="780">
+	<p align="center">
+		<em>伙伴</em>
+	</p>
+</p>
+
+
+<p align="center">
+	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/示例图/商店.png" alt="Sample"  width="393" height="780">
+	<p align="center">
+		<em>商店</em>
+	</p>
+</p>
+
+
+<p align="center">
+	<img src="https://github.com/chenyy0708/BooheeFlutter/blob/feature/%E7%A4%BA%E4%BE%8B%E5%9B%BE/%E6%88%91%E7%9A%84.png" alt="Sample"  width="393" height="780">
+	<p align="center">
+		<em>我的</em>
+	</p>
+</p>
+
