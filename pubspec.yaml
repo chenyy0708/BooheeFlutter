@@ -30,8 +30,6 @@ dependencies:
   banner_view: ^1.1.2
   # 刷新控件
   flutter_easyrefresh: ^2.0.2
-  # 聚合工具类
-  #  flustars: ^0.2.6+1
   # 路由
   fluro: ^1.5.0
   # toast
@@ -45,6 +43,8 @@ dependencies:
   fl_chart: ^0.1.5
   # Image Cache
   extended_image: ^0.5.5
+  # Redux
+  fish_redux: ^0.2.5
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git

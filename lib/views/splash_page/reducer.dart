@@ -1,0 +1,34 @@
+import 'package:boohee_flutter/model/splash_ad.dart';
+import 'package:fish_redux/fish_redux.dart';
+
+import 'action.dart';
+import 'state.dart';
+
+Reducer<SplashState> buildReducer() {
+  return asReducer(
+    <Object, Reducer<SplashState>>{
+      SplashAction.action: _onAction,
+      SplashAction.isLogin: _onLoginStatus,
+      SplashAction.loadSplashAd: _onLoadSplashAd,
+    },
+  );
+}
+
+SplashState _onAction(SplashState state, Action action) {
+  final SplashState newState = state.clone();
+  return newState;
+}
+
+SplashState _onLoginStatus(SplashState state, Action action) {
+  bool isLogin = action.payload ?? '';
+  final SplashState newState = state.clone();
+  newState.isLogin = isLogin;
+  return newState;
+}
+
+SplashState _onLoadSplashAd(SplashState state, Action action) {
+  SplashAd splashAd = action.payload ?? '';
+  final SplashState newState = state.clone();
+  newState.splashAd = splashAd;
+  return newState;
+}
