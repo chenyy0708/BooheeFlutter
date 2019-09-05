@@ -10,6 +10,7 @@ Reducer<SplashState> buildReducer() {
       SplashAction.action: _onAction,
       SplashAction.isLogin: _onLoginStatus,
       SplashAction.initAd: _onInitAd,
+      SplashAction.updateTime: _onUpdateTime,
     },
   );
 }
@@ -23,6 +24,13 @@ SplashState _onLoginStatus(SplashState state, Action action) {
   bool isLogin = action.payload ?? '';
   final SplashState newState = state.clone();
   newState.isLogin = isLogin;
+  return newState;
+}
+
+SplashState _onUpdateTime(SplashState state, Action action) {
+  int updateTime = action.payload ?? '';
+  final SplashState newState = state.clone();
+  newState.currentTime = updateTime;
   return newState;
 }
 

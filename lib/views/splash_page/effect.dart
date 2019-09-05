@@ -27,14 +27,11 @@ void _onInit(Action action, Context<SplashState> ctx) {
   /// 是否登录
   SpUtil.getInstance().then((sp) {
     String token = SpUtil.getString(Constant.token, defValue: "");
-    if (token.isNotEmpty) {
-      ctx.state.isLogin = true;
-    }
+    ctx.dispatch(SplashActionCreator.onLoginStatus(token.isNotEmpty));
   });
   Repository.loadAsset("splash_ad").then((json) {
     var splashAd = SplashAd.fromJson(Repository.toMapForList(json));
     ctx.state.inVisible = !splashAd.isAd;
-    ctx.state.splashAd = splashAd;
     if (ctx.state.inVisible) {
       // 没有广告，倒计时1s
       ctx.state.countdownTime = 1 * 1000;
@@ -42,7 +39,7 @@ void _onInit(Action action, Context<SplashState> ctx) {
     ctx.state.timerUtil = new TimerUtil(mTotalTime: ctx.state.countdownTime);
     ctx.state.timerUtil.setOnTimerTickCallback((int tick) {
       double _tick = tick / 1000;
-      ctx.state.currentTime = _tick.toInt();
+      ctx.dispatch(SplashActionCreator.onUpdateTime(_tick.toInt()));
       if (_tick == 0) {
         ctx.dispatch(SplashActionCreator.onClickJump());
       }
