@@ -9,7 +9,7 @@ Reducer<SplashState> buildReducer() {
     <Object, Reducer<SplashState>>{
       SplashAction.action: _onAction,
       SplashAction.isLogin: _onLoginStatus,
-      SplashAction.loadSplashAd: _onLoadSplashAd,
+      SplashAction.initAd: _onInitAd,
     },
   );
 }
@@ -26,7 +26,7 @@ SplashState _onLoginStatus(SplashState state, Action action) {
   return newState;
 }
 
-SplashState _onLoadSplashAd(SplashState state, Action action) {
+SplashState _onInitAd(SplashState state, Action action) {
   SplashAd splashAd = action.payload ?? '';
   final SplashState newState = state.clone();
   newState.splashAd = splashAd;

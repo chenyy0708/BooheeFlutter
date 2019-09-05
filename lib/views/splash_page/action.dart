@@ -1,6 +1,7 @@
+import 'package:boohee_flutter/model/splash_ad.dart';
 import 'package:fish_redux/fish_redux.dart';
 
-enum SplashAction { action, isLogin, loadSplashAd, clickAd, clickJump }
+enum SplashAction { action, isLogin, initAd, clickAd, clickJump }
 
 class SplashActionCreator {
   static Action onAction() {
@@ -11,8 +12,8 @@ class SplashActionCreator {
     return const Action(SplashAction.isLogin);
   }
 
-  static Action onLoadSplashAd() {
-    return const Action(SplashAction.loadSplashAd);
+  static Action onInitAd(SplashAd splashAd) {
+    return const Action(SplashAction.initAd);
   }
 
   static Action onClickAd() {

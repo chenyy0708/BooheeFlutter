@@ -1,6 +1,11 @@
 import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/app/route/routes.dart';
+import 'package:boohee_flutter/common/constant.dart';
+import 'package:boohee_flutter/model/splash_ad.dart';
+import 'package:boohee_flutter/utils/repository_utils.dart';
+import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/timer_util.dart';
+import 'package:boohee_flutter/views/splash_page/action.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'action.dart';
@@ -19,13 +24,31 @@ Effect<SplashState> buildEffect() {
 void _onAction(Action action, Context<SplashState> ctx) {}
 
 void _onInit(Action action, Context<SplashState> ctx) {
-  ctx.state.timerUtil = new TimerUtil(mTotalTime: ctx.state.countdownTime);
-  ctx.state.timerUtil.setOnTimerTickCallback((int tick) {
-    double _tick = tick / 1000;
-    ctx.state.currentTime = _tick.toInt();
-    if (_tick == 0) {
-      ctx.broadcast(SplashActionCreator.onClickJump());
+  /// 是否登录
+  SpUtil.getInstance().then((sp) {
+    String token = SpUtil.getString(Constant.token, defValue: "");
+    if (token.isNotEmpty) {
+      ctx.state.isLogin = true;
     }
+  });
+  Repository.loadAsset("splash_ad").then((json) {
+    var splashAd = SplashAd.fromJson(Repository.toMapForList(json));
+    ctx.state.inVisible = !splashAd.isAd;
+    ctx.state.splashAd = splashAd;
+    if (ctx.state.inVisible) {
+      // 没有广告，倒计时1s
+      ctx.state.countdownTime = 1 * 1000;
+    }
+    ctx.state.timerUtil = new TimerUtil(mTotalTime: ctx.state.countdownTime);
+    ctx.state.timerUtil.setOnTimerTickCallback((int tick) {
+      double _tick = tick / 1000;
+      ctx.state.currentTime = _tick.toInt();
+      if (_tick == 0) {
+        ctx.dispatch(SplashActionCreator.onClickJump());
+      }
+    });
+    ctx.state.timerUtil.startCountDown();
+    if (splashAd != null) ctx.dispatch(SplashActionCreator.onInitAd(splashAd));
   });
 }
 
