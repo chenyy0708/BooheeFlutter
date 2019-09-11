@@ -1,6 +1,6 @@
 import 'package:boohee_flutter/app/route/fluro_navigator.dart';
 import 'package:boohee_flutter/app/route/routes.dart';
-import 'package:boohee_flutter/common/Colors.dart';
+import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/model/login_user.dart';
 import 'package:boohee_flutter/res/styles.dart';
