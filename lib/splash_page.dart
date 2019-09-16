@@ -1,11 +1,10 @@
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/repository_utils.dart';
-import 'package:boohee_flutter/utils/sp_util.dart';
-import 'package:boohee_flutter/utils/timer_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/round_button.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

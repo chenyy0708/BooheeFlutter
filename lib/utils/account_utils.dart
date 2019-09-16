@@ -1,6 +1,6 @@
 import 'package:boohee_flutter/common/constant.dart';
 import 'package:boohee_flutter/model/login_user.dart';
-import 'package:boohee_flutter/utils/sp_util.dart';
+import 'package:flustars/flustars.dart';
 
 class AccountUtils {
   static User mUser;

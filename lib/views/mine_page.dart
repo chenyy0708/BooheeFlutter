@@ -6,12 +6,12 @@ import 'package:boohee_flutter/model/mine_cards.dart';
 import 'package:boohee_flutter/res/styles.dart';
 import 'package:boohee_flutter/utils/account_utils.dart';
 import 'package:boohee_flutter/utils/repository_utils.dart';
-import 'package:boohee_flutter/utils/sp_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
 import 'package:boohee_flutter/widget/card_view.dart';
 import 'package:boohee_flutter/widget/tool_bar.dart';
 import 'package:boohee_flutter/widget/top_bottom_widget.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

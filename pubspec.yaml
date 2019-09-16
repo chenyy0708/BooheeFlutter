@@ -24,27 +24,28 @@ dependencies:
   # 网络请求库
   dio: 2.1.7
   # bean对象
-  json_annotation: ^2.4.0
+  json_annotation: ^3.0.0
   # 轮播图
 #  banner: ^0.1.3
   banner_view: ^1.1.2
   # 刷新控件
-  flutter_easyrefresh: ^2.0.2
+  flutter_easyrefresh: ^2.0.4
   # 聚合工具类
   #  flustars: ^0.2.6+1
   # 路由
-  fluro: ^1.5.0
+  fluro: ^1.5.1
   # toast
   toast: ^0.1.5
   # 进度条
-  percent_indicator: ^2.1.1
+  percent_indicator: ^2.1.1+1
   # webview
-  webview_flutter: ^0.3.11+3
+  webview_flutter: ^0.3.14+1
 #  flutter_webview_plugin: ^0.3.5
   # 折线图
-  fl_chart: ^0.1.5
+  fl_chart: ^0.2.2
   # Image Cache
-  extended_image: ^0.5.5
+  extended_image: ^0.5.8
+  flustars: ^0.2.6+1
   auto_size:
     git:
       url: git://github.com/flutterchina/auto_size.git
@@ -52,12 +53,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
-  json_serializable: ^3.0.0
+  build_runner: ^1.7.0
+  json_serializable: ^3.2.2
   shared_preferences: '>=0.1.1 <3.0.0'
   synchronized: '>=0.1.0 <3.0.0'
-  rxdart: ^0.22.0
-  crypto: ^2.0.6
+  rxdart: ^0.22.2
+  crypto: ^2.1.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

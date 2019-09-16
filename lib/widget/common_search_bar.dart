@@ -1,7 +1,7 @@
 import 'package:boohee_flutter/common/colors.dart';
 import 'package:boohee_flutter/res/styles.dart';
-import 'package:boohee_flutter/utils/screen_util.dart';
 import 'package:boohee_flutter/utils/utils.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 
 /// 通用的搜索头部Widget

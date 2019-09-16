@@ -1,6 +1,5 @@
 import 'package:boohee_flutter/common/constant.dart';
-import 'package:boohee_flutter/utils/date_util.dart';
-import 'package:boohee_flutter/utils/sp_util.dart';
+import 'package:flustars/flustars.dart';
 
 class BrowserUrlManager {
   static const String URL_BASE = "https://pixiu.boohee.com/";
@@ -15,7 +14,7 @@ class BrowserUrlManager {
 
   static String getSmartAnalysisUrl() {
     return URL_PAY_SMART_ANALYSIS +
-        DateUtil.formatDate(DateTime.now(), format: DataFormats.y_mo_d_v2);
+        DateUtil.formatDate(DateTime.now(), format: Constant.y_mo_d_v2);
   }
 
   static Future<String> handleUrl(String url) async {
